@@ -4,9 +4,7 @@ branches:
         master
 install:
     - git clone https://github.com/illinois-cs241/illinois-cs241.github.io.git site
-    - sudo apt-get update
-    - sudo apt-get install python3 tidy pandoc oracle-java9-set-default
     - git config credential.helper "store --file=.git/credentials"; echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials 2>/dev/null
     - git config --global user.email "bhuvan.venkatesh21@gmail.com"
     - git config --global user.name "Bhuvan Venkatesh"
-    - cd site/_docs; git pull origin master
+    - cd site/; git checkout develop; cd docs/; git pull origin master; git commit -m "Updating docs to $(git rev-parse master)"
