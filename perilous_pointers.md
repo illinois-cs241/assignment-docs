@@ -149,3 +149,10 @@ or
 ```
 ./part2-debug
 ```
+
+## Autograder Schedule
+
+9/07 22:00
+9/09 22:00
+9/11 22:00
+9/13 00:00 - Deadline Autograder
