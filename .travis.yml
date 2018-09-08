@@ -2,7 +2,7 @@ language: python3
 branches:
     only:
         master
-install:
+script:
     - git clone --recurse-submodules https://github.com/illinois-cs241/illinois-cs241.github.io.git site
     - cd site/
     - git config credential.helper "store --file=.git/credentials"
