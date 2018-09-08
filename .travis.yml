@@ -7,4 +7,4 @@ install:
     - git config credential.helper "store --file=.git/credentials"; echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials 2>/dev/null
     - git config --global user.email "bhuvan.venkatesh21@gmail.com"
     - git config --global user.name "Bhuvan Venkatesh"
-    - cd site/; git checkout develop; cd _docs/; git pull origin master; git commit -m "Updating docs to $(git rev-parse master)"
+    - cd site/; git checkout develop; cd _docs/; git pull origin master; cd ..; git commit -m "Updating docs to $(git ls-tree master _docs/)"; git push origin develop
