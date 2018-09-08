@@ -1,9 +1,9 @@
 ---
 layout: doc
-title: "MapReduce"
+title: "Mapreduce"
 submissions:
 - title: Mapreduce
-  due_date: 11/1 11:59pm
+  due_date: 04/9 11:59pm
   graded_files:
   - mapreduce.c
 learning_objectives:
@@ -80,9 +80,9 @@ MapReduce is useful because many different algorithms can be implemented by plug
 If you want to implement a new algorithm you just need to implement those two functions.
 The MapReduce framework will take care of all the other aspects of running a large job: splitting the data and CPU time across any number of machines, recovering from machine failures, tracking job progress, etc.
 
-## The Assignment
+## The MP
 
-For this lab, you have been tasked with building a simplified version of the MapReduce framework.
+For this MP, you have been tasked with building a simplified version of the MapReduce framework.
 It will run multiple processes on one machine as independent processing units and use IPC mechanisms to communicate between them.
 `map()` and `reduce()` will be programs that read from standard input and write to standard output.
 The input data for each mapper program will be lines of text.
@@ -112,7 +112,7 @@ You'll spread the work across multiple instances of the mapper executable.
 
 The input file will need to be split into chunks, with one chunk for each mapper process.
 To split the input file, we've supplied the tool `splitter`.
-Run it without arguments for a brief explanation of how it works.
+**Please** run it without arguments for a brief explanation of how it works.
 You'll start up one instance of splitter for each mapper, using a pipe to send `stdout` of splitter to `stdin` of the mapper program.
 
       splitter inputfile 3 0
@@ -130,12 +130,12 @@ You'll start up one instance of splitter for each mapper, using a pipe to send `
 
 Command line:
 
-    mapreduce <input_file> <output_file> <mapper_executable> <reducer_executable> <mapper_count>
+`./mapreduce <input_file> <output_file> <mapper_executable> <reducer_executable> <mapper_count>`
 
 Sample Usage
 
 
-    % ./mapreduce test.in test.out ./my_mapper ./my_reducer 3
+`$ ./mapreduce test.in test.out ./my_mapper ./my_reducer 3`
 
 
 Your program will:
@@ -148,9 +148,11 @@ Your program will:
 
 This too can be done in the Unix shell:
 
-    % (./splitter inputfile 3 0 | my_mapper ; \
+```
+    $ (./splitter inputfile 3 0 | my_mapper ; \
        ./splitter inputfile 3 1 | my_mapper ; \
        ./splitter inputfile 3 2 | my_mapper ; ) | my_reducer > test.out
+```
 
 ### Things we will be testing for:
 * Inputs of varying size
@@ -158,9 +160,9 @@ This too can be done in the Unix shell:
 * Both mapper and and reducer generating accurate output to stdout file descriptor independently
 * Splitter being used correctly to generate equally sized input data for each mapper
 * All mappers being run in parallel resulting in at least 2x performance speedup for the pi executable
-* No memory leaks and memory errors when running the application
+* **No memory leaks and memory errors** when running the application
 
-### Things that will not be tested for:
+### Things that will **no**t be tested for:
 * Illegal inputs for either the mapper or reducer (Input data in a format other than as described above)
 * Invalid mapper or reducer code (mappers or reducers that do not work)
 * Key Value pairs that are larger than a pipe buffer of 4096 bytes.
@@ -169,12 +171,12 @@ This too can be done in the Unix shell:
 ##  Building and Running
 
 ### Building
-This lab has a complicated `Makefile`, but, it defines all the normal targets.
+This MP has a very complicated `Makefile`, but, it defines all the normal targets.
 
 ```
 make # builds provided code and student code in release mode
 make debug # builds provided code and student code in debug mode
-# there is no tsan target because threading is not needed for this lab
+# there is no tsan target because threading is not needed for this MP.
 ```
 
 ### Input Data
@@ -184,7 +186,7 @@ To download the example input files (books from [Project Gutenberg](https://www.
 make data
 ```
 
-You should now see `data/dracula.txt` and `data/alice.txt` in your lab folder.
+You should now see `data/dracula.txt` and `data/alice.txt` in your MP folder
 
 ### Running Your Code
 We have provided the following mappers:
@@ -202,11 +204,11 @@ And the following reducers:
   * `reducer_sum`
   * `reducer_pi`
 
-These each be used anywhere we specify `my_reducer` in these docs. **Note**: using the `pi` mapper or reducer with a different mapper or reducer will give you output that does not make sense.
+These each be used anywhere we specify `my_reducer` in these docs.
 
 For example, if you wanted to count the occurrences of each word in Alice in Wonderland, you can run and of the following
 
-    ./mapreduce data/alice.txt test.out ./mapper_wordcount ./reducer_sum 4
+`./mr1 data/alice.txt test.out ./mapper_wordcount ./reducer_sum 4`
 
 ### Record Setting Pi Code
 As well as the simple mapper/reducer pairs, we also have also included some really cool pi computation code (see [this](http://www.karrels.org/pi/) for more info).
