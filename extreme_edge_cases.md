@@ -10,9 +10,9 @@ submissions:
 ag_schedules:
 - title: AG Schedule
   schedule_dates:
-    - 09/11 11:59 PM
-    - 09/13 11:59 PM
-    - 09/15 11:59 PM
+    - 09/11 10:00 PM
+    - 09/13 10:00 PM
+    - 09/15 10:00 PM
 learning_objectives:
   - Test Driven Development
   - Thinking of Edge Cases
