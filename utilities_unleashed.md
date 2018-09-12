@@ -10,9 +10,9 @@ submissions:
 ag_schedules:
 - title: AG Schedule
   schedule_dates:
-    - 09/14 11:59 PM
-    - 09/16 11:59 PM
-    - 09/18 11:59 PM
+    - 09/14 10:00 PM
+    - 09/16 10:00 PM
+    - 09/18 10:00 PM
 learning_objectives:
   - Fork, Exec, Wait
   - Environment Variables
