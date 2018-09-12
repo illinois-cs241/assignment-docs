@@ -158,6 +158,3 @@ You have also been provided with a `fail_nth` program that fails most of the tim
 * Our programs **will not** mangle the input file between runs; you can assume that it will not change. But keep in mind that if a run is halfway complete, and the output file has been partially written to before failure, that the output file should be cleared before you try again.
 * You do not have to worry about side effects, meaning that if a process completes halfway and changes some system state you will not be expected to change it back. Though this may cause the process to fail in the future, all you have to do is execute the pipeline again.
 
-## QuizIz Form
-
-Please submit the form [here!](https://docs.google.com/forms/d/1TXFUVxKGW2p_TsmYDAMmKqym0R5LX1YoeU/edit)

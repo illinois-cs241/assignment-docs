@@ -17,10 +17,6 @@ wikibook:
   - "Memory, Part 3: Smashing the Stack Example"
 ---
 
-## Quiziz/Feedback
-
-To get attendence credit for this week's lab session, please fill out the google form at this [link](https://goo.gl/forms/4QyTFyYrYaGtUzkw2) and enter your netid and quiziz nickname. We also have some feedback questions about last week's lab, to help us make CS 241 better!
-
 ## Overview
 
 For this lab, you will be implementing a small version of [Valgrind](http://valgrind.org/docs/manual/quick-start.html) called `mini_valgrind`. Valgrind is a great tool for monitoring memory usage, and you have likely used it earlier in this class. Your version will print out a summary of the memory leaks in a particular C program. This lab is meant in part as preparation for your Malloc MP, introducing some topics and techniques which you will find helpful there.
