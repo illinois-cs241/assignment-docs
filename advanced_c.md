@@ -22,15 +22,12 @@ brainteasers or puzzles to further your interest in a particular area.
 
 ## Requirements:
 
-TODO explain why this is useful
-
 Create an implementation of a dictionary by using clang's blocks!
 Your implementation will have a single entry point that is a variadic function.
 You will need to suport the following operations:
 
 + lookup
 + insert
-+ remove? TODO decide this
 + destroy
 
 The runtime of your implementation does not matter (O(n) lookups are fine!)
@@ -42,7 +39,15 @@ in the psuedo code example below:
 
 ```c
 int main() {
-  create_dictionary(my_dict);
+  auto my_dict = create_dictionary();
+
+  // This line makes _dictionary_destructor be called automatically when my_dict
+  // goes out of scope 
+  // _dictionary_destructor takes in a double pointer (because of clang's type
+  // restrictions) but to access the underlying dictionary, just have the line:
+  //     dictionary_t d = (dictionary_t)(*e);
+  // in your _dictionary_destructor implementation
+  auto_cleanup(my_dict);
   // The following line initializes a dict_value to hold a key of "k1", with a 
   // value of "v1". The length of the value is 3 (2 bytes for 'v' and '1' plus 
   // an extra byte for the null byte)
@@ -61,6 +66,7 @@ int main() {
   // matched. Otherwise, return dict_NULL
 
   my_dict("destroy");
+  // The same as calling my_dict(NULL); You will need to support both
   // The destroy operation consumes no arguments and should free any heap memory
   // used interally and reset the internal state for further use.
   // The return value is undefined.
@@ -70,6 +76,11 @@ int main() {
 ```
 You should also be able to use multiple instances of the dictionary at any given
 time (it doesn't have to be thread safe, if you already know what that means).
+
+The dictionary has a destructor method `_dictionary_destructor` which should
+call the dictionary's destroy method and `Block_release` on the dictionary.
+We've set this up to be the case automatically when `auto_cleanup` is called on
+the created dictionary.
 
 # Walkthrough
 
