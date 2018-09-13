@@ -1,4 +1,17 @@
-# CS296-41 MP 1
+---
+layout: doc
+title: "Advanced C"
+submissions:
+- title: Entire Assignment
+  due_date: 10/01/2018 12:00 am
+  graded_files:
+  - dictionary.c
+learning_objectives:
+  - Implementing an object with blocks
+  - Understanding extensions to the C language
+  - Exploring modern syntax structures in C
+---
+
 Welcome to the first CS296 assignment! Before we begin, let's go through a quick
 overview of the structure of this document. Each document for CS2916-41 will
 have the following sections:
