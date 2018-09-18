@@ -13,6 +13,7 @@ ag_schedules:
     - 09/27 10:00 PM
     - 09/29 10:00 PM
     - 09/30 10:00 PM
+    - 10/01 12:00 PM (noon)
 learning_objectives:
   - Learning How a Shell Works
   - Fork, Exec, Wait
