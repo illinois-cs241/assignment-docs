@@ -7,6 +7,12 @@ submissions:
   graded_files:
   - editor.c
   - document.c
+ag_schedules:
+- title: AG Schedule
+  schedule_dates:
+    - 09/19 10:00 PM
+    - 09/21 10:00 PM
+    - 09/23 10:00 PM
 learning_objectives:
   - Writing a C program
   - File I/O, serializing/deserializing
