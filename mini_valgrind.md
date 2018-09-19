@@ -3,7 +3,7 @@ layout: doc
 title: "Mini Valgrind"
 submissions:
 - title: Entire Assignment
-  due_date: 09/25/18, 11:59 PM
+  due_date: 09/26/18, 11:59 PM
   graded_files:
   - mini_valgrind.c
 ag_schedules:
