@@ -3,21 +3,38 @@ layout: doc
 title: "Shell"
 submissions:
 - title: Entire Assignment
-  due_date: 9/25/2017 11:59pm
+  due_date: 10/1/2018 11:59pm
   graded_files:
   - shell.c
+ag_schedules:
+- title: AG Schedule
+  schedule_dates:
+    - 09/25 10:00 PM
+    - 09/27 10:00 PM
+    - 09/29 10:00 PM
+    - 09/30 10:00 PM
+    - 10/01 12:00 PM (noon)
 learning_objectives:
-  - Processes
-  - Fork, Exec, Wait
-  - Basic Signals
   - Learning How a Shell Works
+  - Fork, Exec, Wait
+  - Signals
+  - Processes
+  - Zombie Processes
 wikibook:
   - "Forking, Part 1: Introduction"
   - "Forking, Part 2: Fork, Exec, Wait"
   - "Process Control, Part 1: Wait macros, using signals"
 ---
 
-## WARNING
+## Backstory
+
+Well, we'll keep it short – you got fired. Your boss brought you in for a code review and was more than disappointed. Apparently, she wanted a text editor like this [one](https://www.sublimetext.com): we didn't get the memo. Now it's time to prove your worth. Your boss wants something fully functional and we've got a great idea. You're going to drop a :fire: :fire: shell on her to get rehired.
+
+The basic function of a shell is to accept commands as inputs and execute the corresponding programs in response. You will be provided the `vector` and `format.c` libraries for your use. Hopefully, this will make things right and you can resume your work at *insert hot tech company here*. Feel free to refer to the Unix shell as a rough reference.
+
+## Notices
+
+#### Fork Bombs
 
 :fork_and_knife: :bomb: :bangbang:
 
@@ -27,23 +44,17 @@ To prevent you from fork bombing your own VM, we recommend looking into [`ulimit
 
 Since a learning objective of this assignment is to use the fork-exec-wait pattern, if you use `system`, you will automatically fail this MP.
 
-## Backstory
+#### Formatting
 
-Well, we'll keep it short – you got fired. Your boss brought you in for a code review and was more than disappointed. Apparently, she wanted a text editor like this [one](https://www.sublimetext.com): we didn't get the memo. Now it's time to prove your worth. Your boss wants something fully functional and we've got a great idea. You're going to drop a :fire: :fire: shell on her to get rehired.
+Since this MP **requires** your programs to print a variety of things like error messages, we have provided you with our own highly customized formatting library. You should not be printing out to stdout and stderr at all; instead, all output and errors should be printed using the functions provided in `format.c` and `format.h`. In `format.h` you can find documentation about what each function does, and you should use them whenever appropriate.
 
-The basic function of a shell is to accept commands as inputs and execute the corresponding programs in response. You will be provided the `vector` and `format.c` libraries for your use. Hopefully, this will make things right and you can resume your work at *insert hot tech company here*. Feel free to refer to the Unix shell as a rough reference.
-
-## format.h
-
-Since this MP **requires** your programs to print a variety of things like error messages, we have provided you with our own highly customized formatting library. You should not be printing out to stdout and stderr at all; instead, all output and errors should be printed using the functions provided in `format.c` and `format.h`. In `format.h` you can find documentation about what each function does, and you should use them whenever appropriate. This is our way of ensuring that you do not lose points for formatting issues, but it also means that you are responsible for handling any and all errors mentioned in `format.c` and `format.h`.
-
-**Note**: don't worry if you don't use all of the functions in `format.c`.
+**Note**: don't worry if you don't use all of the functions in `format.c`, but you should use them whenever their documented purpose matches the situation.
 
 ## Overview
 
 The shell is responsible for providing a command line for users to execute programs or scripts. You should be very familiar with `bash` by now, which will be the basis for your own shell.
 
-## Starting Your Shell
+#### Starting Your Shell
 
 The shell should run in a loop like this executing multiple commands:
 
@@ -53,7 +64,7 @@ The shell should run in a loop like this executing multiple commands:
 
 The shell must support the following two optional arguments:
 
-### History
+#### History
 
 `-h` takes the filename of the history file. The shell should load in the history file as its history. Upon exit, the exact same history file should be updated, even if the shell is in a different working directory than where it started.
 
@@ -63,7 +74,7 @@ The shell must support the following two optional arguments:
 
 If the the `-h` flag is not specified, the shell will still keep a history of commands run, but will not read/write from/to a history file. Just think of it like private browsing mode for your terminal.
 
-### File
+#### File
 
 `-f` takes the name of the file to be executed by the shell. The shell will both print and run the commands in the file in sequential order until the end of the file. See the following example file and execution:
 
@@ -85,11 +96,11 @@ If the user supplies an incorrect number of arguments, or the script file cannot
 
 The [getopt](http://linux.die.net/man/3/getopt) function may come in handy. :smile:
 
-## Specifics
+## Interaction
 
-### Prompting
+#### Prompting
 
-When prompting for a command, the shell will print a prompt in the following format (from `format.c/h`):
+When prompting for a command, the shell will print a prompt in the following format (from `format.h`):
 
 ```
 (pid=<pid>)<path>$
@@ -97,11 +108,11 @@ When prompting for a command, the shell will print a prompt in the following for
 
 `<pid>` is the current process ID, and `<path>` is a path to the current working directory. Note the lack of a newline at the end of this prompt.
 
-### Reading in the Command
+#### Reading in the Command
 
 The shell will read in a command from `stdin` (or a file if `-f` was specified).
 
-### Running the Command
+#### Running the Command
 
 The shell should run the command that was read in previously.
 
@@ -113,13 +124,34 @@ Command executed by pid=<pid>
 
 This should be printed before any of the output of the command is printed (prints to be used are in `format.c/h`).
 
-### History
+#### Keeping History
 
 Your shell should store the command that was just executed, so the user can repeat it later if they wish. Every command should be stored unless otherwise noted. A vector may be useful here.
 
-### Catching Ctrl+C
+#### Catching Ctrl+C
 
-Usually when we do `Ctrl+C`, the current running program will exit. However, we want the shell to ignore the `Ctrl+C` signal (`SIGINT`). The shell should not exit upon receiving `SIGINT`. Instead, it should check if there is a currently running foreground process, and if so, it should kill it using SIGINT (the `kill()` function might come in handy, here and elsewhere).
+Usually when we do `Ctrl+C`, the current running program will exit. However, we want the shell itself to ignore the `Ctrl+C` signal (`SIGINT`). Instead, it should check if there is a currently running foreground process, and if so, it should kill that foreground process using SIGINT (the `kill()` function might come in handy, here and elsewhere).
+
+Note that we want this signal sent to the foreground process, not to any backgrounded processes. As such, you will want to use [`setpgid`](http://man7.org/linux/man-pages/man2/setpgid.2.html) to assign each background process to its own process group when forking:
+
+```
+pid_t pid = fork();
+if (pid > 0) {
+  // ...
+
+  // assign the child's process group id to be its pid
+  if (setpgid(pid, pid) == -1) {
+    print_setpgid_failed();
+    exit(1);
+  }
+
+  // ...
+} else if ( ... ) {
+  // ...
+}
+```
+
+Yes, we are giving you code that you will want to put somewhere in your program. Use it appropriately for free points!
 
 ## Commands
 
@@ -131,7 +163,7 @@ Command arguments will be space-separated without trailing whitespace. Your shel
 
 There are several built-in commands your shell is expected to support.
 
-### `cd <path>`
+#### `cd <path>`
 
 Changes the current working directory of the shell to `<path>`. Paths not starting with `/` should be followed relative to the current directory. If the directory does not exist, then print the appropriate error. Unlike your regular shell, the `<path>` argument is mandatory here. A missing path should be treated as a nonexistent directory.
 
@@ -142,7 +174,9 @@ imaginary_directory: No such file or directory
 (pid=1234)/home/user/code$
 ```
 
-### `!history`
+There is a system call that may be helpful here.
+
+#### `!history`
 
 Prints out each command in the history, in order.
 
@@ -156,7 +190,7 @@ Prints out each command in the history, in order.
 
 :warning: This command is not stored in history.
 
-### `#<n>`
+#### `#<n>`
 
 Prints and executes the <i>n</i>th command in history (in chronological order, from earliest to most recent), where _n_ is a non-negative integer. Other values of _n_ will not be tested. The command run should be stored in the history. If _n_ is not a valid index, then print the appropriate error and do not store anything in the history.
 
@@ -189,7 +223,7 @@ Invalid Index
 
 :warning: The `#<n>` command itself is __not__ stored in history, but the command being executed (if any) __is__.
 
-### `!<prefix>`
+#### `!<prefix>`
 
 Prints and executes the last command that has the specified prefix. If no match is found, print the appropriate error and do not store anything in the history. The prefix may be empty. The following example assumes a fresh history:
 
@@ -227,9 +261,52 @@ Echo This!
 
 :warning: The `!<prefix>` command itself is __not__ stored in history, but the command being executed (if any) __is__.
 
-### `exit`
+#### `ps`
 
-The shell will exit once it receives the `exit` command or an EOF. The latter is sent by typing `Ctrl+D` on an empty line, and from a script file (as used with the `-f` flag) this is sent once the end of the file is reached.  This should cause your shell to exit with exit status 0. You should make sure that all processes you've started have been cleaned up.
+Like our good old `ps`, your shell should print out information about all currently executing processes. You should include the shell and its immediate children, but don't worry about grandchildren or other processes. Make sure you use `print_process_info()`!
+
+_Note:_ while `ps` is normally a separate binary, it is a built-in command for your shell. (This is not "execing `ps`", this is you implementing it in the code. Thus you have to keep track of process statuses and such.)
+
+Some things to keep in mind:
+
+- The order in which you print the processes does not matter.
+- The 'command' for `print_process_info` should be the full command you executed, with escape sequences and environment variables expanded. (This is _different_ from what gets stored in the history!) The `&` for background processes is optional. For the main shell process _only_, you do not need to include the command-line flags.
+
+#### `kill <pid>`
+
+The ever-useful panic button. Send `SIGTERM` to the specified process.
+
+Use the appropriate prints from `format.h` for:
+- Successfully sending `SIGTERM` to process
+- No process with `pid` exists
+- `kill` was ran without a `pid`
+
+#### `stop <pid>`
+
+This command will allow your shell to stop a currently executing process by sending it the `SIGTSTP` signal. It may be resumed by using the command `cont`.
+
+Use the appropriate prints from `format.h` for:
+- Process was successfully sent `SIGTSTP`
+- No such process exists
+- `stop` was ran without a `pid`
+
+#### `cont <pid>`
+
+This command resumes the specified process by sending it `SIGCONT`.
+
+Use the appropriate prints from `format.h` for:
+- No such process exists
+- `cont` was ran without a `pid`
+
+**Any `<pid>` used in `kill`, `stop`, or, `cont` will either be a process that is a direct child of your shell or a non-existent process. You do not have to worry about killing other processes.**
+
+#### `exit`
+
+The shell will exit once it receives the `exit` command or once it receives an `EOF`. An `EOF` is sent by typing `Ctrl-D` from your terminal. It is also sent automatically from a script file (as used with the `-f` flag) once the end of the file is reached. This should cause your shell to exit with exit status 0.
+
+If there are currently stopped or running background processes when your shell receives `exit` or `Control-D` (EOF), you should kill and cleanup each of those children before your shell exits. You do not need to worry about SIGTERM.
+
+:warning: If you don't handle `EOF` to exit, you will fail many of our test cases!
 
 ### Invalid Built-in Commands
 
@@ -268,13 +345,13 @@ It is good practice to flush the standard output stream before the fork to be ab
 
 ## Logical Operators
 
-Like `bash`, your shell should support `&&`, `||`, and `;` in between two commands.
+Like `bash`, your shell should support `&&`, `||`, and `;` in between two commands. This will require only a minimal amount of string parsing that you have to do yourself.
 
 **Important**: each input can have at most *one* of `&&`, `||`, or `;`. You do *not* have to support chaining (e.g. `x && y || z; w`).
 
 **Important**: you should *not* try to handle the combination of the `!history`, `#<n>`, `!<prefix>`, or `exit` commands with any logical operators. Rather, you can assume these commands will always be run on a line by themselves.
 
-### AND
+#### AND
 
 `&&` is the AND operator.
 
@@ -287,7 +364,7 @@ This mimics short-circuiting AND in boolean algebra: if `x` is false, we know th
 
 :question: This is often used to run multiple commands in a sequence and stop early if one fails. For example, `make && ./shell` will run your shell only if `make` succeeds.
 
-### OR
+#### OR
 
 `||` is the OR operator.
 
@@ -300,7 +377,7 @@ Boolean algebra: if `x` is true, we can return true right away *without* having 
 
 :question: This is often used to recover after errors. For example, `make || echo 'Make failed!'` will run `echo` only if `make` does not succeed.
 
-### Separator
+#### Separator
 
 `;` is the command separator.
 
