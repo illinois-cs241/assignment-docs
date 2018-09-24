@@ -128,6 +128,24 @@ This should be printed before any of the output of the command is printed (print
 
 Your shell should store the command that was just executed, so the user can repeat it later if they wish. Every command should be stored unless otherwise noted. A vector may be useful here.
 
+#### Backgrounding	
+An _external_ command suffixed with `&` should be run in the background. In other words, the shell should be ready to take the next command before the given command has finished running. There is no limit on the number of background processes you can have running at one time (aside from any limits set by the system).	
+
+There may or may not be a single space between the rest of the command and `&`. For example, `pwd&` and `pwd &` are both valid.	
+
+Since spawning a background process introduces a race condition, it is okay if the prompt gets misaligned as in the following example:	
+```	
+(pid=1873)/home/user$ pwd &	
+Command executed by pid=1874	
+(pid=1873)/home/user$	
+/home/user	
+When I type, it shows up on this line	
+```	
+
+While the shell should be usable after calling the command, after the process finishes, the parent is still responsible for waiting on the child (hint: catch a signal). Avoid creating zombies! Think about what happens when multiple children finish around the same time.	
+
+Backgrounding will **not** be chained with the logical operators.
+
 #### Catching Ctrl+C
 
 Usually when we do `Ctrl+C`, the current running program will exit. However, we want the shell itself to ignore the `Ctrl+C` signal (`SIGINT`). Instead, it should check if there is a currently running foreground process, and if so, it should kill that foreground process using SIGINT (the `kill()` function might come in handy, here and elsewhere).
