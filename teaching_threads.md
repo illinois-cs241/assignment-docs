@@ -3,9 +3,16 @@ layout: doc
 title: "Teaching Threads"
 submissions:
 - title: Entire Assignment
-  due_date: 10/04, 11:59 PM
+  due_date: 10/03/2018, 11:59 PM
   graded_files:
   - par_reduce.c
+ag_schedules:
+- title: AG Schedule
+  schedule_dates:
+    - 09/28 10:00 PM
+    - 09/30 10:00 PM
+    - 10/02 10:00 PM
+
 learning_objectives:
   - Introduction to pthreads
   - Introduction to concurrency
