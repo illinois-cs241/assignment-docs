@@ -1,0 +1,1 @@
+rm -rf ${CLONE_DIR}
