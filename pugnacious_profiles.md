@@ -1,4 +1,18 @@
-# CS296-41 MP 2 
+---
+layout: doc
+title: "Pugnacious Profiles"
+submissions:
+- title: Entire Assignment
+  due_date: 10/22/2018 12:00 am
+  graded_files:
+  - orderbook.c
+  - orderbook.h
+learning_objectives:
+  - Understanding profiling
+  - Performance optimization (both time and memory)
+  - Applying data structures in systems
+---
+
 Over the course of this assignment, we will be exploring how profilers can be used to optimize your C program through 
 the combination of dynamic analysis, data-structures and algorithms along with systems programming. 
 
