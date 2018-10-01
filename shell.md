@@ -66,7 +66,7 @@ The shell must support the following two optional arguments:
 
 #### History
 
-`-h` takes the filename of the history file. The shell should load in the history file as its history. Upon exit, the exact same history file should be updated, even if the shell is in a different working directory than where it started.
+`-h` takes the filename of the history file. The shell should load in the history file as its history. If the file does not exist, you should treat it as an empty file and write all the commands that were executed in the terminal to the output file on exit. Upon exit, the exact same history file should be updated, even if the shell is in a different working directory than where it started.
 
 ```
 ./shell -h <filename>
