@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: "Pugnacious Profiles"
+title: "Pugnacious Profilers"
 submissions:
 - title: Entire Assignment
   due_date: 10/22/2018 12:00 am
