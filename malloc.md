@@ -3,13 +3,29 @@ layout: doc
 title: "Malloc"
 submissions:
 - title: Part 1
-  due_date: 02/26/2018 11:59 pm
+  due_date: 10/08/2018 11:59 pm
   graded_files:
   - alloc.c
+ag_schedules:
+- title: AG Schedule
+  schedule_dates:
+    - 10/03 10:00 PM
+    - 10/05 10:00 PM
+    - 10/06 10:00 PM
+    - 10/07 10:00 PM
+    - 10/08 12:00 PM (noon)
 - title: Part 2
-  due_date: 03/05/2018 11:59 pm
+  due_date: 10/15/2018 11:59 pm
   graded_files:
   - alloc.c
+ag_schedules:
+- title: AG Schedule
+  schedule_dates:
+    - 10/09 10:00 PM
+    - 10/11 10:00 PM
+    - 10/13 10:00 PM
+    - 10/14 10:00 PM
+    - 10/15 12:00 PM (noon)
 learning_objectives:
   - Memory Allocation and Management
   - Performance Optimization
