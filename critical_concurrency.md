@@ -29,10 +29,6 @@ wikibook:
   - "Deadlock, Part 2: Deadlock Conditions"
 ---
 
-## Lab Attendance
-
-For this week's lab attendance please fill out the following form: [https://docs.google.com/forms/d/e/1FAIpQLSd29dlmCoZ0SPEULCVv_nuIfZojUfoY5Zy493DkAFkmPOU1Fw/viewform](https://docs.google.com/forms/d/e/1FAIpQLSd29dlmCoZ0SPEULCVv_nuIfZojUfoY5Zy493DkAFkmPOU1Fw/viewform)
-
 ## Overview
 
 There are four main components to this lab, three of which are graded. These are Rendezvous (not graded), Semamore, Barrier, and Thread-safe Queue. Each of these represent very common synchronization problem (or slight twists on them) that will do you well to become familiar with.
