@@ -37,7 +37,9 @@ wikibook:
 
 ## Introduction
 
-In the past, you have been using `malloc` to allocate memory on the heap. In this MP, you will be implementing your own version of `malloc`. By the end of this MP, you will theoretically be able to use your own malloc to run any program you wish.
+Well, you impressed your boss with your shell and got your job back at Macrohard. The only thing is, everyone on your team left to go work for the hot new startup, Ocean tent because of your boss's high demands. Now Macrohard, Ocean tent, and all the other tech companies are in a tight competition to write the world's best malloc in order to offer the fastest solution to the consumers. 
+
+Your new task is to create this turbo malloc. Your boss gave you total freedom on your implementation so that you can out-think anyone elses implementation. The only limitation she gives you is two weeks to complete it. 
 
 ## Overview
 
