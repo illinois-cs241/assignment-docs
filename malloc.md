@@ -37,9 +37,9 @@ wikibook:
 
 ## Introduction
 
-Well, you impressed your boss with your shell and got your job back at Macrohard. The only thing is, everyone on your team left to go work for the hot new startup, Ocean tent because of your boss's high demands. Now Macrohard, Ocean tent, and all the other tech companies are in a tight competition to write the world's best malloc in order to offer the fastest solution to the consumers. 
+Well, you impressed your boss with your shell and got your job back at Macrohard. Macrohard is now in tight competition with Ocean tent, the hot new tech startup trying to innovate the world's fastest C memory allocator. This simple competition wouldn't be an issue to Macrohard if it wasn't for the fact that Ocean tent also has intelligent cs241 students in it. 
 
-Your new task is to create this turbo malloc. Your boss gave you total freedom on your implementation so that you can out-think anyone elses implementation. The only limitation she gives you is two weeks to complete it. 
+Your new task is to create this turbo malloc. Your boss gave you total freedom on your implementation so that you can out-think anyone else's implementation. The only limitation she gives you is two weeks to complete it. This time, you've decided not to procrastinate so that you can finish the first part of your memory allocator a week early, in hopes of getting a promotion. 
 
 ## Overview
 
