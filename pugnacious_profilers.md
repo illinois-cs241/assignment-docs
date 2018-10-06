@@ -24,7 +24,7 @@ In high-frequency trading (HFT), programs analyze market data to find and take a
 often only exist for a few seconds. Messages describing trade offers can reach rates of up to 250,000 messages/second.
 Thus, programs involved in automated trading have to process a lot of data extremely quickly.
 
-The program provided to you will read in and process a stream of order messages for a single stock. These messages will 
+The program provided to you will read in and process a stream of order messages for multiple stocks. These messages will 
 be used to update our program’s view of the market state. This state is known as the “order book”. The messages we 
 process will either trigger the entry of a new order, change an existing order, or delete an order. 
 At the end of the stream, this program will print out all the current orders in the order book.
@@ -75,8 +75,6 @@ Example output:
 344532111 S 100 117.840000
 ```
 
-*Note: We are only interested in the stocks related to the symbol SPY.*
-
 ## Part - 1 (Grade: 70%)
 High frequency trading requires optimal performance demanding high speed and for this part of the project we are going
 to meet those goals. While the program provided to you does everything correctly, it is too slow to scale up and process 
@@ -93,9 +91,9 @@ $ time ./orderbook -i input/ascii_data.txt -o ob.txt
 
 On the EWS systems in Siebel, the implementation provided to you will roughly run around the following time output:
 ```
-real    0m55.711s
-user    0m55.416s
-sys     0m0.283s
+real    0m8.281s
+user    0m8.022s
+sys     0m0.042s
 ```
 
 *Note: While this may be higher or lower based on the computational resources available, it will never get close to the
@@ -106,8 +104,8 @@ What do each of these values mean and which one is relevant for us?
 
 **Task**
 
-Your job is to defeat our reference implementation (your competitors) which has a user time of **3.000 seconds** and 
-a system time of **0.050 seconds** for the data-set of ascii_data.txt provided to you. Your program when executed with 
+Your job is to defeat our reference implementation (your competitors) which has a user time of **2.000 seconds** and 
+a system time of **0.020 seconds** for the data-set of ascii_data.txt provided to you. Your program when executed with 
 **_-h_** flag needs to be below this threshold maintaining the correctness in order to complete part 1.
 
 **Profile Time**
@@ -146,18 +144,17 @@ $ env LD_PRELOAD=/lib/libmemusage.so ./orderbook_mem -i input/ascii_data.txt -o 
 
 This should provide you with the following output regarding the amount of heap memory consumed:
 ```
-Memory usage summary: heap total: 24111236, heap peak: 8560460, stack peak: 344
+Memory usage summary: heap total: 16948324, heap peak: 2519164, stack peak: 344
          total calls   total memory   failed calls
- malloc|     669739       24111236              0
+ malloc|     470778       16948324              0
 realloc|          0              0              0  (nomove:0, dec:0, free:0)
  calloc|          0              0              0
-   free|    1145281       24111236
+   free|     548400       16948324
 ```
-*Note: If you get a segmentation fault for this command, please try commenting out the writing functionality and try again.*
 
 **Task**
 
-Our reference implementation uses **16078392** bytes of heap memory for ascii_data.txt dataset. For the **_-h_** flag which will 
+Our reference implementation uses **11304352** bytes of heap memory for ascii_data.txt dataset. For the **_-h_** flag which will 
 execute your time optimized implementation, bring your memory consumption equal to or less than this value. We will be looking 
 out for the stack segment as well and thus ensure that your stack peak is less than **500** bytes.
 
@@ -178,15 +175,12 @@ Our reference implementation which uses no tricks and no clever optimizations ex
 datastructure executes this with the following performance:
 ```
 $  time ./orderbook -h -i input/dat10m.txt -o ob.txt
-real    0m12.411s
-user    0m11.935s
-sys     0m0.248s
+real    0m5.574s
+user    0m5.127s
+sys     0m0.095s
 ```
 
 It is very well possible to get below **~1.000s** for processing this dataset. Up for a challenge!
-
-
-
 
 
 
