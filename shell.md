@@ -326,6 +326,8 @@ If there are currently stopped or running background processes when your shell r
 
 :warning: If you don't handle `EOF` to exit, you will fail many of our test cases!
 
+:warning: Do **not** store `exit` in history!
+
 ### Invalid Built-in Commands
 
 You should be printing appropriate errors in cases where built-in commands fail; for example, if the user tries to `cd` into a nonexistent directory.
