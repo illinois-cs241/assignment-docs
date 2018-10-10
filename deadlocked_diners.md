@@ -9,9 +9,9 @@ submissions:
 ag_schedules:
  - title: AG Schedule
    schedule_dates:
-     - 10/11 10:00 PM
-     - 10/13 10:00 PM
-     - 10/15 10:00 PM
+     - 10/12 10:00 PM
+     - 10/14 10:00 PM
+     - 10/16 10:00 PM
 learning_objectives:
   - Synchronization
   - Deadlock / Livelock / Starvation
