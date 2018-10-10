@@ -109,7 +109,7 @@ helen xxhx0AsVpMTMU sysx....
 inigo xxHUf9zUctXNA miss....
 ```
 
-**Note:** For both version 1 and version 2, the main thread is NOT to be used to crack passwords. ONLY the worker threads should try to crack a password.
+**Note:**
 - For both version 1 and version 2, the main thread is NOT to be used to crack passwords. ONLY the worker threads should try to crack a password.
 - For both, you will be editing a function called `start` that should `return 0` when exiting under normal circumstances. You can return any non-zero exit status when an error occurs.
 
@@ -258,7 +258,7 @@ With 4 worker threads, you would split the work up like this:
 * Thread 4: 13182..17575 (tna..zzz)
 
 When the number of threads doesn't divide the search space evenly, it's easy to get off-by-one errors due to integer rounding.
-The functions `getSubrange()` and `setStringPosition()` are provided in `utils.h` file to assist you with this. We cannot guarantee the correctness of code that does not utilize these functions.
+The functions `getSubrange()` and `setStringPosition()` are provided in `utils.h` file to assist you with this. We **require** that you use these functions to match our expected output. We cannot guarantee the correctness of code that does not utilize these functions.
 
 With all the threads working on the same task, you may want to restructure your thread synchronization a little.
 Rather than a queue, you may wish to use a barrier.
