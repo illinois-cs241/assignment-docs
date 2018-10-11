@@ -194,7 +194,9 @@ If you create a new thread for each task (instead of keeping the threads in the 
 
 ### Bounds
 1 <= thread_pool_size <= 8
+
 1 <= number of passowrds <= 12
+
 0 <= number of periods <= 8
 
 ## Version 2: Parallelize each task
@@ -309,7 +311,9 @@ Note that we have not provided any of the timing print statements in `cracker2`.
 
 ### Bounds
 1 <= thread_pool_size <= 13
+
 1 <= number of passowrds <= 10,000
+
 0 <= number of periods <= 8
 
 ## Concept
