@@ -192,6 +192,11 @@ This is an exercise we have intentionally left for the reader, but one hint we w
 **Remember to use appropriate synchronization, and make sure to use `crypt_r`.**
 If you create a new thread for each task (instead of keeping the threads in the thread pool running), you will lose points! (and your implementation will be very slow)
 
+### Bounds
+1 <= thread_pool_size <= 8
+1 <= number of passowrds <= 12
+0 <= number of periods <= 8
+
 ## Version 2: Parallelize each task
 
 **We will not grade any output which is not the result of a call to a function in `format.h`**
@@ -301,6 +306,11 @@ When the worker threads finish a task, each thread will print the number of pass
 
 After all worker threads finish each task, the main thread will print the password (if found), the total number of hashes, the wall clock and CPU time spent on that task, and the ratio of CPU time to wall clock time.
 Note that we have not provided any of the timing print statements in `cracker2`.
+
+### Bounds
+1 <= thread_pool_size <= 13
+1 <= number of passowrds <= 10,000
+0 <= number of periods <= 8
 
 ## Concept
 
