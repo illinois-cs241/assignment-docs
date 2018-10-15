@@ -3,7 +3,7 @@ layout: doc
 title: "Password Cracker"
 submissions:
 - title: Version 1 and 2
-  due_date: 3/12 11:59pm
+  due_date: 10/22 11:59pm
   graded_files:
   - cracker1.c
   - cracker2.c
