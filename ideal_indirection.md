@@ -3,7 +3,7 @@ layout: doc
 title: "Ideal Indirection"
 submissions:
 - title: Entire Assignment
-  due_date: 3/14 11:59pm
+  due_date: 10/24 11:59pm
   graded_files:
   - mmu.c
 learning_objectives:
