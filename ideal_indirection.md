@@ -16,10 +16,6 @@ wikibook:
   - "Virtual Memory, Part 1: Introduction to Virtual Memory"
 ---
 
-## Quizziz/Attendance 
-
-For this week's quizziz username mapping/feedback form see this link [https://docs.google.com/forms/d/e/1FAIpQLSdmmKmx6XHaUtXgLVGtQzOFdIS1zuuInFjbOWqOwkk_Xcy_HA/viewform](https://docs.google.com/forms/d/e/1FAIpQLSdmmKmx6XHaUtXgLVGtQzOFdIS1zuuInFjbOWqOwkk_Xcy_HA/viewform).
-
 
 ## Overview
 
