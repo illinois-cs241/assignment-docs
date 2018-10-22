@@ -3,11 +3,11 @@ layout: doc
 title: "Parallel Make"
 submissions:
 - title: Part 1
-  due_date: 10/30 11:59pm
+  due_date: 10/29 11:59pm
   graded_files:
   - parmake.c
 - title: Part 2
-  due_date: 11/06 11:59pm
+  due_date: 11/05 11:59pm
 learning_objectives:
   - Parallel Programming with Dependencies
   - Using a Threadsafe Data structure
