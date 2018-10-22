@@ -37,7 +37,7 @@ Using a fixed pool of threads, you will parallelize this execution process such 
 
 Before starting you should read the Wikipedia article on [Make](http://en.wikipedia.org/wiki/Make_(software)).
 
-You might also want to look [here](https://www.cs.umd.edu/class/fall2002/cmsc214/Tutorial/makefile.html) for some notes that explain makefiles really well.
+You might also want to look [here](https://web.archive.org/web/20170202011246/http://www.cs.umd.edu/class/fall2002/cmsc214/Tutorial/makefile.html) for some notes that explain makefiles really well.
 (They start with some C++ specific details but you can skip to the 'Now, makefiles' section. Also, do note that the makefile for this MP does NOT use makefile macros.)
 
 
