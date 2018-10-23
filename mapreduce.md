@@ -1,8 +1,8 @@
 ---
 layout: doc
-title: "Mapreduce"
+title: "MapReduce"
 submissions:
-- title: Mapreduce
+- title: MapReduce
   due_date: 10/31 11:59pm
   graded_files:
   - mapreduce.c
