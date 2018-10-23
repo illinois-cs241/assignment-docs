@@ -3,9 +3,16 @@ layout: doc
 title: "Mapreduce"
 submissions:
 - title: Mapreduce
-  due_date: 04/9 11:59pm
+  due_date: 10/31 11:59pm
   graded_files:
   - mapreduce.c
+ag_schedules:
+ - title: AG Schedule
+   schedule_dates:
+     - 10/26 10:00 PM
+     - 10/28 10:00 PM
+     - 10/29 10:00 PM
+     - 10/30 10:00 PM
 learning_objectives:
   - Interprocess Communication (IPC)
   - Pipes
@@ -161,6 +168,8 @@ This too can be done in the Unix shell:
 * Splitter being used correctly to generate equally sized input data for each mapper
 * All mappers being run in parallel resulting in at least 2x performance speedup for the pi executable
 * **No memory leaks and memory errors** when running the application
+
+In addition, see the comments we've placed in the `main` method for more specific instructions!
 
 ### Things that will **no**t be tested for:
 * Illegal inputs for either the mapper or reducer (Input data in a format other than as described above)
