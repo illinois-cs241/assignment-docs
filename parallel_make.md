@@ -18,8 +18,6 @@ ag_schedules:
     - 11/04 10:00 PM
 - title: Part 2
   due_date: 11/05 11:59pm
-  graded_files:
-  - parmake.c
 learning_objectives:
   - Parallel Programming with Dependencies
   - Using a Threadsafe Data structure
