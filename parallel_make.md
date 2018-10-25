@@ -12,17 +12,14 @@ ag_schedules:
     - 10/25 10:00 PM
     - 10/27 10:00 PM
     - 10/29 12:00 PM
-- title: Part 2
-  due_date: 11/05 11:59pm
-    graded_files:
-  - parmake.c
-ag_schedules:
-- title: AG Schedule
-  schedule_dates:
     - 11/01 10:00 PM
     - 11/02 10:00 PM
     - 11/03 10:00 PM
     - 11/04 10:00 PM
+- title: Part 2
+  due_date: 11/05 11:59pm
+    graded_files:
+  - parmake.c
 learning_objectives:
   - Parallel Programming with Dependencies
   - Using a Threadsafe Data structure
