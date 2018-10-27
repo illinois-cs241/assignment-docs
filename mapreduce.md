@@ -1,11 +1,18 @@
 ---
 layout: doc
-title: "Mapreduce"
+title: "MapReduce"
 submissions:
-- title: Mapreduce
-  due_date: 04/9 11:59pm
+- title: MapReduce
+  due_date: 10/31 11:59pm
   graded_files:
   - mapreduce.c
+ag_schedules:
+ - title: AG Schedule
+   schedule_dates:
+     - 10/26 10:00 PM
+     - 10/28 10:00 PM
+     - 10/29 10:00 PM
+     - 10/30 10:00 PM
 learning_objectives:
   - Interprocess Communication (IPC)
   - Pipes
@@ -80,9 +87,9 @@ MapReduce is useful because many different algorithms can be implemented by plug
 If you want to implement a new algorithm you just need to implement those two functions.
 The MapReduce framework will take care of all the other aspects of running a large job: splitting the data and CPU time across any number of machines, recovering from machine failures, tracking job progress, etc.
 
-## The MP
+## The Lab
 
-For this MP, you have been tasked with building a simplified version of the MapReduce framework.
+For this lab, you have been tasked with building a simplified version of the MapReduce framework.
 It will run multiple processes on one machine as independent processing units and use IPC mechanisms to communicate between them.
 `map()` and `reduce()` will be programs that read from standard input and write to standard output.
 The input data for each mapper program will be lines of text.
@@ -162,6 +169,8 @@ This too can be done in the Unix shell:
 * All mappers being run in parallel resulting in at least 2x performance speedup for the pi executable
 * **No memory leaks and memory errors** when running the application
 
+In addition, see the comments we've placed in the `main` method for more specific instructions!
+
 ### Things that will **no**t be tested for:
 * Illegal inputs for either the mapper or reducer (Input data in a format other than as described above)
 * Invalid mapper or reducer code (mappers or reducers that do not work)
@@ -171,12 +180,12 @@ This too can be done in the Unix shell:
 ##  Building and Running
 
 ### Building
-This MP has a very complicated `Makefile`, but, it defines all the normal targets.
+This lab has a very complicated `Makefile`, but, it defines all the normal targets.
 
 ```
 make # builds provided code and student code in release mode
 make debug # builds provided code and student code in debug mode
-# there is no tsan target because threading is not needed for this MP.
+# there is no tsan target because threading is not needed for this lab.
 ```
 
 ### Input Data
@@ -186,7 +195,7 @@ To download the example input files (books from [Project Gutenberg](https://www.
 make data
 ```
 
-You should now see `data/dracula.txt` and `data/alice.txt` in your MP folder
+You should now see `data/dracula.txt` and `data/alice.txt` in your lab folder
 
 ### Running Your Code
 We have provided the following mappers:

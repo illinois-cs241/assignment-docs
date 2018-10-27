@@ -3,10 +3,16 @@ layout: doc
 title: "Password Cracker"
 submissions:
 - title: Version 1 and 2
-  due_date: 3/12 11:59pm
+  due_date: 10/22 11:59pm
   graded_files:
   - cracker1.c
   - cracker2.c
+ag_schedules:
+- title: AG Schedule
+  schedule_dates:
+    - 10/17 10:00 PM
+    - 10/19 10:00 PM
+    - 10/21 10:00 PM
 learning_objectives:
   - Multithreaded programming and its performance gains
   - Using a thread-safe datastructure
@@ -109,7 +115,7 @@ helen xxhx0AsVpMTMU sysx....
 inigo xxHUf9zUctXNA miss....
 ```
 
-**Note:** For both version 1 and version 2, the main thread is NOT to be used to crack passwords. ONLY the worker threads should try to crack a password.
+**Note:**
 - For both version 1 and version 2, the main thread is NOT to be used to crack passwords. ONLY the worker threads should try to crack a password.
 - For both, you will be editing a function called `start` that should `return 0` when exiting under normal circumstances. You can return any non-zero exit status when an error occurs.
 
@@ -258,7 +264,7 @@ With 4 worker threads, you would split the work up like this:
 * Thread 4: 13182..17575 (tna..zzz)
 
 When the number of threads doesn't divide the search space evenly, it's easy to get off-by-one errors due to integer rounding.
-The functions `getSubrange()` and `setStringPosition()` are provided in `utils.h` file to assist you with this. We cannot guarantee the correctness of code that does not utilize these functions.
+The functions `getSubrange()` and `setStringPosition()` are provided in `utils.h` file to assist you with this. We **require** that you use these functions to match our expected output. We cannot guarantee the correctness of code that does not utilize these functions.
 
 With all the threads working on the same task, you may want to restructure your thread synchronization a little.
 Rather than a queue, you may wish to use a barrier.
@@ -301,6 +307,17 @@ When the worker threads finish a task, each thread will print the number of pass
 
 After all worker threads finish each task, the main thread will print the password (if found), the total number of hashes, the wall clock and CPU time spent on that task, and the ratio of CPU time to wall clock time.
 Note that we have not provided any of the timing print statements in `cracker2`.
+
+## Bounds
+2 <= thread_pool_size <= 13
+
+1 <= number of passwords <= 10,000
+
+0 <= number of periods <= 8
+
+Performance: If you have n threads then CPU usage should be:
+* in interval \[n - 0.5, n + 0.5\] if 2 <= n <= 3
+* more than 2 if n >= 4
 
 ## Concept
 

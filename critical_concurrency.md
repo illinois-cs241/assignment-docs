@@ -3,11 +3,17 @@ layout: doc
 title: "Critical Concurrency"
 submissions:
 - title: Entire Assignment
-  due_date: 02/28 11:59pm
+  due_date: 10/10 11:59pm
   graded_files:
   - barrier.c
   - queue.c
   - semamore.c
+ag_schedules:
+ - title: AG Schedule
+   schedule_dates:
+     - 10/05 10:00 PM
+     - 10/07 10:00 PM
+     - 10/09 10:00 PM
 learning_objectives:
   - Synchronization Primitives
   - Common Patterns in Multi-Threaded Programs
@@ -22,10 +28,6 @@ wikibook:
   - "Deadlock, Part 1: Resource Allocation Graph"
   - "Deadlock, Part 2: Deadlock Conditions"
 ---
-
-## Lab Attendance
-
-For this week's lab attendance please fill out the following form: [https://docs.google.com/forms/d/e/1FAIpQLSd29dlmCoZ0SPEULCVv_nuIfZojUfoY5Zy493DkAFkmPOU1Fw/viewform](https://docs.google.com/forms/d/e/1FAIpQLSd29dlmCoZ0SPEULCVv_nuIfZojUfoY5Zy493DkAFkmPOU1Fw/viewform)
 
 ## Overview
 

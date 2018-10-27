@@ -3,13 +3,29 @@ layout: doc
 title: "Malloc"
 submissions:
 - title: Part 1
-  due_date: 02/26/2018 11:59 pm
+  due_date: 10/08/2018 11:59 pm
   graded_files:
   - alloc.c
+ag_schedules:
+- title: AG Schedule
+  schedule_dates:
+    - 10/03 10:00 PM
+    - 10/05 10:00 PM
+    - 10/06 10:00 PM
+    - 10/07 10:00 PM
+    - 10/08 12:00 PM (noon)
 - title: Part 2
-  due_date: 03/05/2018 11:59 pm
+  due_date: 10/15/2018 11:59 pm
   graded_files:
   - alloc.c
+ag_schedules:
+- title: AG Schedule
+  schedule_dates:
+    - 10/09 10:00 PM
+    - 10/11 10:00 PM
+    - 10/13 10:00 PM
+    - 10/14 10:00 PM
+    - 10/15 12:00 PM (noon)
 learning_objectives:
   - Memory Allocation and Management
   - Performance Optimization
@@ -21,7 +37,9 @@ wikibook:
 
 ## Introduction
 
-In the past, you have been using `malloc` to allocate memory on the heap. In this MP, you will be implementing your own version of `malloc`. By the end of this MP, you will theoretically be able to use your own malloc to run any program you wish.
+Well, you impressed your boss with your shell and got your job back at Macrohard. Macrohard is now in tight competition with Ocean tent, the hot new tech startup trying to innovate the world's fastest C memory allocator. This simple competition wouldn't be an issue to Macrohard if it wasn't for the fact that Ocean tent also has intelligent cs241 students in it. 
+
+Your new task is to create this turbo malloc. Your boss gave you total freedom on your implementation so that you can out-think anyone else's implementation. The only limitation she gives you is two weeks to complete it. This time, you've decided not to procrastinate so that you can finish the first part of your memory allocator a week early, in hopes of getting a promotion. 
 
 ## Overview
 

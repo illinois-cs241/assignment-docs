@@ -3,11 +3,21 @@ layout: doc
 title: "Parallel Make"
 submissions:
 - title: Part 1
-  due_date: 10/30 11:59pm
+  due_date: 10/29 11:59pm
   graded_files:
   - parmake.c
+ag_schedules:
+- title: AG Schedule
+  schedule_dates:
+    - 10/25 10:00 PM
+    - 10/27 10:00 PM
+    - 10/29 12:00 PM
+    - 11/01 10:00 PM
+    - 11/02 10:00 PM
+    - 11/03 10:00 PM
+    - 11/04 10:00 PM
 - title: Part 2
-  due_date: 11/06 11:59pm
+  due_date: 11/05 11:59pm
 learning_objectives:
   - Parallel Programming with Dependencies
   - Using a Threadsafe Data structure
@@ -37,7 +47,7 @@ Using a fixed pool of threads, you will parallelize this execution process such 
 
 Before starting you should read the Wikipedia article on [Make](http://en.wikipedia.org/wiki/Make_(software)).
 
-You might also want to look [here](https://www.cs.umd.edu/class/fall2002/cmsc214/Tutorial/makefile.html) for some notes that explain makefiles really well.
+You might also want to look [here](https://web.archive.org/web/20170202011246/http://www.cs.umd.edu/class/fall2002/cmsc214/Tutorial/makefile.html) for some notes that explain makefiles really well.
 (They start with some C++ specific details but you can skip to the 'Now, makefiles' section. Also, do note that the makefile for this MP does NOT use makefile macros.)
 
 

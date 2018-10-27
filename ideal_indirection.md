@@ -3,9 +3,15 @@ layout: doc
 title: "Ideal Indirection"
 submissions:
 - title: Entire Assignment
-  due_date: 3/14 11:59pm
+  due_date: 10/24 11:59pm
   graded_files:
   - mmu.c
+ag_schedules:
+ - title: AG Schedule
+   schedule_dates:
+     - 10/19 10:00 PM
+     - 10/21 10:00 PM
+     - 10/23 10:00 PM
 learning_objectives:
   - Virtual Memory
   - The virtual address translation process
@@ -15,10 +21,6 @@ learning_objectives:
 wikibook:
   - "Virtual Memory, Part 1: Introduction to Virtual Memory"
 ---
-
-## Quizziz/Attendance 
-
-For this week's quizziz username mapping/feedback form see this link [https://docs.google.com/forms/d/e/1FAIpQLSdmmKmx6XHaUtXgLVGtQzOFdIS1zuuInFjbOWqOwkk_Xcy_HA/viewform](https://docs.google.com/forms/d/e/1FAIpQLSdmmKmx6XHaUtXgLVGtQzOFdIS1zuuInFjbOWqOwkk_Xcy_HA/viewform).
 
 
 ## Overview
