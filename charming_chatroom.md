@@ -1,8 +1,13 @@
 ---
 layout: doc
 title: "Chatroom"
-permalink: charming\_chatroom
+permalink: charming_chatroom
 dueDates: "04/04/2018, 11:59 PM"
+ag_schedules:
+ - title: AG Schedule
+   schedule_dates:
+     - 11/03 10:00 PM
+     - 11/05 10:00 PM
 ---
 
 ## Learning Objectives
