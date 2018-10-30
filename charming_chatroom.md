@@ -1,7 +1,7 @@
 ---
 layout: doc
 title: "Chatroom"
-permalink: chatroom
+permalink: charming\_chatroom
 dueDates: "04/04/2018, 11:59 PM"
 ---
 
