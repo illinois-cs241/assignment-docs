@@ -88,7 +88,7 @@ To sum up, you have to:
 * (There is a giant while-loop - you need to do something in it)
 
 Here is the overall client-server architecture: 
-![Alt](./OverallArchitecture.png "Title")
+![Alt](/images/OverallArchitecture.png "Title")
 
 ## Read/Write Failures
 
