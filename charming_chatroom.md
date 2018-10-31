@@ -1,6 +1,13 @@
 ---
 layout: doc
 title: "Chatroom"
+submissions:
+- title: Entire Assignment
+  due_date: 11/07 11:59pm
+  graded_files:
+  - client.c
+  - server.c
+  - utils.c
 permalink: charming_chatroom
 dueDates: "04/04/2018, 11:59 PM"
 ag_schedules:
