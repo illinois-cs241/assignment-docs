@@ -18,19 +18,22 @@ wikibook:
   - "File System, Part 4: Working with directories"
 ---
 
-## QuizzIz
+## Introduction / Backstory
 
-For this week's lab attendance grade, please fill out the google form at this link: [https://docs.google.com/forms/d/e/1FAIpQLSc9tDTBZ62p2zcZq6AaYKrq4q1A6zYzWCFzdnJGHYwwvxtWDw/viewform](https://docs.google.com/forms/d/e/1FAIpQLSc9tDTBZ62p2zcZq6AaYKrq4q1A6zYzWCFzdnJGHYwwvxtWDw/viewform)
+So you've been doing well at Macrohard. Your turbo malloc really impressed your boss and you also went on to work on the infamous password cracker and parmake programs. However, your bosses have been looking for a way to store data in a proprietary format so that they can easily share chunks of data without having to first compress it. They have the following requirements:
 
-## Overview
++ The data must be stored in a single file so that it's easy to share - however, to keep the file within the company the format must be proprietary
++ Current tools like `cp`, `ls`, `touch`, etc must work with this data format for easy usage
 
-Your friendly neighborhood 241 course staff asked themselves, _"What's the best way to learn filesystems?"_ Write one!
+Sounds tough. That second requirement really throws a spin on things. It's such an arbitrary requirement. Almost as if it was just thrown in as a TA's lazy writing to motivate an MP or something. Lame!
 
-In this lab, you will be implementing several callbacks to file system operations, namely, `chmod`, `chown`, `read`, and `write`. To do this you will be exploring how metadata is stored in the inode and how data is stored in the data blocks.
+Of course, as a student of CS241, you know exactly what they're asking for - a loopback filesystem! After doing some research, you decide that a good filesystem to base your implementation off of is minixfs. Your friendly coworkers have already made some progress on this project and created a filesystem wrapper, fakefs, That can load a mininxfs image. It's now your job to implement a few filesystem operation for minix.
+
+In this MP, you will be implementing several callbacks to file system operations, namely, `chmod`, `chown`, `read`, and `write`. To do this you will be exploring how metadata is stored in the inode and how data is stored in the data blocks. You will also be exploring the idea of virtual filesystems and how they can be used to present metadata about a system.
 
 ## minixfs
 
-ext2 is good filesystem, but to keep things simple, we will be using a modified version of its predecessor (the [MINIX filesystem](https://en.wikipedia.org/wiki/MINIX_file_system)) in this lab.
+ext2 is good filesystem, but to keep things simple, we will be using a modified version of its predecessor (the [MINIX filesystem](https://en.wikipedia.org/wiki/MINIX_file_system)) in this MP.
 
 ### Superblock
 
@@ -100,27 +103,31 @@ typedef struct {
 
 ```
 
+TODO change this image!!!
 ![](http://cs241.cs.illinois.edu/images/map.png)
 
 The `file_system` struct keeps track of the metadata, the root inode (where `fs->inode_root[0]` is the root `"/"` inode), and the root of the `data_block`s.
 
-* The `meta` pointer points to the start of the file system, which includes the superblock and the `data_map`.
-* The `inode_root` points to the start of the inodes as in the picture, right after the `data_map`.
+* The `meta` pointer points to the start of the file system, which includes the superblock.
+* The `inode_root` points to the start of the inodes as in the picture.
 * The `data_root` points to the start of the `data_blocks` as in the picture, right after the inodes.
+* The `data_map` keeps track of which blocks are used and is placed at the end of the filesystem whihc makes it easy to resize the filesystem (although resizing is not supported by your implementation).
 
 The inodes and data blocks are laid sequentially out so you can treat them like an array. Think about how you could get a pointer to the nth `data_block`.
 
 ## fakefs interface
 
-To make this lab possible, we've developed our own userspace filesystem interface which we're calling fakefs. Normally, filesystem are a piece of code which you load into your kernel and must provide a few things. It needs a constructor, destructor, callbacks for all system calls involving files and file descriptors within your filesystem. However, writing kernel code is a bit more cumbersome than writing normal code (since you need additional security checks among other things), and can even lead to instability in your operating system. To avoid this, there are various ways to implment a filesystem in userspace. The most common (and preffered) method is to use a library called FUSE (Filesystems in USErspace). However, FUSE alllows you to implement your file operations in userspace, but still interacts with th ekernel to provide it's functionality. While this allows you to mount  the filesystem and use it like any other filesystem, there a few reasons why we chose not to use it for this lab. A major reason is that if a FUSE callback crashes while it is mounted, it renders the mounted partition unsuable and in some cases, you won't be able to even unmount the parition without rebooting the machine. To prevent this, and make this lab not annoying and tedious, we've made ourn own way of implementing filesystems in userspace by `hooking` filesystem operations. 
+You do not to modify or read any of the code in `fakefs_src/`.
 
-If you take a look at `fakefs.c` you'll see that we've overridden most of `glibc`'s filesystem operations. Note that this only hooks functions from code or programs that were either written in `C` or in something that compiles to `C`. Running a program written in assembly will not be affected by these hooks.
+To make this MP possible, we've developed our own userspace filesystem interface which we're calling fakefs. Normally, filesystem are a piece of code which you load into your kernel and must provide a few things. It needs a constructor, destructor, callbacks for all system calls involving files and file descriptors within your filesystem. However, writing kernel code is a bit more cumbersome than writing normal code (since you need additional security checks among other things), and can even lead to instability in your operating system. To avoid this, there are various ways to implment a filesystem in userspace. The most common (and preffered) method is to use a library called FUSE (Filesystems in USErspace). However, FUSE alllows you to implement your file operations in userspace, but still interacts with th ekernel to provide it's functionality. While this allows you to mount  the filesystem and use it like any other filesystem, there a few reasons why we chose not to use it for this MP. A major reason is that if a FUSE callback crashes while it is mounted, it renders the mounted partition unsuable and in some cases, you won't be able to even unmount the parition without rebooting the machine. To prevent this, and make this MP not annoying and tedious, we've made ourn own way of implementing filesystems in userspace by `hooking` filesystem operations. 
+
+If you take a look at `fakefs_src/fakefs.c` you'll see that we've overridden most of `glibc`'s filesystem operations. Note that this only hooks functions from code or programs that were either written in `C` or in something that compiles to `C`. Running a program written in assembly will not be affected by these hooks.
 
 Note that not all programs will work with fakefs. At the least, we guarantee that `ls`, `cat`, `mkdir`, `unlink` and `cp` work. `vim` and `neovim` seem to work although you might run into some weird bugs using these programs within fakefs.
 
 ## Helper Functions/Macros
 
-There are some functions that you are going to need to know in order to finish this lab.
+There are some functions that you are going to need to know in order to finish this MP.
 
 ### `get_inode`
 
@@ -130,6 +137,14 @@ This function takes a string name like `/path/to/file` and returns the inode cor
 
 Call `is_file` or `is_directory` on an inode to tell whether it is a directory or a file. You don't need to consider other inode types.
 
+### `is_virtual_path`
+
+Call `is_virtual_path` on a path to see if it's a path in the virtual component. If it is, this function will return a path relative to the virtual directory. Returns `NULL` otherwise.
+
+### `minixfs_min_blockcount`
+
+Call `minixfs_min_blockcount` to ensure that an inode has a certain minimum number of data blocks directly, or indirectly associated with it.
+
 ### `NUM_DIRECT_INODES`
 
 `NUM_DIRECT_INODES` is the number of direct `data_block` nodes in a single inode. The `indirect` array has only this many entries (for the sake of simplicity).
@@ -137,28 +152,6 @@ Call `is_file` or `is_directory` on an inode to tell whether it is a directory o
 ### `UNASSIGNED_NODE`
 
 You may not need to use this macro, but if you choose to, then any `data_block` or `inode` that is not currently being used will have this number.
-
-## Directory Structure
-
-Our directory `data_blocks` looks like the following:
-
-```
-
-|--248 Byte Name String--||-8 Byte Inode Number-|
-|--248 Byte Name String--||-8 Byte Inode Number-|
-...
-
-```
-
-The filesystem guarantees that size of a directory is a multiple of 256. You need to loop through all of the directory entries and get the name of the entry, and print it out to standard out. You are going to need to call two different print functions based on whether the inode that you are pointing to is a directory or a file, which means you have to get the inode number and check that inode.
-
-Use `make_dirent_from_string`: it accepts a `char* ptr` to the start of a dirent block like this.
-
-```
-
-|--248 Byte Name String--||-8 Byte Inode Number-|
-^ -- Points here
-```
 
 ## So what do I need to do?
 
@@ -169,9 +162,26 @@ You will need to implement the following 4 functions
 * `ssize_t minixfs_read(file_system *fs, const char *path, void *buf, size_t req, off_t *off)`
 * `ssize_t minixfs_write(file_system *fs, const char *path, const void *buf, size_t count, off_t *off)`
 
-You can find more information about these functions in `minixfs.h`. Remember to set `errno` on errors in your code!
+And you will need to implement a virtual file `/virtual/info` for more infomation about that scroll down to the virtual filesystem section.
+
+You can find more information about the required functions in `minixfs.h`. Remember to set `errno` on errors in your code! We will be checking errno while grading.
 
 Note that for all functions where you need to update times, you should use `clock_gettime(CLOCK_REALTIME, variable_to_update);`.
+
+## Virtual Filesystem
+
+In order to quickly get meta-information about the filesystem, we're going to implement a virtual filesystem. Virtual filesystems are filesystems that present file-like objects, but don't provide access to data in the traditional sense that you would expect from a filesystem. Some examples are `procfs` (usually mounted at `/proc`) that gives a user information about running processes, and also has some special files that can control various system parameters or provide debugging information about a running machine, or `devfs` (usually mounted at `/dev`) that provides information about devices and presents some virtual devices such as '`dev/zero`, `/dev/random` and /dev/null` which have special actions when being read or written to.
+
+The virtual filesystem we will be baking into our mininxfs implementation will live at `/virtual` with respect to the root of your minix filesystem. There will be at least one file inside, `info`. You do not need to implement writing to `/virtual/info`, but do need to support read. When read from, `/virtual/info` will return a string with the following format:
+
+```
+Free blocks: [number of free blocks]
+Used blocks: [number of used blocks]
+``
+
+Note that there is a new line at the end of each line above. You will need to compute the number of free and used blocks to insert into the data. Also note that you will need to support reading the virtual file from an offset, and must not copy more bytes to the user's buffer than requested (just like a normal read).
+
+To simplify your implementation we reccomend first generating the data above as a string and then copying a certain number of bytes of the string from a desired offset to the user buffer.
 
 ## Testing
 
