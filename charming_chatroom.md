@@ -171,8 +171,3 @@ We are using `pthread_cancel`, `pthread_detach`,  `pthread_cleanup`, and `ncurse
 In the Makefile, we have `-I./includes`.  This lets you do `#include "something.h"` instead of `#include "./includes/something.h"`
 
 Also `#pragma once` in the .h files
-
-
-## Usernames
-
-[Here is the link to the username form for the quiz](https://docs.google.com/forms/d/e/1FAIpQLSdFXluySLGBj0dZLJsrGO8EE649syotPACaPYq0QtdoqfKxJA/viewform). Fill it out sometime during your lab. Thanks!
