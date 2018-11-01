@@ -79,7 +79,7 @@ So to sum up, your job in the client program is:
 * port - The port number to accept connections on.
 
 Similar to `client.c`, a lot of the functionality in `server.c` has been implemented for you.  Your job is to set up the server to use TCP IPv4 with reusable ports and gracefully close the server when `SIGINT` is received.
- The figure below illustrates how a message propagates through the system: ![Alt](./MessageBroadcast.png "Title")
+ The figure below illustrates how a message propagates through the system: ![Alt](/images/MessageBroadcast.png "Title")
 
 To sum up, you have to:
 
