@@ -58,7 +58,7 @@ Implement `run_client()` to use a TCP IPv4 connection and connect to the host at
 
 **Notice** the `write_to_server()` and `read_from_server()` functions use `write_all_to_socket()` and `read_all_from_socket()`.  You will have to implement these functions to handle the failures of read/write calls, but more on that later.
 
-The figure below gives you an idea about how the client side architecture looks like: ![Alt](./ClientArch.png "Title")
+The figure below gives you an idea about how the client side architecture looks like: ![Alt](/images/ClientArch.png "Title")
 
 So to sum up, your job in the client program is:
 
