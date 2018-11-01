@@ -1,6 +1,13 @@
 ---
 layout: doc
 title: "Chatroom"
+submissions:
+- title: Entire Assignment
+  due_date: 11/07 11:59pm
+  graded_files:
+  - client.c
+  - server.c
+  - utils.c
 permalink: charming_chatroom
 dueDates: "04/04/2018, 11:59 PM"
 ag_schedules:
@@ -51,7 +58,7 @@ Implement `run_client()` to use a TCP IPv4 connection and connect to the host at
 
 **Notice** the `write_to_server()` and `read_from_server()` functions use `write_all_to_socket()` and `read_all_from_socket()`.  You will have to implement these functions to handle the failures of read/write calls, but more on that later.
 
-The figure below gives you an idea about how the client side architecture looks like: ![Alt](./ClientArch.png "Title")
+The figure below gives you an idea about how the client side architecture looks like: ![Alt](/images/ClientArch.png "Title")
 
 So to sum up, your job in the client program is:
 
@@ -72,7 +79,7 @@ So to sum up, your job in the client program is:
 * port - The port number to accept connections on.
 
 Similar to `client.c`, a lot of the functionality in `server.c` has been implemented for you.  Your job is to set up the server to use TCP IPv4 with reusable ports and gracefully close the server when `SIGINT` is received.
- The figure below illustrates how a message propagates through the system: ![Alt](./MessageBroadcast.png "Title")
+ The figure below illustrates how a message propagates through the system: ![Alt](/images/MessageBroadcast.png "Title")
 
 To sum up, you have to:
 
@@ -81,7 +88,7 @@ To sum up, you have to:
 * (There is a giant while-loop - you need to do something in it)
 
 Here is the overall client-server architecture: 
-![Alt](./OverallArchitecture.png "Title")
+![Alt](/images/OverallArchitecture.png "Title")
 
 ## Read/Write Failures
 
