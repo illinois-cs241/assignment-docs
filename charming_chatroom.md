@@ -28,19 +28,19 @@ ag_schedules:
 
 ## Goal
 
-The goal of this lab is to help you understand networking components. You will accomplish this by writing a real chatroom program. You are going to write a client which can send/receive data to/from server, a server which can receive data from multiple clients and broadcast these messages to each of the clients, and read/write functions than handle the failures of read and write.  The files you must modify are 
+The goal of this lab is to help you understand networking components. You will accomplish this by writing a real chatroom program. You are going to write a client which can send/receive data to/from server, a server which can receive data from multiple clients and broadcast these messages to each of the clients, and read/write functions than handle the failures of read and write.  The files you must modify are
 
 * client.c
 * server.c
 * utils.c
 
-The files `client.c` and `server.c` provide an outline of what you are expected to do via references to questions in questions.txt. For example, if you see /*QUESTION 1*/ then question 1 in `questions.txt` should help you understand what to do when filling that part of the code.  
+The files `client.c` and `server.c` provide an outline of what you are expected to do via references to questions in questions.txt. For example, if you see /*QUESTION 1*/ then question 1 in `questions.txt` should help you understand what to do when filling that part of the code.
 **So be sure to answer the questions in `questions.txt` to begin with as these will help you get started!**
 
 
 ## Client
 
-The file `chat_window.c` is the control center for setting up the ncurses windows (that's a thing).  You do not need to worry about this, but feel free to look at it if you are interested. 
+The file `chat_window.c` is the control center for setting up the ncurses windows (that's a thing).  You do not need to worry about this, but feel free to look at it if you are interested.
 
 The client executable will accept up to four arguments:
 ```
@@ -87,7 +87,7 @@ To sum up, you have to:
 * Set up connections (TCP & IPv4).
 * (There is a giant while-loop - you need to do something in it)
 
-Here is the overall client-server architecture: 
+Here is the overall client-server architecture:
 ![Alt](/images/OverallArchitecture.png "Title")
 
 ## Read/Write Failures
@@ -106,7 +106,7 @@ Messages in our server/client will be exchanged in the following format:
 informally: 0x0000000C"hello world\n"
 ```
 where the **first 4 bytes** of the message indicate the size of the message in bytes.
-We use network-to-host byte-order (ntohs) and host-to-network byte-order (htons) for this.
+We use network-to-host byte-order (ntohl) and host-to-network byte-order (htonl) for this.
 We've given you `get_message_size()`, you **must** implement `write_message_size()`.  As we will be testing your server and client separately, and because our server and client expect this setup, be sure this works; it is like our "protocol".
 Please see how `get_message_size()` it is done in `utils.c`
 
@@ -121,12 +121,12 @@ Many things can go wrong when working with networks. Be sure to do plenty of err
 
 
 ## Testing
-You should implement tests for testing functionality of client and server side code separately. That way you don't worry about client-server interactions. 
-You can then consider cases where a message is written to one client, is sent to the server and is then broadcasted to all the other clients running. To test such a code path, you start a test that writes to one of the clients **c** and then verifies whether all the clients have received the message that was provided as input to **c**. 
+You should implement tests for testing functionality of client and server side code separately. That way you don't worry about client-server interactions.
+You can then consider cases where a message is written to one client, is sent to the server and is then broadcasted to all the other clients running. To test such a code path, you start a test that writes to one of the clients **c** and then verifies whether all the clients have received the message that was provided as input to **c**.
 
 Note, you are writing a server that could potentially run for a long time. This is exactly a scenario where memory leaks can be very costly and cause your server to crash. So ensure there are no memory leaks in your implementation.
 
-Otherwise, we will leave it open ended to let you come up with other interesting test cases. 
+Otherwise, we will leave it open ended to let you come up with other interesting test cases.
 
 ### We provided you with a Makefile.
 
