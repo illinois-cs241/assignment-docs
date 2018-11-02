@@ -14,8 +14,11 @@ ag_schedules:
     - 10/29 12:00 PM
     - 11/01 10:00 PM
     - 11/02 10:00 PM
+    - 11/03 12:00 PM
     - 11/03 10:00 PM
+    - 11/04 12:00 PM
     - 11/04 10:00 PM
+    - 11/05 12:00 PM
 - title: Part 2
   due_date: 11/05 11:59pm
 learning_objectives:
