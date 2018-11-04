@@ -153,12 +153,24 @@ Call `minixfs_min_blockcount` to ensure that an inode has a certain minimum numb
 
 You may not need to use this macro, but if you choose to, then any `data_block` or `inode` that is not currently being used will have this number.
 
+### Other useful functions
+
+* `void make_string_from_dirent`
+* `add_single_indirect_block`
+* `add_data_block_to_indirect_block`
+* `add_data_block_to_inode`
+* `parent_directory`
+
+You can find information about these in `minixfs.h` and `minixfs_utils.h`. It's also a good idea to read through the provided functions briefly (at least the headers) to get an idea of what tools we provide you with.
+
+
 ## So what do I need to do?
 
 You will need to implement the following 4 functions
 
 * `int minixfs_chmod(file_system *fs, char *path, int new_permissions)`
 * `int minixfs_chown(file_system *fs, char *path, uid_t owner, gid_t group)`
+* `inode *minixfs_create_inode_for_path(file_system *fs, const char *path)`
 * `ssize_t minixfs_read(file_system *fs, const char *path, void *buf, size_t req, off_t *off)`
 * `ssize_t minixfs_write(file_system *fs, const char *path, const void *buf, size_t count, off_t *off)`
 
