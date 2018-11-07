@@ -100,7 +100,9 @@ Read and Write calls (general read/write - this extends to recv, send, etc.) can
 counter = 0
 while counter is not the number of bytes needed:
     return_code = read bytes from socket
-    if return_code >= 0:
+    if return_code = 0:
+        return 0
+    else if return_code > 0:
         add return_code bytes to counter
     else if return_code == -1 and error was interrupted:
         try again
