@@ -13,8 +13,9 @@ dueDates: "04/04/2018, 11:59 PM"
 ag_schedules:
  - title: AG Schedule
    schedule_dates:
-     - 11/03 10:00 PM
+     - 11/04 10:00 PM
      - 11/05 10:00 PM
+     - 11/06 10:00 PM
 ---
 
 ## Learning Objectives
@@ -88,13 +89,24 @@ To sum up, you have to:
 * (There is a giant while-loop - you need to do something in it)
 
 Here is the overall client-server architecture:
+
 ![Alt](/images/OverallArchitecture.png "Title")
 
 ## Read/Write Failures
 
-Read and Write calls (general read/write - this extends to recv, send, etc.) can fail to send/receive all bytes or get interrupted by signals.  We have defined failure as:
+Read and Write calls (general read/write - this extends to recv, send, etc.) can fail to send/receive all bytes or get interrupted by signals.  Here is the pseudocode for read all to socket.
 
-> If read/write should read/write x bytes, then read/write failed if read/write returns y where 0 < y < x OR y = -1.  If read/write returns -1 AND errno == EINTR then read/write was interrupted by a signal and should try again.
+```
+counter = 0
+while counter is not the number of bytes needed:
+    return_code = read bytes from socket
+    if return_code >= 0:
+        add return_code bytes to counter
+    else if return_code == -1 and error was interrupted:
+        try again
+    else:
+        fail (return)
+```
 
 
 In `utils.c/h` we have declared the functions `read_all_from_socket` and `write_all_to_socket`.  You need to implement these functions to read/write from/to a socket and handle the failures of read/write (defined above).  You should look at `utils.h` for detailed info on what your functions should do.
