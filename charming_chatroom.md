@@ -16,6 +16,7 @@ ag_schedules:
      - 11/04 10:00 PM
      - 11/05 10:00 PM
      - 11/06 10:00 PM
+     - 11/07 12:00 PM (noon)
 ---
 
 ## Learning Objectives
