@@ -3,7 +3,7 @@ layout: doc
 title: "Mad Mad Access Pattern"
 submissions:
 - title: Entire Assignment
-  due_date: 04/26 11:59pm
+  due_date: 11/14 11:59pm
   graded_files:
   - lookup1.c
   - lookup2.c
