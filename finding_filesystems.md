@@ -6,6 +6,13 @@ submissions:
   due_date: 11/12/2018 11:59pm
   graded_files:
   - minixfs.c
+ag_schedules:
+- title: AG Schedule
+  schedule_dates:
+    - 11/08 10:00 PM
+    - 11/10 10:00 PM
+    - 11/11 10:00 PM
+    - 11/12 12:00 PM
 learning_objectives:
   - Learn how inodes are represented in the kernel
   - How to write callbacks for filesystem operations
@@ -67,6 +74,10 @@ typedef struct {
 } inode;
 ```
 
+This is the famous inode struct that you have been learning about! Here are a breakdown of the variables:
+
+- `uid` is the user ID of the inode owner.
+- `gid` is the ID of the inode group (does not have to include the owner).
 This is the famous inode struct that you have been learning about! Here are a breakdown of the variables:
 
 - `uid` is the user ID of the inode owner.
@@ -257,7 +268,3 @@ You can also test by generating your own filesystems. Simply run ./fakefs mkfs _
 *   **Only** change`minixfs.c`.
 
 ## Graded Files
-
-*   `minixfs.c`
-
-**Anything not specified in these docs is considered undefined behavior, and we will not test it.**
