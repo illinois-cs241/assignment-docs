@@ -199,7 +199,7 @@ The virtual filesystem we will be baking into our mininxfs implementation will l
 ```
 Free blocks: [number of free blocks]
 Used blocks: [number of used blocks]
-``
+```
 
 Note that there is a new line at the end of each line above. You will need to compute the number of free and used blocks to insert into the data. Also note that you will need to support reading the virtual file from an offset, and must not copy more bytes to the user's buffer than requested (just like a normal read).
 
