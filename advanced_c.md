@@ -22,12 +22,12 @@ have the following sections:
 + Walkthrough - this may not be in every document, but for some assignments, we
   will include a 'walkthrough' section that will have more hints on how to
   complete the assignment.
-+ Analysis - a discussion on what we hoped you learnt from completing the
++ Analysis - a discussion on what we hoped you learned from completing the
   assignment and some further challenges or relevant resources.
 
 If you are already comfortable with the present topic or you'd like to explore 
 it on your own before looking at the walkthrough/discussion, feel free to do so 
-(although we reccomend at least coming back here for the analysis section)! This
+(although we recommend at least coming back here for the analysis section)! This
 class is all about explorative learning and is much more open ended than CS241. 
 While your MPs and Labs from CS241 will help you master the techniques and gain 
 the knowledge required to call yourself a systems programmer, these MPs will be 
@@ -37,7 +37,7 @@ brainteasers or puzzles to further your interest in a particular area.
 
 Create an implementation of a dictionary by using clang's blocks!
 Your implementation will have a single entry point that is a variadic function.
-You will need to suport the following operations:
+You will need to support the following operations:
 
 + lookup
 + insert
@@ -48,7 +48,7 @@ The runtime of your implementation does not matter (O(n) lookups are fine!)
 To invoke a particular operation the user should pass in a string with the name
 of that operation, followed by any arguments that operation may use. The
 arguments consumed by each of the operations, and their behaviors are described
-in the psuedo code example below:
+in the pseudo code example below:
 
 ```c
 int main() {
@@ -109,14 +109,14 @@ Variadic functions are a controversial part of the C language - and for good
 reason! A variadic function is one that doesn't define how many parameters it
 expects at compile time. There's some clear use cases for variadic functions,
 such as `printf`. Have you ever wonder how to declare a function like `printf`
-that can take in a varaible number of arguments of any type? The answer is to
+that can take in a variable number of arguments of any type? The answer is to
 declare a variadic function. Of course, variadic functions have some nasty
 downsides. One of them is that it simply leads to code that's harder to read
 since it obtains its arguments in a strange way. Another major downside is that
 you can't tell the compiler what types you want your arguments to have - leading
 to more situations where a programmer can create insidious bugs.
 
-_fun fact:_ Variadic functions are pretty common in languagues, a noteable
+_fun fact:_ Variadic functions are pretty common in languagues, a notable
 example being python. However, python has better semantics around this feature
 by providing an array containing all passed in arguments as opposed to C's
 approach described below.
@@ -194,7 +194,7 @@ arguments we're going to need. This isn't always the case. Some functions use
 other mechanisms such as reading in elements until it reads NULL or some other
 special value.
 
-Try writing your own variadic functions in C! One interesting excersize could be
+Try writing your own variadic functions in C! One interesting exercise could be
 to write a simple parser for an arithmetic expression such as `$1 + $2` and
 replace `$n` with the value of the nth variadic argument to make a simple
 calculator.
