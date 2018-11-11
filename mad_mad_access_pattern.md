@@ -7,6 +7,13 @@ submissions:
   graded_files:
   - lookup1.c
   - lookup2.c
+ag_schedules:
+- title: AG Schedule
+  schedule_dates:
+    - 11/11 10:00 PM
+    - 11/10 10:00 PM
+    - 11/13 10:00 PM
+    - 11/14 12:00 PM
 learning_objectives:
   - Working with files
   - mmap()
