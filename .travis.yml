@@ -7,8 +7,10 @@ branches:
 script:
     - git config credential.helper "store --file=.git/credentials"
     - echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials 2>/dev/null
-    - git config --global user.email "bhuvan.venkatesh21@gmail.com"
-    - git config --global user.name "Bhuvan Venkatesh"
+    - export COMMITTER_EMAIL="$(git log -1 $TRAVIS_COMMIT --pretty="%cE")"
+    - export AUTHOR_NAME="$(git log -1 $TRAVIS_COMMIT --pretty="%aN")"
+    - git config --global user.email $COMMITTER_EMAIL
+    - git config --global user.name $AUTHOR_NAME
     - export NUM_RETRIES=3
     - export BUILD_TIME=120 #seconds
     - export CLONE_DIR=site
