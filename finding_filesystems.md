@@ -244,7 +244,7 @@ For example, the output of:
 Here are some sample (and not comprehensive) testcases!
 
 ```
-$ ./fakefs test.fs cat /goodies/hello.txt
+$ ./fakefs test.fs cat test.fs/goodies/hello.txt
 Hello World!
 $
 ```
@@ -252,7 +252,7 @@ $
 You can even cat directories!
 
 ```
-$ ./fakefs test.fs cat /
+$ ./fakefs test.fs cat test.fs/
 you00000001got00000002ls!00000003congrats00000004 [...]
 $
 ```
