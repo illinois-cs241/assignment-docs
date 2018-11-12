@@ -13,6 +13,7 @@ ag_schedules:
     - 11/10 10:00 PM
     - 11/11 10:00 PM
     - 11/12 12:00 PM
+    - 11/12 8:00 PM
 learning_objectives:
   - Learn how inodes are represented in the kernel
   - How to write callbacks for filesystem operations
