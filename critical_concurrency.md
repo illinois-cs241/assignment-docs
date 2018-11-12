@@ -87,7 +87,6 @@ Your goal is to implement the functions
 * `void queue_push (queue* this, void* element);`
 * `void* queue_pull (queue* this);`
 
-
 ## Testing
 
 **Testing is ungraded, but highly recommended**
@@ -98,6 +97,15 @@ Since the implementation of your semamore is quite close to an actual semaphore,
 For `barrier_test.c` we have provided you with a simple test case.  Feel free to expand on it, as it is not exhaustive/perfect.  Learning how to use the barrier is just as important as writing it, since you will be using barriers on the Password Cracker MP :)
 
 For `queue_test.c` we would like you to write tests yourself.  Learning to write tests for multi-threaded code is very important.  You will also be using this queue in the Password Cracker MP :)  (we will give you a working version; you will not be penalized on the MP for not successfully completing the lab)
+
+### Thread Sanitizer
+
+We have another target executed by typing `make tsan`. This compiles your code with Thread Sanitizer.
+
+ThreadSantizer is a race condition detection tool. See [this page](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-5%3A-Debugging#tsan) for more information.
+
+**We will be using ThreadSanitizer to grade your code! If the autograder detects a data race, you won't automatically get 0 points, but a few points will be deducted.**
+
 
 ## Helpful Hints and Notes
 
