@@ -4,8 +4,7 @@ title: "Savvy Scheduler"
 submissions:
 - title: Entire Assignment
   due_date: 11/28 11:59pm
-
-graded_files:
+  graded_files:
   - libscheduler.c
 learning_objectives:
   - scheduling algorithms
