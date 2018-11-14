@@ -122,7 +122,7 @@ The `file_system` struct keeps track of the metadata, the root inode (where `fs-
 * The `meta` pointer points to the start of the file system, which includes the superblock.
 * The `inode_root` points to the start of the inodes as in the picture.
 * The `data_root` points to the start of the `data_blocks` as in the picture, right after the inodes.
-* The `data_map` keeps track of which blocks are used and is placed at the end of the filesystem whihc makes it easy to resize the filesystem (although resizing is not supported by your implementation).
+* The `data_map` keeps track of which blocks are used and is placed at the end of the filesystem which makes it easy to resize the filesystem (although resizing is not supported by your implementation).
 
 The inodes and data blocks are laid sequentially out so you can treat them like an array. Think about how you could get a pointer to the nth `data_block`.
 
@@ -186,7 +186,7 @@ You will need to implement the following 4 functions
 * `ssize_t minixfs_read(file_system *fs, const char *path, void *buf, size_t req, off_t *off)`
 * `ssize_t minixfs_write(file_system *fs, const char *path, const void *buf, size_t count, off_t *off)`
 
-And you will need to implement a virtual file `/virtual/info` for more infomation about that scroll down to the virtual filesystem section.
+And you will need to implement a virtual file `/virtual/info` for more information about that scroll down to the virtual filesystem section.
 
 You can find more information about the required functions in `minixfs.h`. Remember to set `errno` on errors in your code! We will be checking errno while grading.
 
@@ -236,7 +236,7 @@ You will probably want to reset your `test.fs` file frequently while testing you
 
 Note: There's a small chance that `make testfs` can fail - in this case `rm test.fs` and `make testfs` again.
 
-make will generate the minixfs_test executable that you can use for testing. We strongly reccomend writing your own testcases in `minixfs_test.c` and not just on the output of commands like `ls` and `cat` (which we describe how to test with below). This is because subtle bugs in your code can make the output look right, but have random unprintable characters as well.
+make will generate the minixfs_test executable that you can use for testing. We strongly recommend writing your own testcases in `minixfs_test.c` and not just on the output of commands like `ls` and `cat` (which we describe how to test with below). This is because subtle bugs in your code can make the output look right, but have random unprintable characters as well.
 
 The `goodies` directory is also included and can also be used to check against the /goodies directory in test.fs.
 For example, the output of:

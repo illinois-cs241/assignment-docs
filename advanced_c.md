@@ -116,7 +116,7 @@ since it obtains its arguments in a strange way. Another major downside is that
 you can't tell the compiler what types you want your arguments to have - leading
 to more situations where a programmer can create insidious bugs.
 
-_fun fact:_ Variadic functions are pretty common in languagues, a notable
+_fun fact:_ Variadic functions are pretty common in languages, a notable
 example being python. However, python has better semantics around this feature
 by providing an array containing all passed in arguments as opposed to C's
 approach described below.
