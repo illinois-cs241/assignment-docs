@@ -3,7 +3,7 @@ layout: doc
 title: "Savvy Scheduler"
 submissions:
 - title: Entire Assignment
-  due_date: 04/11 11:59pm
+  due_date: 11/28 11:59pm
   graded_files:
   - libscheduler.c
 learning_objectives:
@@ -46,11 +46,11 @@ So basically, half of your job in this lab is simply writing a comparator functi
 
 ## Mission
 
-### ~~\[Part 1\]: Priority Queue~~
+### Background: Priority Queue
 
-To build a scheduler, a fundamental data structure is a priority queue. The first part of this lab requires you to ~~implement~~ read and understand `libpriqueue`, our priority queue library. You will be using this library in your scheduler.
+To build a scheduler, a fundamental data structure is a priority queue. You do not need to implement one, but should read and understand `libpriqueue`, our priority queue library. You will be using this library in your scheduler.
 
-### \[Part 2\]: Scheduler
+### Scheduler
 
 You will need to implement scheduling callbacks for a userspace threading library. 
 
