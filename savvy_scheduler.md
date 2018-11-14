@@ -46,11 +46,11 @@ So basically, half of your job in this lab is simply writing a comparator functi
 
 ## Mission
 
-### ~~\[Part 1\]: Priority Queue~~
+### Background: Priority Queue
 
-To build a scheduler, a fundamental data structure is a priority queue. The first part of this lab requires you to ~~implement~~ read and understand `libpriqueue`, our priority queue library. You will be using this library in your scheduler.
+To build a scheduler, a fundamental data structure is a priority queue. You do not need to implement one, but should read and understand `libpriqueue`, our priority queue library. You will be using this library in your scheduler.
 
-### \[Part 2\]: Scheduler
+### Scheduler
 
 You will need to implement scheduling callbacks for a userspace threading library. 
 
@@ -172,7 +172,7 @@ diff test.txt examples/expected_fcfs.txt
 
 ```
 
-For your convinience, we've wrapped this with the bash script __testall.sh__. Running `./testall.sh` will run all the schemes and diff them with the expected output to check if your implementation is correct. If you'd like to test specific schemes, you can pass those in as arguments, for example `./testall.sh rr fcfs pri` will only test round robin, first-come-first-serve and priority. 
+For your convenience, we've wrapped this with the bash script __testall.sh__. Running `./testall.sh` will run all the schemes and diff them with the expected output to check if your implementation is correct. If you'd like to test specific schemes, you can pass those in as arguments, for example `./testall.sh rr fcfs pri` will only test round robin, first-come-first-serve and priority. 
 
 However, since this method of testing relies on outputs generated every second, it may not accurately reflect the schedulers behavior, and may falsely report your solution as correctly working. To get around this, you can also take a look at the generated log in __gthread.log__. This contains information about each thread's context switches and you can manually inspect it to see if it does what you expect. 
 

@@ -78,7 +78,7 @@ Think of it as an event driven system. At a high level, you maintain a set of fi
 
 ## Epoll basics
 
-`epoll()` arose out of the inefficiencies of `select()` and `poll()` (O(N) waiting is so 20th century) (Check out the [C10k problem](https://en.wikipedia.org/wiki/C10k_problem) for more information). It provides two modes of operation, edge triggered (ET) and level triggered (LT). Think of it as follows, you have a tank (the descriptor) that you want a notification for whenever there's water (data) in it. Edge triggered mode would wake up your program once and expect you to empty out the entire tank (process all the data). If you only process half of it and call `epoll\_wait()` again, your process will block (that's not good - there is data waiting to be processed and other connections to handle).
+`epoll()` arose out of the inefficiencies of `select()` and `poll()` (O(N) waiting is so 20th century) (Check out the [C10k problem](https://en.wikipedia.org/wiki/C10k_problem) for more information). It provides two modes of operation, edge triggered (ET) and level triggered (LT). Think of it as follows, you have a tank (the descriptor) that you want a notification for whenever there's water (data) in it. Edge triggered mode would wake up your program once and expect you to empty out the entire tank (process all the data). If you only process half of it and call `epoll_wait()` again, your process will block (that's not good - there is data waiting to be processed and other connections to handle).
 
 On the other hand, level triggered will wake up your `epoll_wait()` call any time there is any data in the descriptor. In this case, if you process half, and then call `epoll_wait()` again, it'll immediately return with a notification about that descriptor.
 
@@ -228,13 +228,13 @@ That would download the file 'remotefile' from the server and store it as 'local
 The client runs a single command (GET, PUT, LIST or DELETE) with the chosen arguments, makes sure the file it's trying to upload (if it is uploading one) actually exists, connects to the server, sends the request (and file data, if needed), and finally prints out any error messages to STDOUT. Once the client has sent all the data to the server, it should perform a 'half close' by closing the write half of the socket (hint: `shutdown()`). This ensures that the server will eventually realize that the client has stopped sending data, and can move forward with processing the request.
 
 For LIST, binary data from the server should be printed to STDOUT, each file on a separate line.
-For GET, binary data should be written to the `[local]` file specified when the user ran the command.  If not created, create the file.  If it exists, truncate the file.  You should create the file with all permissions set.
+For GET, binary data should be written to the `[local]` file specified when the user ran the command.  If not created, create the file.  If it exists, truncate the file.  You should create the file with all permissions set (r-w-x for all users groups).
 
 Your client is allowed to use blocking I/O, since clients don't really care about scaling. However, there are a few important things to keep in mind:
 
 1) Parse the response carefully. When you're reading, you may accidentally read into the application binary data without realizing it (since you don't have fixed size fields in the responses).
 
-2) `write(fd, buffer, n)` may not always write n bytes for various reasons. Buffers may become full, signals may arrive, the Skynet revolution might begin. None of which are excuses for not sending the correct amount of data to the server. Good practice is to wrap your read/write calls in a loop that runs until the specified number of bytes are read, the connection is closed, or an error occurs.
+2) `write(fd, buffer, n)` may not always write n bytes for various reasons. Buffers may become full, signals may arrive, the Skynet revolution might begin. None of which are excuses for not sending the correct amount of data to the server. Good practice is to wrap your read/write calls in a loop that runs until the specified number of bytes are read, the connection is closed, or an error (with the exception of EINTR) occurs.
 
 3) Your client needs to be able to handle large files (more than physical RAM) and should do so efficiently.
 
@@ -259,7 +259,7 @@ A suggested flowchart for the server automata:
 
 ### Maintaining persistent connection state
 
-New connections arrive and old connections close all the time. Your server need to know what the current status of the command it's serving is. One suggested way is to maintain a mapping from socket handle to connection state (you are provided a dictionary data structure for this purpose). When a connection arrives, this state is allocated on the heap and added to the dictionary. When the server is handling epoll events, it can check the descriptor of the event that occurred, and quickly find out the underlying state of the request. Information that might go into a connection state could be:
+New connections arrive and old connections close all the time. Your server needs to know what the current status of the command it's serving is. One suggested way is to maintain a mapping from socket handle to connection state (you are provided a dictionary data structure for this purpose). When a connection arrives, this state is allocated on the heap and added to the dictionary. When the server is handling epoll events, it can check the descriptor of the event that occurred, and quickly find out the underlying state of the request. Information that might go into a connection state could be:
 
 - What state in the DFA you're in
 - The request VERB
