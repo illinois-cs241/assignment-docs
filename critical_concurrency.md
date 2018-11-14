@@ -60,7 +60,7 @@ There are four functions in total you will be writing:
 
 In rendezvous you saw an example of an one-time-use barrier.  Now, you get to build code to support a reusable barrier.  At the cost of being redundant, a reusable barrier is one that can get used more than once.  Say you have threads executing code in a for loop and you want them to stay in sync.  That is, each thread should be on the i'th iteration of the loop when every other thread is on the i'th iteration.  With a reusable barrier, you can stop threads from going to the i+1'th iteration until all of them have finished the i'th.
 
-Note that most barrier implementations (including the pthread library barrier) are "resuable", but never say so.  This is because it simply does not make sense to have a "not-reusable" barrier.  Thus, we are only iterating to you that the barrier your build should be reusable so that you understand what  it means.
+Note that most barrier implementations (including the pthread library barrier) are "reusable", but never say so.  This is because it simply does not make sense to have a "not-reusable" barrier.  Thus, we are only iterating to you that the barrier your build should be reusable so that you understand what  it means.
 
 You can find more info in the [WIKI](https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-6%3A-Implementing-a-barrier)
 

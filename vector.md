@@ -85,13 +85,13 @@ return the length of the first sstring after the append.
 ### `vector *sstring_split(sstring *this, char delimiter)`
 
 This function should take an sstring and a character and split the sstring into
-a vector of c-strings on the delimeter.
+a vector of c-strings on the delimiter.
 (e.g. `sstring_split(cstr_to_sstring("abcdeefg"), 'e') == [ "abcd", "", "fg" ]`)
 
 ### `int sstring_substitute(sstring *this, size_t offset, char *target, char *substitution)`
 
-This function should substitute one occurance of `target` in `this` after
-`offset` bytes with `substitution`. If there are no occurances of `target` after
+This function should substitute one occurrence of `target` in `this` after
+`offset` bytes with `substitution`. If there are no occurrences of `target` after
 `offset` bytes, return `-1`.  Otherwise return `0`.
 
 ### `char *sstring_slice(sstring *this, int start, int end)`

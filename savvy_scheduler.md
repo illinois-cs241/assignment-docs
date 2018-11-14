@@ -66,7 +66,7 @@ You can read up on scheduling in the wikibook: [Scheduling Part 1](https://githu
 
 **You should use the priority queue that we provided to help you complete this part of the lab.**
 
-To complete this lab, you must implement the six comparator functions and eight scheduler functions (and one optional one) defined in `libscheduler.c`. These functions are self-descriptive, but a full function outline for each function is provided for you in the SVN files. These functions will be utilized by the green threading library (Check out the section on Gthreads below).
+To complete this lab, you must implement the six comparator functions and eight scheduler functions (and one optional one) defined in `libscheduler.c`. These functions are self-descriptive, but a full function outline for each function is provided for you in the file. These functions will be utilized by the green threading library (Check out the section on Gthreads below).
 
 You might want to understand how scheduler works. So we put a detailed explanation in the bottom of this webpage.
 
@@ -130,7 +130,7 @@ This function is responsible for setting up a new job. You must populate `newjob
 
 ### job \*scheduler_quantum_expired(job \*job_evicted, double time) 
 
-This function is called at the end of every time quantum. If there is no job currently running, `job_evicted` will be NULL. If the current scheme is not premptive and `job_evicted` is not NULL, return `job_evicted`. In all other cases, if `job_evicted` is not NULL, place it back on the queue and return a pointer to the next job that should run. (Note, it is possible for the next job to be the same as `job_evicted`)
+This function is called at the end of every time quantum. If there is no job currently running, `job_evicted` will be NULL. If the current scheme is not preemptive and `job_evicted` is not NULL, return `job_evicted`. In all other cases, if `job_evicted` is not NULL, place it back on the queue and return a pointer to the next job that should run. (Note, it is possible for the next job to be the same as `job_evicted`)
 
 ### void scheduler_job_finished(job \*job_done, double time)
 
@@ -154,7 +154,7 @@ This is an optional function that you can implement for debugging purposes.
 
 ## Testing
 
-We have provided three interfaces to testing this lab. The firse testing interface is __scheduler_test.c__. This file allows you to directly test the functions you've implemented in libscheduler.c. We reccomend using this one, and have already populated it with a few test cases of our own! This is how the autograder will be testing your code. There are 10 tests that we have provided you. You can run each test with the following:
+We have provided three interfaces to testing this lab. The first testing interface is __scheduler_test.c__. This file allows you to directly test the functions you've implemented in libscheduler.c. We recommend using this one, and have already populated it with a few test cases of our own! This is how the autograder will be testing your code. There are 10 tests that we have provided you. You can run each test with the following:
 
 ```bash
 ./scheduler_test [test_no]
@@ -172,11 +172,11 @@ diff test.txt examples/expected_fcfs.txt
 
 ```
 
-For your convinience, we've wrapped this with the bash script __testall.sh__. Running `./testall.sh` will run all the schemes and diff them with the expected output to check if your implementation is correct. If you'd like to test specific schemes, you can pass those in as arguments, for example `./testall.sh rr fcfs pri` will only test round robin, first-come-first-serve and priority. 
+For your convenience, we've wrapped this with the bash script __testall.sh__. Running `./testall.sh` will run all the schemes and diff them with the expected output to check if your implementation is correct. If you'd like to test specific schemes, you can pass those in as arguments, for example `./testall.sh rr fcfs pri` will only test round robin, first-come-first-serve and priority. 
 
 However, since this method of testing relies on outputs generated every second, it may not accurately reflect the schedulers behavior, and may falsely report your solution as correctly working. To get around this, you can also take a look at the generated log in __gthread.log__. This contains information about each thread's context switches and you can manually inspect it to see if it does what you expect. 
 
-Using the log file, we have built a visualizer for this data that will display which thread ran in approximately 500ms intervals. Note that the visualizer doesn't perfectly display all the context switches, and performs especially badly with rund robin output. However, it works well for schemes such as sjf and will display the following if __gthread.log__ contains the log of running `./main sjf`:
+Using the log file, we have built a visualizer for this data that will display which thread ran in approximately 500ms intervals. Note that the visualizer doesn't perfectly display all the context switches, and performs especially badly with round robin output. However, it works well for schemes such as sjf and will display the following if __gthread.log__ contains the log of running `./main sjf`:
 ```
 ['d10', 'd40', 'd70', 'da0', 'dd0']
 d10: ++                       
@@ -190,7 +190,7 @@ There are couple things to note about this output. The first is that each '+' re
 
 ## Spooky bugs
 
-This lab has some strange gotchas when testing with the gthread library. For this reason, we reccomend using (and augmenting) the tests in `scheduler_test.c`. If you notice any random segfaults or freezes in the program that occur non-deterministically (maybe only once or twice every 10 runs) please report this to us so we can get that patched! (This will not affect grading since the grader will directly test the functions in __libscheduler.c__ as opposed to the actual context switches generated by the green threading library.
+This lab has some strange gotchas when testing with the gthread library. For this reason, we recommend using (and augmenting) the tests in `scheduler_test.c`. If you notice any random segfaults or freezes in the program that occur non-deterministically (maybe only once or twice every 10 runs) please report this to us so we can get that patched! (This will not affect grading since the grader will directly test the functions in __libscheduler.c__ as opposed to the actual context switches generated by the green threading library.
 
 ## The threading model - gthreads (optional reading)
 
@@ -236,7 +236,7 @@ This function will sleep for at least the number of seconds specified by the arg
 
 ### gtdoyield
 
-This function is a wrapper around the internal function gtyield and might perform a context switch to another thread. The return value will be true if a context switch occured and false otherwise. The argument is not important, so long as it is not -1 or SIGALRM.
+This function is a wrapper around the internal function gtyield and might perform a context switch to another thread. The return value will be true if a context switch occurred and false otherwise. The argument is not important, so long as it is not -1 or SIGALRM.
 
 ### gtcurrjob
 
@@ -250,6 +250,6 @@ The idea of green threads is essentially to have a user-space thread that is lig
 
 To learn more about the concept, read this [green threading intro](https://c9x.me/articles/gthreads/code0.html) article that we used as a starting point.
 
-Now, let's talk about what we've added on top of that very simple implmentation. We need a way to preempt threads. For our purposes, a signal is an accpetable solution to this problem. We have used the function ualarm(3) to schedule alarms on regular intervals. The handler then calls gtyield which will call scheduler_quantum_expired to select the next job to run.
+Now, let's talk about what we've added on top of that very simple implmentation. We need a way to preempt threads. For our purposes, a signal is an acceptable solution to this problem. We have used the function ualarm(3) to schedule alarms on regular intervals. The handler then calls gtyield which will call scheduler_quantum_expired to select the next job to run.
 
 Note that almost all the scheduling magic is implemented in libscheduler! The only exception is that the main thread will never be sent to any of the functions in libscheduler. Instead, every other quanta, gtyield will store the current job do a context switch to main, and the next time gtyield is called from main, the process will switch back to the stored job.

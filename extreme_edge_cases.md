@@ -79,7 +79,7 @@ Here is a formal description of how your camelCaser should behave:
 
 *   You can't camelCase a NULL pointer, so if `input` is a NULL pointer, return a NULL pointer.
 *   If `input` is NOT NULL, then it is a NULL-terminated array of characters (a standard C string).
-*   A input sentence, `input_s`, is defined as any *MAXIMAL* substring of the input string that ends with a punctuation mark. This means that all strings in the camel cased output should not contain punctutation marks.
+*   A input sentence, `input_s`, is defined as any *MAXIMAL* substring of the input string that ends with a punctuation mark. This means that all strings in the camel cased output should not contain punctuatation marks.
     *   This means that "Hello.World." gets split into 2 sentences "Hello" and "World" and NOT "Hello.World".
 *   Let the camelCasing of `input_s` be called `output_s`
 *   `output_s` is the the concatenation of all words `w` in `input_s` after `w` has been camelcased

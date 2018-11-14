@@ -232,7 +232,7 @@ The malloc contest pits your memory allocator implementation against your fellow
 * The test cases used for grading will be randomized with a different seed every day.
 * There may be additional, more advanced tests added which won't count for anything but the contest.
 * The memory limit is 2.500GB.
-* To submit your program to the contest, you simply commit to Subversion. Your most recent SVN submission will be fetched somewhat frequently.
+* To submit your program to the contest, you simply commit to Subversion. Your most recent submission will be fetched somewhat frequently.
 * We will assign a score to each of the three categories (max heap, average heap, and total time) based on how well your program performs memory management relative to a standard solution.
 * You can pick a nickname in `nickname.txt`. You will show up as this name on the contest webpage.
 * On the webpage, each test will either be green, which signifies that you passed the test, or red, which signifies that you failed the test.

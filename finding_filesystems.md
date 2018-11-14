@@ -17,7 +17,7 @@ learning_objectives:
   - Learn how inodes are represented in the kernel
   - How to write callbacks for filesystem operations
   - Traverse singly indirect blocks
-  - Modifing permissions on files
+  - Modifying permissions on files
 wikibook:
   - "File System, Part 1: Introduction"
   - "File System, Part 2: Files are inodes (everything else is just data...)"
@@ -129,7 +129,7 @@ The inodes and data blocks are laid sequentially out so you can treat them like 
 
 You do not to modify or read any of the code in `fakefs_src/`.
 
-To make this MP possible, we've developed our own userspace filesystem interface which we're calling fakefs. Normally, filesystem are a piece of code which you load into your kernel and must provide a few things. It needs a constructor, destructor, callbacks for all system calls involving files and file descriptors within your filesystem. However, writing kernel code is a bit more cumbersome than writing normal code since you need additional security checks among other things, and can even lead to instability in your operating system. To avoid this, there are various ways to implment a filesystem in userspace. The most common (and preffered) method is to use a library called FUSE (Filesystems in USErspace). However, FUSE alllows you to implement your file operations in userspace, but still interacts with th ekernel to provide it's functionality. While this allows you to mount  the filesystem and use it like any other filesystem, there a few reasons why we chose not to use it for this MP. A major reason is that if a FUSE callback crashes while it is mounted, it renders the mounted partition unsuable and in some cases, you won't be able to even unmount the parition without rebooting the machine. To prevent this, and make this MP not annoying and tedious, we've made ourn own way of implementing filesystems in userspace by `hooking` filesystem operations. 
+To make this MP possible, we've developed our own userspace filesystem interface which we're calling fakefs. Normally, filesystem are a piece of code which you load into your kernel and must provide a few things. It needs a constructor, destructor, callbacks for all system calls involving files and file descriptors within your filesystem. However, writing kernel code is a bit more cumbersome than writing normal code since you need additional security checks among other things, and can even lead to instability in your operating system. To avoid this, there are various ways to implment a filesystem in userspace. The most common (and preferred) method is to use a library called FUSE (Filesystems in USErspace). However, FUSE allows you to implement your file operations in userspace, but still interacts with th ekernel to provide it's functionality. While this allows you to mount  the filesystem and use it like any other filesystem, there a few reasons why we chose not to use it for this MP. A major reason is that if a FUSE callback crashes while it is mounted, it renders the mounted partition unusable and in some cases, you won't be able to even unmount the partition without rebooting the machine. To prevent this, and make this MP not annoying and tedious, we've made our own way of implementing filesystems in userspace by `hooking` filesystem operations. 
 
 If you take a look at `fakefs_src/fakefs.c` you'll see that we've overridden most of `glibc`'s filesystem operations. Note that this only hooks functions from code or programs that were either written in `C` or in something that compiles to `C`. Running a program written in assembly will not be affected by these hooks.
 
@@ -223,7 +223,7 @@ Used blocks: [number of used blocks]
 
 Note that there is a new line at the end of each line above. You will need to compute the number of free and used blocks to insert into the data. Also note that you will need to support reading the virtual file from an offset, and must not copy more bytes to the user's buffer than requested (just like a normal read).
 
-To simplify your implementation we reccomend first generating the data above as a string and then copying a certain number of bytes of the string from a desired offset to the user buffer.
+To simplify your implementation we recommend first generating the data above as a string and then copying a certain number of bytes of the string from a desired offset to the user buffer.
 
 ## Testing
 
