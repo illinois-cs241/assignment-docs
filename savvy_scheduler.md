@@ -3,7 +3,7 @@ layout: doc
 title: "Savvy Scheduler"
 submissions:
 - title: Entire Assignment
-  due_date: 04/11 11:59pm
+  due_date: 11/28 11:59pm
   graded_files:
   - libscheduler.c
 learning_objectives:
