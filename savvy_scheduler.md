@@ -6,6 +6,11 @@ submissions:
   due_date: 11/28 11:59pm
   graded_files:
   - libscheduler.c
+ag_schedules:
+- title: AG Schedule
+    - 11/17 10:00 PM
+    - 11/26 10:00 PM
+    - 11/27 10:00 PM
 learning_objectives:
   - scheduling algorithms
   - preemptive vs non-preemptive
