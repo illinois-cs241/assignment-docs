@@ -9,4 +9,4 @@ export DOCS_SHA=$(git rev-parse --short HEAD)
 cd ..
 git add _docs
 git commit -m "Updating docs to ${DOCS_SHA}"
-git push origin master
+git push origin develop

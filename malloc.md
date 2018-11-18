@@ -145,7 +145,7 @@ Thread 2.1 "tester-2" hit Breakpoint 1, malloc (size=1) at alloc.c:323
 323    return ptr;
 (gdb) kill
 Kill the program being debugged? (y or n) y
-[mcontest]: STAUS: FAILED. SIGNAL=(9)
+[mcontest]: STATUS: FAILED. SIGNAL=(9)
 [mcontest]: MAX: 0
 [mcontest]: AVG: 0.000000
 [mcontest]: TIME: 0.012000
