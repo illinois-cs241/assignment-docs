@@ -283,7 +283,7 @@ You should create a temporary directory using the `mkdtemp()` function (make sur
 
 When your server exits, it should clean up any files stored in this directory, and then delete the directory itself. `unlink()` and `rmdir()` might be helpful here.
 
-_Note:_ Be sure to use the directory name that mkdirtmp(char \*template) gives you. Additionally, make sure that your template is *exactly* 6 X's, as in `XXXXXX`.
+_Note:_ Be sure to use the directory name that `mkdtemp(char \*template)` gives you. Additionally, make sure that your template is *exactly* 6 X's, as in `XXXXXX`.
 
 ### Exiting the server
 
