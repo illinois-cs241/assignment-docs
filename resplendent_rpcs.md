@@ -41,10 +41,10 @@ This recursive DNS server is the server you will implement in the lab.
 ## Say that again? / Format UDP input and output
 For example, let's walk through how 'www.microsoft.com' would be resolved by our lab's recursive DNS server. In this lab, we will always contact exactly 3 servers in this manner to complete a request. 
 
-    1. We need to find a server responsible for '.', the root of all domains. One is stored locally in `domain_to_nameserver/root_servers` in the format ".;www.xxx.yyy.zzz:qqqq", where the information to the right of the semicolon is the IPv4 address and port. 
-    2. Send that root nameserver address (hint: check out `inet_pton`) and port ".com" via UDP to get the server responsible for ".com", and you will receive the bytes 'www.xxx.yyy.zzz:qqqq' representing the ".com" nameserver's IPv4 address and port.  
-    3. Send that .com nameserver address and port "microsoft.com" via UDP to get the server responsible for "microsoft.com", and you will receive the bytes 'www.xxx.yyy.zzz:qqqq' representing the "microsoft.com" nameserver's IPv4 address and port.
-    4. Send that microsoft.com nameserver address and port "www.microsoft.com" via UDP to get an IPv4 address for "www.microsoft.com". You will receive the bytes 'www.xxx.yyy.zzz' representing the final IPv4 address for www.microsoft.com and your answer.
+- We need to find a server responsible for '.', the root of all domains. One is stored locally in `domain_to_nameserver/root_servers` in the format ".;www.xxx.yyy.zzz:qqqq", where the information to the right of the semicolon is the IPv4 address and port. 
+- Send that root nameserver address (hint: check out `inet_pton`) and port ".com" via UDP to get the server responsible for ".com", and you will receive the bytes 'www.xxx.yyy.zzz:qqqq' representing the ".com" nameserver's IPv4 address and port.  
+- Send that .com nameserver address and port "microsoft.com" via UDP to get the server responsible for "microsoft.com", and you will receive the bytes 'www.xxx.yyy.zzz:qqqq' representing the "microsoft.com" nameserver's IPv4 address and port.
+- Send that microsoft.com nameserver address and port "www.microsoft.com" via UDP to get an IPv4 address for "www.microsoft.com". You will receive the bytes 'www.xxx.yyy.zzz' representing the final IPv4 address for www.microsoft.com and your answer.
     
 Note that all data is handled in plaintext that the maximum # of bytes to represent an IPv4 address is 15 and the maximum # of bytes to represent a port is 5.
 
