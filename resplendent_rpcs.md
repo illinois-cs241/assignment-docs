@@ -86,12 +86,13 @@ $ ./client 127.0.0.1 www.google.com
 www.google.com has ipv4 address <...>
 ```
 
-See if your client and server print out the right things when
+See if your client interprets the correct input when
 
 * A hostname is in none of the caches or the nameserver
 * A hostname is in none of the caches but on the nameserver
 * A hostname is in the server not client cache
 * A hostname is in the client cache
+* Makes sure that your client works with your server
 
 ## Extra stuff
 
