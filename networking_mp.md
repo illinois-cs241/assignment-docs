@@ -287,9 +287,7 @@ _Note:_ Be sure to use the directory name that `mkdtemp(char \*template)` gives 
 
 ### Exiting the server
 
-Your server should exit on receiving SIGINT.
-
-You might find `sigaction` and signal masking with threads helpful, if your signal handling and threads aren't working together quite the way you had hoped
+Your server should exit on receiving SIGINT. You might find `sigaction` useful.
 
 _Note:_ Do not store the newlines in your filenames. There will be no whitespace or slashes in filenames at all.
 
