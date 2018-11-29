@@ -77,13 +77,13 @@ Nameserver running on port 9000
 
 Run your server with environment variables:
 ```bash
-$ NAMESERVER_HOST=localhost NAMESERVER_PORT=9000 ./server
+$ NAMESERVER_HOST=127.0.0.1 NAMESERVER_PORT=9000 ./server
 ```
 
 Then send a query for a domain through the client. The client requires two arguments. The first is the IP address of the server that will accept its RPC and the second is the domain to resolve.
 
 ```
-$ ./client localhost www.google.com
+$ ./client 127.0.0.1 www.google.com
 www.google.com has ipv4 address <...>
 ```
 
