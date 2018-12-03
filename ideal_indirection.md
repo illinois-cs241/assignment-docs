@@ -96,7 +96,7 @@ For this lab, a processes' address space is split into memory segments like so:
 Photo Cred: http://duartes.org/gustavo/blog/post/anatomy-of-a-program-in-memory/
 
 Notice how some of the memory segments like the stack and mmap have an arrow pointing down.
-This indicates that these regions "grow down" by decreasing their end boundry's virtual address as you add elements to them.
+This indicates that these regions "grow down" by decreasing their end boundary's virtual address as you add elements to them.
 This is so that the stack and heap can share the same address space, but grow in different directions.
 It is now easy to see that if you put too many elements onto the stack it will eventually run into heap memory leading to the classic Stack Overflow.
 

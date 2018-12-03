@@ -29,7 +29,7 @@ The definition of a network protocol, according to Wikipedia, is this: *"A syste
 
 In layman's term, a network protocol is just an agreement made by all the nodes in a network on how to communicate with one another. It is like a blueprint: *You sent me a bunch of bytes over the network, how do I reconstruct your message and understand it?*
 
-Here're some examples of network protocols:
+Here are some examples of network protocols:
 
 - TCP (Transmission Control Protocol)
 	- TCP is a protocol at the *transport layer*, which delivers streams of bytes between hosts communicating via an IP network.
@@ -82,7 +82,7 @@ A **fully-connected network** is extremely resilient, since:
 
 However, **fully-connected networks** do not scale very well. The number of connections in the system grows quadratically (O(n^2)) with the number of nodes, which can easily over-flood a network. So in reality, this topology is only used for small networks with a relatively small number of nodes.
 
-The most common topology in distributed systems is the **partially-connected network**, which broadly covers all networks in which the nodes are partially connected. Here're some common examples of **partially-connected** topologies (ignore the top right one):
+The most common topology in distributed systems is the **partially-connected network**, which broadly covers all networks in which the nodes are partially connected. Here are some common examples of **partially-connected** topologies (ignore the top right one):
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/9/97/NetworkTopologies.svg" alt="partially-connected" width="500"/>
 

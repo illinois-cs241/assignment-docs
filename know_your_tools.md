@@ -254,8 +254,8 @@ make release
     * Use valgrind!
     * Use GDB!
     * Run on the given files and see if the output is what you expect.
-    * Problem 1: See why the file is not shreded
-    * Problem 2: See why the program crashes on non-existant-file
+    * Problem 1: See why the file is not shredded
+    * Problem 2: See why the program crashes on non-existent-file
     * Problem 3: Are there any memory errors or leaks (check valgrind?)
     * Problem 4: What does the address space look like?
 * `git commit -a -m "My Submission"` (commit your work to git).

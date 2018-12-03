@@ -179,7 +179,7 @@ Sentinel value is a chunck of *pre-defined bits* at the end of an allocated memo
 
     [meta_data][---actual data---][sentinel_value]
 
-On every operation, we would check that the sentinel value is still the same as it was pre-defined. If the sentinel value has changed, then we know for certain that the user has corrupted memeory.
+On every operation, we would check that the sentinel value is still the same as it was pre-defined. If the sentinel value has changed, then we know for certain that the user has corrupted memory.
 
 In your `mini_valgrind`, you will use the [magic number](https://en.wikipedia.org/wiki/Magic_number_(programming)) `0xCAFEBABE` for sentinel value. [(Why x0CAFEBABE?)](http://www.artima.com/insidejvm/whyCAFEBABE.html)
 

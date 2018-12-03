@@ -3,25 +3,44 @@ layout: doc
 title: "Nonstop Networking"
 submissions:
 - title: Part 1 The Client
-  due_date: 11/27/2017 11:59pm
+  due_date: 11/26/2018 11:59pm
   graded_files:
   - client.c
   - common.c
   - common.h
 - title: Part 2 The Server Part 1
-  due_date: 12/04/2017 11:59pm
+  due_date: 12/03/2018 11:59pm
   graded_files:
   - client.c
   - server.c
   - common.c
   - common.h
 - title: Part 3 The Server Part 2
-  due_date: 12/11/2017 11:59pm
+  due_date: 12/10/2018 11:59pm
   graded_files:
   - client.c
   - server.c
   - common.c
   - common.h
+ag_schedules:
+- title: AG Schedule
+  schedule_dates:
+    - 11/14 10:00 PM
+    - 11/15 10:00 PM
+    - 11/16 10:00 PM
+    - 11/25 10:00 PM
+    - 11/26 11:59 PM (Part 1 deadline)
+    - 11/28 10:00 PM
+    - 11/19 10:00 PM
+    - 11/30 10:00 PM
+    - 12/2 10:00 PM
+    - 12/3 11:59 PM (Part 2 deadline)
+    - 12/5 10:00 PM
+    - 12/6 10:00 PM
+    - 12/7 10:00 PM
+    - 12/8 10:00 PM
+    - 12/9 10:00 PM
+    - 12/10 11:59 PM (Part 3 deadline, no extensions)
 learning_objectives:
   - Implementing a simple text based protocol
   - epoll and non-blocking I/O
@@ -59,7 +78,7 @@ Think of it as an event driven system. At a high level, you maintain a set of fi
 
 ## Epoll basics
 
-`epoll()` arose out of the inefficiencies of `select()` and `poll()` (O(N) waiting is so 20th century) (Check out the [C10k problem](https://en.wikipedia.org/wiki/C10k_problem) for more information). It provides two modes of operation, edge triggered (ET) and level triggered (LT). Think of it as follows, you have a tank (the descriptor) that you want a notification for whenever there's water (data) in it. Edge triggered mode would wake up your program once and expect you to empty out the entire tank (process all the data). If you only process half of it and call `epoll\_wait()` again, your process will block (that's not good - there is data waiting to be processed and other connections to handle).
+`epoll()` arose out of the inefficiencies of `select()` and `poll()` (O(N) waiting is so 20th century) (Check out the [C10k problem](https://en.wikipedia.org/wiki/C10k_problem) for more information). It provides two modes of operation, edge triggered (ET) and level triggered (LT). Think of it as follows, you have a tank (the descriptor) that you want a notification for whenever there's water (data) in it. Edge triggered mode would wake up your program once and expect you to empty out the entire tank (process all the data). If you only process half of it and call `epoll_wait()` again, your process will block (that's not good - there is data waiting to be processed and other connections to handle).
 
 On the other hand, level triggered will wake up your `epoll_wait()` call any time there is any data in the descriptor. In this case, if you process half, and then call `epoll_wait()` again, it'll immediately return with a notification about that descriptor.
 
@@ -209,13 +228,13 @@ That would download the file 'remotefile' from the server and store it as 'local
 The client runs a single command (GET, PUT, LIST or DELETE) with the chosen arguments, makes sure the file it's trying to upload (if it is uploading one) actually exists, connects to the server, sends the request (and file data, if needed), and finally prints out any error messages to STDOUT. Once the client has sent all the data to the server, it should perform a 'half close' by closing the write half of the socket (hint: `shutdown()`). This ensures that the server will eventually realize that the client has stopped sending data, and can move forward with processing the request.
 
 For LIST, binary data from the server should be printed to STDOUT, each file on a separate line.
-For GET, binary data should be written to the `[local]` file specified when the user ran the command.  If not created, create the file.  If it exists, truncate the file.  You should create the file with all permissions set.
+For GET, binary data should be written to the `[local]` file specified when the user ran the command.  If not created, create the file.  If it exists, truncate the file.  You should create the file with all permissions set (r-w-x for all users groups).
 
 Your client is allowed to use blocking I/O, since clients don't really care about scaling. However, there are a few important things to keep in mind:
 
 1) Parse the response carefully. When you're reading, you may accidentally read into the application binary data without realizing it (since you don't have fixed size fields in the responses).
 
-2) `write(fd, buffer, n)` may not always write n bytes for various reasons. Buffers may become full, signals may arrive, the Skynet revolution might begin. None of which are excuses for not sending the correct amount of data to the server. Good practice is to wrap your read/write calls in a loop that runs until the specified number of bytes are read, the connection is closed, or an error occurs.
+2) `write(fd, buffer, n)` may not always write n bytes for various reasons. Buffers may become full, signals may arrive, the Skynet revolution might begin. None of which are excuses for not sending the correct amount of data to the server. Good practice is to wrap your read/write calls in a loop that runs until the specified number of bytes are read, the connection is closed, or an error (with the exception of EINTR) occurs.
 
 3) Your client needs to be able to handle large files (more than physical RAM) and should do so efficiently.
 
@@ -240,7 +259,7 @@ A suggested flowchart for the server automata:
 
 ### Maintaining persistent connection state
 
-New connections arrive and old connections close all the time. Your server need to know what the current status of the command it's serving is. One suggested way is to maintain a mapping from socket handle to connection state (you are provided a dictionary data structure for this purpose). When a connection arrives, this state is allocated on the heap and added to the dictionary. When the server is handling epoll events, it can check the descriptor of the event that occurred, and quickly find out the underlying state of the request. Information that might go into a connection state could be:
+New connections arrive and old connections close all the time. Your server needs to know what the current status of the command it's serving is. One suggested way is to maintain a mapping from socket handle to connection state (you are provided a dictionary data structure for this purpose). When a connection arrives, this state is allocated on the heap and added to the dictionary. When the server is handling epoll events, it can check the descriptor of the event that occurred, and quickly find out the underlying state of the request. Information that might go into a connection state could be:
 
 - What state in the DFA you're in
 - The request VERB
@@ -264,13 +283,11 @@ You should create a temporary directory using the `mkdtemp()` function (make sur
 
 When your server exits, it should clean up any files stored in this directory, and then delete the directory itself. `unlink()` and `rmdir()` might be helpful here.
 
-_Note:_ Be sure to use the directory name that mkdirtmp(char \*template) gives you. Additionally, make sure that your template is *exactly* 6 X's, as in `XXXXXX`.
+_Note:_ Be sure to use the directory name that `mkdtemp(char \*template)` gives you. Additionally, make sure that your template is *exactly* 6 X's, as in `XXXXXX`.
 
 ### Exiting the server
 
-Your server should exit on receiving SIGINT.
-
-You might find `sigaction` and signal masking with threads helpful, if your signal handling and threads aren't working together quite the way you had hoped
+Your server should exit on receiving SIGINT. You might find `sigaction` useful.
 
 _Note:_ Do not store the newlines in your filenames. There will be no whitespace or slashes in filenames at all.
 
@@ -333,4 +350,15 @@ Obtaining 50% of the points is a 100% on week 2, 45% yields a 90%, 40% an 80%, a
 
 Part 3 is full server-client functionality. All tests will run, including the stress test. This is due Monday, December 11th, at 23:59.
 
-Your final grade for this assignment is computed as total = max(part1, part3) + max(part2, part3) + part3.
+To compute your final grade:
+```
+part1_final = part1_orig
+if part1_orig > 0:
+  part1_final = max(part1_orig, part3)
+
+part2_final = part2_orig
+if part2_orig > 0:
+  part2_final = max(part2_orig, part3)
+  
+networking_score = part1_final + part2_final + part3
+```

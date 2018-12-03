@@ -85,7 +85,7 @@ Similar to `client.c`, a lot of the functionality in `server.c` has been impleme
 
 To sum up, you have to:
 
-* Implement `run_server()` and `close_server()` (the signal hanlder for SIGINT)
+* Implement `run_server()` and `close_server()` (the signal handler for SIGINT)
 * Set up connections (TCP & IPv4).
 * (There is a giant while-loop - you need to do something in it)
 

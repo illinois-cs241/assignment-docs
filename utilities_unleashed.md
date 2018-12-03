@@ -48,7 +48,7 @@ To prevent you from fork bombing your own VM, we recommend looking into [`ulimit
 
 Since this lab requires your programs to print messages to `stdout` and `stderr`, we have provided you with `format.c` and `format.h`. You should not be printing out to stdout and stderr at all. Instead, you should be using the provided functions. You can find documentation for each function in `format.h`. Please *read* the documentation in `format.h` _multiple_ times to determine when each function should be used. This is our way of ensuring that you do not lose points for formatting issues, but it also means that you are responsible for handling any errors mentioned in `format.c` and `format.h`.
 
-It is common for students to fail certain test cases on this assignent with seemingly functional code, it is almost always because of improper usage of `format.h`.
+It is common for students to fail certain test cases on this assignment with seemingly functional code, it is almost always because of improper usage of `format.h`.
 
 ## time
 

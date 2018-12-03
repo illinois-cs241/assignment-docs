@@ -13,11 +13,12 @@ ag_schedules:
     - 11/10 10:00 PM
     - 11/11 10:00 PM
     - 11/12 12:00 PM
+    - 11/12 8:00 PM
 learning_objectives:
   - Learn how inodes are represented in the kernel
   - How to write callbacks for filesystem operations
   - Traverse singly indirect blocks
-  - Modifing permissions on files
+  - Modifying permissions on files
 wikibook:
   - "File System, Part 1: Introduction"
   - "File System, Part 2: Files are inodes (everything else is just data...)"
@@ -121,7 +122,7 @@ The `file_system` struct keeps track of the metadata, the root inode (where `fs-
 * The `meta` pointer points to the start of the file system, which includes the superblock.
 * The `inode_root` points to the start of the inodes as in the picture.
 * The `data_root` points to the start of the `data_blocks` as in the picture, right after the inodes.
-* The `data_map` keeps track of which blocks are used and is placed at the end of the filesystem whihc makes it easy to resize the filesystem (although resizing is not supported by your implementation).
+* The `data_map` keeps track of which blocks are used and is placed at the end of the filesystem which makes it easy to resize the filesystem (although resizing is not supported by your implementation).
 
 The inodes and data blocks are laid sequentially out so you can treat them like an array. Think about how you could get a pointer to the nth `data_block`.
 
@@ -129,7 +130,7 @@ The inodes and data blocks are laid sequentially out so you can treat them like 
 
 You do not to modify or read any of the code in `fakefs_src/`.
 
-To make this MP possible, we've developed our own userspace filesystem interface which we're calling fakefs. Normally, filesystem are a piece of code which you load into your kernel and must provide a few things. It needs a constructor, destructor, callbacks for all system calls involving files and file descriptors within your filesystem. However, writing kernel code is a bit more cumbersome than writing normal code since you need additional security checks among other things, and can even lead to instability in your operating system. To avoid this, there are various ways to implment a filesystem in userspace. The most common (and preffered) method is to use a library called FUSE (Filesystems in USErspace). However, FUSE alllows you to implement your file operations in userspace, but still interacts with th ekernel to provide it's functionality. While this allows you to mount  the filesystem and use it like any other filesystem, there a few reasons why we chose not to use it for this MP. A major reason is that if a FUSE callback crashes while it is mounted, it renders the mounted partition unsuable and in some cases, you won't be able to even unmount the parition without rebooting the machine. To prevent this, and make this MP not annoying and tedious, we've made ourn own way of implementing filesystems in userspace by `hooking` filesystem operations. 
+To make this MP possible, we've developed our own userspace filesystem interface which we're calling fakefs. Normally, filesystem are a piece of code which you load into your kernel and must provide a few things. It needs a constructor, destructor, callbacks for all system calls involving files and file descriptors within your filesystem. However, writing kernel code is a bit more cumbersome than writing normal code since you need additional security checks among other things, and can even lead to instability in your operating system. To avoid this, there are various ways to implment a filesystem in userspace. The most common (and preferred) method is to use a library called FUSE (Filesystems in USErspace). However, FUSE allows you to implement your file operations in userspace, but still interacts with th ekernel to provide it's functionality. While this allows you to mount  the filesystem and use it like any other filesystem, there a few reasons why we chose not to use it for this MP. A major reason is that if a FUSE callback crashes while it is mounted, it renders the mounted partition unusable and in some cases, you won't be able to even unmount the partition without rebooting the machine. To prevent this, and make this MP not annoying and tedious, we've made our own way of implementing filesystems in userspace by `hooking` filesystem operations. 
 
 If you take a look at `fakefs_src/fakefs.c` you'll see that we've overridden most of `glibc`'s filesystem operations. Note that this only hooks functions from code or programs that were either written in `C` or in something that compiles to `C`. Running a program written in assembly will not be affected by these hooks.
 
@@ -185,7 +186,7 @@ You will need to implement the following 4 functions
 * `ssize_t minixfs_read(file_system *fs, const char *path, void *buf, size_t req, off_t *off)`
 * `ssize_t minixfs_write(file_system *fs, const char *path, const void *buf, size_t count, off_t *off)`
 
-And you will need to implement a virtual file `/virtual/info` for more infomation about that scroll down to the virtual filesystem section.
+And you will need to implement a virtual file `/virtual/info` for more information about that scroll down to the virtual filesystem section.
 
 You can find more information about the required functions in `minixfs.h`. Remember to set `errno` on errors in your code! We will be checking errno while grading.
 
@@ -223,7 +224,7 @@ Used blocks: [number of used blocks]
 
 Note that there is a new line at the end of each line above. You will need to compute the number of free and used blocks to insert into the data. Also note that you will need to support reading the virtual file from an offset, and must not copy more bytes to the user's buffer than requested (just like a normal read).
 
-To simplify your implementation we reccomend first generating the data above as a string and then copying a certain number of bytes of the string from a desired offset to the user buffer.
+To simplify your implementation we recommend first generating the data above as a string and then copying a certain number of bytes of the string from a desired offset to the user buffer.
 
 ## Testing
 
@@ -235,7 +236,7 @@ You will probably want to reset your `test.fs` file frequently while testing you
 
 Note: There's a small chance that `make testfs` can fail - in this case `rm test.fs` and `make testfs` again.
 
-make will generate the minixfs_test executable that you can use for testing. We strongly reccomend writing your own testcases in `minixfs_test.c` and not just on the output of commands like `ls` and `cat` (which we describe how to test with below). This is because subtle bugs in your code can make the output look right, but have random unprintable characters as well.
+make will generate the minixfs_test executable that you can use for testing. We strongly recommend writing your own testcases in `minixfs_test.c` and not just on the output of commands like `ls` and `cat` (which we describe how to test with below). This is because subtle bugs in your code can make the output look right, but have random unprintable characters as well.
 
 The `goodies` directory is also included and can also be used to check against the /goodies directory in test.fs.
 For example, the output of:
@@ -244,7 +245,7 @@ For example, the output of:
 Here are some sample (and not comprehensive) testcases!
 
 ```
-$ ./fakefs test.fs cat /goodies/hello.txt
+$ ./fakefs test.fs cat test.fs/goodies/hello.txt
 Hello World!
 $
 ```
@@ -252,7 +253,7 @@ $
 You can even cat directories!
 
 ```
-$ ./fakefs test.fs cat /
+$ ./fakefs test.fs cat test.fs/
 you00000001got00000002ls!00000003congrats00000004 [...]
 $
 ```

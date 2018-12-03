@@ -563,7 +563,7 @@ own extension.
 For example, you could implement a copy/paste function for lines or words.
 
 This part will __not__ be autograded, but is worth 4 points. Your lab TA will be
-grading your extensions. You will recieve points for creativity and complexity.
+grading your extensions. You will receive points for creativity and complexity.
 
 
 ## Managing Memory
