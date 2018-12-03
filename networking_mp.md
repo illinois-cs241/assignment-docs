@@ -249,6 +249,10 @@ Your client should handle the following errors and use the appropriate function 
 
 The real fun lies here. As discussed, you'll be using epoll to allow non-blocking I/O. As you know, epoll allows you to add various descriptors to the epoll set to be 'monitored' for events. After that, when you call epoll\_wait(), it will block until there are events on one or more epoll descriptors (either indicating data is available or that data can be written to the socket).
 
+The server usage is as follows:
+
+`./server <port>`
+
 ### Request states
 
 One way to reason about connections in a nonblocking server is to visualize each one as a traversal of a finite state machine. That is, there is some initial state (probably when the connection was created), and you transition between the different states depending on what action occurred (the type of request, whether there was an error or not, etc.).
