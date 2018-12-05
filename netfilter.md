@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: "Advanced C"
+title: "Netfilter Kernel Module"
 submissions:
 - title: Entire Assignment
   due_date: 10/01/2018 12:00 am
