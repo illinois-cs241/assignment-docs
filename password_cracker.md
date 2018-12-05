@@ -1,18 +1,6 @@
 ---
 layout: doc
 title: "Password Cracker"
-submissions:
-- title: Version 1 and 2
-  due_date: 10/22 11:59pm
-  graded_files:
-  - cracker1.c
-  - cracker2.c
-ag_schedules:
-- title: AG Schedule
-  schedule_dates:
-    - 10/17 10:00 PM
-    - 10/19 10:00 PM
-    - 10/21 10:00 PM
 learning_objectives:
   - Multithreaded programming and its performance gains
   - Using a thread-safe datastructure

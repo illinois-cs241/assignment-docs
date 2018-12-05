@@ -1,11 +1,6 @@
 ---
 layout: doc
 title: "Netfilter Kernel Module"
-submissions:
-- title: Entire Assignment
-  due_date: 10/01/2018 12:00 am
-  graded_files:
-  - filter.c
 ---
 
 # Netfilter

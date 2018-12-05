@@ -1,17 +1,6 @@
 ---
 layout: doc
 title: "Mini Valgrind"
-submissions:
-- title: Entire Assignment
-  due_date: 09/26/18, 11:59 PM
-  graded_files:
-  - mini_valgrind.c
-ag_schedules:
-- title: AG Schedule
-  schedule_dates:
-    - 09/21 10:00 PM
-    - 09/23 10:00 PM
-    - 09/25 10:00 PM
 learning_objectives:
   - Using metadata for memory bookkeeping
   - Memory management and linked lists

@@ -1,18 +1,6 @@
 ---
 layout: doc
 title: "Extreme Edge Cases"
-submissions:
-- title: Entire Assignment
-  due_date: 09/17 11:59pm
-  graded_files:
-  - camelCaser.c
-  - camelCaser_tests.c
-ag_schedules:
-- title: AG Schedule
-  schedule_dates:
-    - 09/12 10:00 PM
-    - 09/14 10:00 PM
-    - 09/16 10:00 PM
 learning_objectives:
   - Test Driven Development
   - Thinking of Edge Cases

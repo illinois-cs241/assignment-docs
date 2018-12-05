@@ -1,17 +1,6 @@
 ---
 layout: doc
 title: "Deadlocked Diners"
-submissions:
-- title: Entire Assignment
-  due_date: 10/17 11:59pm
-  graded_files:
-  - good_company.c
-ag_schedules:
- - title: AG Schedule
-   schedule_dates:
-     - 10/12 10:00 PM
-     - 10/14 10:00 PM
-     - 10/16 10:00 PM
 learning_objectives:
   - Synchronization
   - Deadlock / Livelock / Starvation

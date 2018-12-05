@@ -1,12 +1,6 @@
 ---
 layout: doc
 title: "Vector"
-submissions:
-- title: Entire Assignment
-  due_date: 09/10/2018 11:59pm
-  graded_files:
-  - vector.c
-  - sstring.c
 learning_objectives:
   - Implementing a C++ style Vector in C
   - Using Dynamic/Heap Memory

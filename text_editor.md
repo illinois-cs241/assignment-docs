@@ -1,18 +1,6 @@
 ---
 layout: doc
 title: "Text Editor"
-submissions:
-- title: Entire Assignment
-  due_date: 09/24/2018, 11:59 PM
-  graded_files:
-  - editor.c
-  - document.c
-ag_schedules:
-- title: AG Schedule
-  schedule_dates:
-    - 09/19 10:00 PM
-    - 09/21 10:00 PM
-    - 09/23 10:00 PM
 learning_objectives:
   - Writing a C program
   - File I/O, serializing/deserializing

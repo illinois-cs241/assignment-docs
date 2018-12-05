@@ -1,12 +1,6 @@
 ---
 layout: doc
 title: "Pugnacious Profilers"
-submissions:
-- title: Entire Assignment
-  due_date: 10/22/2018 12:00 am
-  graded_files:
-  - orderbook.c
-  - orderbook.h
 learning_objectives:
   - Understanding profiling
   - Performance optimization (both time and memory)

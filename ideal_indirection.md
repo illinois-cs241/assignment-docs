@@ -1,17 +1,6 @@
 ---
 layout: doc
 title: "Ideal Indirection"
-submissions:
-- title: Entire Assignment
-  due_date: 10/24 11:59pm
-  graded_files:
-  - mmu.c
-ag_schedules:
- - title: AG Schedule
-   schedule_dates:
-     - 10/19 10:00 PM
-     - 10/21 10:00 PM
-     - 10/23 10:00 PM
 learning_objectives:
   - Virtual Memory
   - The virtual address translation process

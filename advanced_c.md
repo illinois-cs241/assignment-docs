@@ -1,11 +1,6 @@
 ---
 layout: doc
 title: "Advanced C"
-submissions:
-- title: Entire Assignment
-  due_date: 10/01/2018 12:00 am
-  graded_files:
-  - dictionary.c
 learning_objectives:
   - Implementing an object with blocks
   - Understanding extensions to the C language

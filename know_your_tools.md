@@ -1,16 +1,6 @@
 ---
 layout: doc
 title: "Know Your Tools"
-submissions:
-- title: HW0
-  due_date: 9/5 11:59 PM
-- title: Lab Assignment
-  due_date: 9/5 11:59 PM
-  graded_files:
-  - read_wrap.c
-  - secure_move.c
-  - shred.c
-  - utils.c
 learning_objectives:
   - Getting familiar with the tools needed for CS 241.
 wikibook:

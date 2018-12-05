@@ -1,11 +1,6 @@
 ---
 layout: doc
 title: "Lovable Linux"
-submissions:
-- title: Entire Assignment
-  due_date: 12/12 11:59pm
-  graded_files:
-  - kernel.c
 learning_objectives:
   - Building Character
   - Proving a Point

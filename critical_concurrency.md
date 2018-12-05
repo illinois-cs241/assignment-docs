@@ -1,19 +1,6 @@
 ---
 layout: doc
 title: "Critical Concurrency"
-submissions:
-- title: Entire Assignment
-  due_date: 10/10 11:59pm
-  graded_files:
-  - barrier.c
-  - queue.c
-  - semamore.c
-ag_schedules:
- - title: AG Schedule
-   schedule_dates:
-     - 10/05 10:00 PM
-     - 10/07 10:00 PM
-     - 10/09 10:00 PM
 learning_objectives:
   - Synchronization Primitives
   - Common Patterns in Multi-Threaded Programs

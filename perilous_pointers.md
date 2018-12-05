@@ -1,12 +1,6 @@
 ---
 layout: doc
 title: "Perilous Pointers"
-submissions:
-- title: Entire Assignment
-  due_date: 09/12 11:59pm
-  graded_files:
-  - part1-functions.c
-  - part2-main.c
 learning_objectives:
   - Pointers
   - Strings

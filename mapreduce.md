@@ -1,18 +1,6 @@
 ---
 layout: doc
 title: "MapReduce"
-submissions:
-- title: MapReduce
-  due_date: 10/31 11:59pm
-  graded_files:
-  - mapreduce.c
-ag_schedules:
- - title: AG Schedule
-   schedule_dates:
-     - 10/26 10:00 PM
-     - 10/28 10:00 PM
-     - 10/29 10:00 PM
-     - 10/30 10:00 PM
 learning_objectives:
   - Interprocess Communication (IPC)
   - Pipes

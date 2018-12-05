@@ -1,19 +1,6 @@
 ---
 layout: doc
 title: "Shell"
-submissions:
-- title: Entire Assignment
-  due_date: 10/1/2018 11:59pm
-  graded_files:
-  - shell.c
-ag_schedules:
-- title: AG Schedule
-  schedule_dates:
-    - 09/25 10:00 PM
-    - 09/27 10:00 PM
-    - 09/29 10:00 PM
-    - 09/30 10:00 PM
-    - 10/01 12:00 PM (noon)
 learning_objectives:
   - Learning How a Shell Works
   - Fork, Exec, Wait

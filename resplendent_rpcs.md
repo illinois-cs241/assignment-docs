@@ -1,19 +1,6 @@
 ---
 layout: doc
 title: "Resplendent RPCs"
-submissions:
-- title: Entire Assignment
-  due_date: 12/5/2018 11:59pm
-  graded_files:
-  - dns_query_svc_impl.c
-  - dns_query_clnt_impl.c
-ag_schedules:
- - title: AG Schedule
-   schedule_dates:
-     - 12/01 10:00 PM
-     - 12/02 10:00 PM
-     - 12/03 10:00 PM
-     - 12/04 10:00 PM
 learning_objectives:
   - Learn about RPCs with rpcgen
   - Learn basic UDP networking

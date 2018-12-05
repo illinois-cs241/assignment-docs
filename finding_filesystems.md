@@ -1,19 +1,6 @@
 ---
 layout: doc
 title: "Finding Filesystems"
-submissions:
-- title: Entire Assignment
-  due_date: 11/12/2018 11:59pm
-  graded_files:
-  - minixfs.c
-ag_schedules:
-- title: AG Schedule
-  schedule_dates:
-    - 11/08 10:00 PM
-    - 11/10 10:00 PM
-    - 11/11 10:00 PM
-    - 11/12 12:00 PM
-    - 11/12 8:00 PM
 learning_objectives:
   - Learn how inodes are represented in the kernel
   - How to write callbacks for filesystem operations

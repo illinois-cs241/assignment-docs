@@ -1,16 +1,10 @@
 ---
 layout: doc
 title: "Decentralized Network"
-submissions:
-- title: Entire Assignment
-  due_date: 11/14/2018 12:00 am
-  graded_files:
-  - src/
 learning_objectives:
   - Understanding network topology
   - Understanding high-level network protocols
   - Exploring common algorithms in distributed systems
-
 ---
 
 # Overview

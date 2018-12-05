@@ -1,18 +1,6 @@
 ---
 layout: doc
 title: "Utilities Unleashed"
-submissions:
-- title: Entire Assignment
-  due_date: 9/19/2018, 11:59 PM
-  graded_files:
-  - env.c
-  - time.c
-ag_schedules:
-- title: AG Schedule
-  schedule_dates:
-    - 09/14 10:00 PM
-    - 09/16 10:00 PM
-    - 09/18 10:00 PM
 learning_objectives:
   - Fork, Exec, Wait
   - Environment Variables

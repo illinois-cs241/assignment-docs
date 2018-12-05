@@ -1,22 +1,7 @@
 ---
 layout: doc
-title: "Chatroom"
-submissions:
-- title: Entire Assignment
-  due_date: 11/07 11:59pm
-  graded_files:
-  - client.c
-  - server.c
-  - utils.c
+title: "Charming Chatroom"
 permalink: charming_chatroom
-dueDates: "04/04/2018, 11:59 PM"
-ag_schedules:
- - title: AG Schedule
-   schedule_dates:
-     - 11/04 10:00 PM
-     - 11/05 10:00 PM
-     - 11/06 10:00 PM
-     - 11/07 12:00 PM (noon)
 ---
 
 ## Learning Objectives
