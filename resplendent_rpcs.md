@@ -7,6 +7,13 @@ submissions:
   graded_files:
   - dns_query_svc_impl.c
   - dns_query_clnt_impl.c
+ag_schedules:
+ - title: AG Schedule
+   schedule_dates:
+     - 12/01 10:00 PM
+     - 12/02 10:00 PM
+     - 12/03 10:00 PM
+     - 12/04 10:00 PM
 learning_objectives:
   - Learn about RPCs with rpcgen
   - Learn basic UDP networking
@@ -54,6 +61,7 @@ More information in the header files -- this is the high level overview.
 
 ### `dns_query_clnt_impl.c`
 - `resolve_hostname()` Given a host and a dns server, figures out what IP this hostname points to or reports if it couldn't find the hostname.
+
 ### `dns_query_svc_impl.c`
 - `create_response()` Given a few parameters, allocates all needed fields for the `response` object on the heap
 - `contact_nameserver()` Given all appropriate parameters, sends a UDP Packet to the nameserver containing the hostname and the server sends back an IP address or sentinel value (check the error section above).
@@ -76,7 +84,7 @@ Nameserver running on port 9000
 
 Run your server with environment variables:
 ```bash
-$ NAMESERVER_HOST=localhost NAMESERVER_PORT=9000 ./server
+$ NAMESERVER_HOST=127.0.0.1 NAMESERVER_PORT=9000 ./server
 ```
 
 Then send a query for a domain through the client. The client requires two arguments. The first is the IP address of the server that will accept its RPC and the second is the domain to resolve.
@@ -94,7 +102,12 @@ See if your client interprets the correct input when
 * A hostname is in the client cache
 * Makes sure that your client works with your server
 
-## Extra stuff
+Things you don't need to worry about:
+
+* Don't worry about retransmitting UDP packets.
+* For this lab we won't be testing memory as intensively
+
+## Extra: Tech Descriptions
 
 The motivation for this type of protocol is influenced by [DNSSec](https://en.wikipedia.org/wiki/Domain_Name_System_Security_Extensions). In a nutshell, DNS is really insecure. Your computer first (usually) sends your host name request to a server unencrypted, and has no way of verifying that the sent-to server is an actual server. Secondly, when your computer gets a response back, it has no way of verifying that the response was sent from that server. This is all because UDP packets are plain text and can be spoofed -- so the first leg of this connection matters a _lot_. The other parts of the connection don't need to matter as much because often they are on your Internet Service Provider's internal, trusted network.
 

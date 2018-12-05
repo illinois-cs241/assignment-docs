@@ -131,7 +131,7 @@ Comparer function for sjf scheme
 
 ### void scheduler_new_job(job \*newjob, int job_number, double time, scheduler_info \*sched_data)
 
-This function is responsible for setting up a new job. You must populate `newjob->metatdata` with the information found in `scheduler_info`. The contents of `newjob->metadata` cannot be a pointer to `sched_data` since this variable may be on the stack of the calling function. Once you've set up `newjob` offer it to the queue.
+This function is responsible for setting up a new job. You must populate `newjob->metadata` with the information found in `scheduler_info`. The contents of `newjob->metadata` cannot be a pointer to `sched_data` since this variable may be on the stack of the calling function. Once you've set up `newjob` offer it to the queue.
 
 ### job \*scheduler_quantum_expired(job \*job_evicted, double time) 
 
