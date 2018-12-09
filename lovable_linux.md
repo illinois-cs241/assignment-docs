@@ -85,7 +85,7 @@ unused pages to not present as well. In this layout everything in Kernel
 the first 4MB, that isn’t the page for video memory, should be
 marked not present.
 
-![](./images/391/initialize_paging.png)
+![Page Initialization](./images/391/initialize_paging.png)
 
 Make sure that you align your pages (page directory and page 8 MB
 tables) on 4 kB boundaries. To align things in x86:
@@ -319,7 +319,7 @@ blocks. The first block is called the boot block, and holds both file system sta
 the statistics and each directory entry occupy 64B, so the file system can hold up to 63 files. The first directory entry
 always refers to the directory itself, and is named ".", so it can really hold only 62 files.
 
-![](./images/391/fs_layout.png)
+![Filesystem Layout](./images/391/fs_layout.png)
 
 Each directory entry gives a name (up to 32 characters, zero-padded, but not necessarily including a terminal EOS
 or O-byte), a file type, and an index node number for the file. File types are 0 for a file giving user-level access to
@@ -366,7 +366,7 @@ system call should update this member.
 
 4. A "flags" member for, among other things, marking this file descriptor as "in-use."
 
-![](./images/391/file_description_table.png)
+![File Descriptor Table](./images/391/file_description_table.png)
 
 When a process is started, the kernel should automatically open stdin and stdout, which correspond to file descriptors O and 1, respectively. stdin is a read-only file which corresponds to keyboard input. stdout is a write-only
 file corresponding to terminal output. “Opening” these files consists of storing appropriate jump tables in these two
@@ -470,7 +470,7 @@ The virtual memory map for each task is show in the figure.
 The kernel is loaded at physical address 0x400000 (4 MB), 128MB and also mapped at virtual address 4 MB.
 A global page directory entry with its Supervisor bit set should be set up to map the kernel to virtual address ox400000 (4 MB). This ensures that the kernel, which is linked to run with its starting address at 4 MB, will continue to work even after paging is turned on.
 
-![](./images/391/memory_map.png)
+![Memory Mapping](./images/391/memory_map.png)
 
 To make physical memory management easy, you may assume there is at least 16 MB of physical memory on the system.
 Then, use the following (static) strategy: the first user-level program (the shell) should be loaded at physical 8 MB, and the second user-level program, when it is executed by the shell, should be loaded at physical 12 MB. The program image itself is linked to execute at virtual address 0x08048000.
@@ -509,7 +509,7 @@ segment descriptor. When the x86 sees that a new CS is specified, it will perfor
 for the IDT entry will run in the new privilege level. This way, the system call interface is accessible to user space but
 the code executes in the kernel.
 
-![](./images/391/interrupt_gate.png)
+![Interrupt Gate](./images/391/interrupt_gate.png)
 
 ## Appendix E: Stack Switching and the TSS
 The last detail of user space to kernel transitions on system calls, interrupts, or exceptions is stack switching. The stack
@@ -584,7 +584,7 @@ to user space. Be sure you don’t clobber the user’s EAX value from its hardw
 From `sigreturn` - have `sigreturn` return the hardware context’s EAX value so that you won’t have to special-case
 the return from `sigreturn`.
 
-![](./images/391/signals_figures.png)
+![Signals Figures](./images/391/signals_figures.png)
 
 Shown in Figure 2 is a slightly-modified version of the struct pt_regs structure that Linux uses for its hardware
 context; this modified structure is what you should use in this MP. The “Error Code / Dummy” field has been added to

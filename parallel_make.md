@@ -300,7 +300,7 @@ To compile in release mode, run `make`, for debug mode, use `make debug.`
 The provided `Makefile` also builds a ThreadSanitizer instrumented version of your code.
 The tsan executable is `parmake-tsan`.
 You can run this (instead of `parmake`) to use the ThreadSanitizer race condition detection tool with parmake.
-For a tsan example, see [the tsan docs](./tsan)
+For a tsan example, see [the tsan docs](https://clang.llvm.org/docs/ThreadSanitizer.html)
 
 **We will be using ThreadSanitizer to grade your code! If the autograder detects a data race, you won't automatically get 0 points, but a few points will be deducted.**
 
