@@ -28,7 +28,6 @@ Here are some examples of network protocols:
 - TCP (Transmission Control Protocol)
 	- TCP is a protocol at the *transport layer*, which delivers streams of bytes between hosts communicating via an IP network.
 	- The main purpose of TCP as a protocol is to make sure that packages are delivered reliably in the correct order and without error.
-	- A TCP package looks something like this: ![](https://tr1.cbsistatic.com/hub/i/2015/06/03/596ecee7-0987-11e5-940f-14feb5cc3d2a/r00220010702mul01_02.gif)
 
 - HTTP (Hypertext Transfer Protocol)
 	- HTTP is a protocol at the *application layer*. It is built on top of TCP, which guarantees that packages are sent and received in the right orders, and is used by browsers. So HTTP does not concern itself with low-level implementations of the network layer, but focuses more on higher-level functionalities like sessions, request methods (GET, POST, etc.), and status code.

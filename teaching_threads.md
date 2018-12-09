@@ -14,7 +14,7 @@ wikibook:
 
 ## reduce()
 
-In functional programming, there is an operation called [_reduce_](https://en.wikipedia.org/wiki/Fold_(higher-order_function\)). `reduce` takes three parameters: an input list, a function to apply to the elements of that list, and an initial value (or base case). The function takes two inputs and returns a value. It is first applied to the base case and the first element, and from then on, the function is repeatedly applied to the cumulative result and the next element. `reduce` then returns the "reduced" value of the entire list. Depending on which direction this is applied, this is sometimes called a _left-fold_ or _right-fold_. In this problem, the functions are associative, so it does not matter.
+In functional programming, there is an operation called [_reduce_](https://en.wikipedia.org/wiki/Fold_(higher-order_function)). `reduce` takes three parameters: an input list, a function to apply to the elements of that list, and an initial value (or base case). The function takes two inputs and returns a value. It is first applied to the base case and the first element, and from then on, the function is repeatedly applied to the cumulative result and the next element. `reduce` then returns the "reduced" value of the entire list. Depending on which direction this is applied, this is sometimes called a _left-fold_ or _right-fold_. In this problem, the functions are associative, so it does not matter.
 
 Here's a concrete example. Say we have the input list `[1, 2, 3]`, a callback function `int add(int elem1, int elem2)` which takes two numbers and returns their sum, and a base case of 0. If we call `reduce`, the resulting value would be `add(add(add(0, 1), 2), 3) = 6`.
 
