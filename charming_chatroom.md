@@ -1,7 +1,6 @@
 ---
 layout: doc
 title: "Charming Chatroom"
-permalink: charming_chatroom
 ---
 
 ## Learning Objectives
