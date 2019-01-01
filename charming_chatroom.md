@@ -79,20 +79,20 @@ Here is the overall client-server architecture:
 
 ## Read/Write Failures
 
-Read and Write calls (general read/write - this extends to recv, send, etc.) can fail to send/receive all bytes or get interrupted by signals.  Here is the pseudocode for read all to socket.
+Read and Write calls (general `read`/`write` - this extends to `recv`, `send`, etc.) can fail to send/receive all bytes.  Here is the pseudocode for read all to socket.
 
 ```
-counter = 0
-while counter is not the number of bytes needed:
+while number of bytes is not the number needed:
     return_code = read bytes from socket
     if return_code = 0:
-        return 0
+        return bytes read
     else if return_code > 0:
         add return_code bytes to counter
     else if return_code == -1 and error was interrupted:
         try again
     else:
-        fail (return)
+        return bytes read
+return bytes read
 ```
 
 
