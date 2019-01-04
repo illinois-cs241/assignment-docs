@@ -107,6 +107,14 @@ If you have the correct answers then `Sucessfully defused the bomb!` will be pri
 
 **Make sure you use your own netid for everything in this assignment. We will be grading your answers using your netid.**
 
+## The Outline
+
+* Log into your VM
+* Clone or Update your git repository on your VM
+* Use the defuser to figure out how to defuse the bomb
+* Add your answers to `submission.txt`
+* `git commit -a -m "My Submission"` (commit your work to git).
+
 ## CS 241 Makefile
 
 There is not Makefile for this assignment, but all future assignment in this class will use a Makefile similar to the one which follows. It's important to have a basic understanding of how it works.
@@ -200,15 +208,6 @@ make debug
 ```console
 make release
 ```
-
-## The Outline
-
-* Log into your VM
-* Clone or Update your git repository on your VM
-* Use the defuser to figure out how to defuse the bomb
-* Add your answers to `submission.txt`
-* `git commit -a -m "My Submission"` (commit your work to git).
-
 
 ## Lab Attendance
 
