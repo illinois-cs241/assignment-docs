@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: "Bomb Lab"
+title: "Lockpicking Lab"
 learning_objectives:
   - Getting familiar with GDB and system programming.
 wikibook:
@@ -53,38 +53,38 @@ One section we will have on the top of every assignment is a section called `gra
 
 ## Background and Assignment
 
-You are working for ShadyCorp Inc. Your boss discover's that your competitor, ShadierCorp Inc., has uploaded a bomb to your company's only production server. You need to safely defuse the bomb. Luckily you boss has found a defuser to help you.
+You are working for ShadyCorp Inc. Your boss discover's that your competitor, ShadierCorp Inc., has uploaded a safe to your company's production server. Your boss is curious and wants to know what's in the safe. Luckily you boss has a lockpick to help you.
 
 
-Initial analysis of the bomb indicates that it has two modes: interactive mode and file mode.
+Initial analysis of the safe indicates that it has two modes: interactive mode and file mode.
 
 Interactive mode use:
 
 ```console
-$ ./bomb <netid>
+$ ./safe <netid>
 ```
 
 File mode use:
 
 ```console
-$ ./bomb <netid> <input_file>
+$ ./safe <netid> <input_file>
 ```
 
-In interactive mode the bomb allows you directly provide input to the bomb and attempt to defuse it. In file mode the bomb reads input line by line from specified file. In both of these modes the bomb will explode if given the wrong input. Luckily you have a defuser which will help you find the correct input to defuse the bomb.
+In interactive mode the safe allows you directly provide input to the safe and attempt to unlock it. In file mode the safe reads input line by line from specified file. In both of these modes the safe will reset if given the wrong input. Luckily you have a lockpick which will help you find the correct input to unlock the safe.
 
-The defuser can be used as follows:
+The lockpick can be used as follows:
 
 ```console
-$ ./defuser
+$ ./lockpick
 ```
 
-This will launch GDB and load the bomb debug symbols and source code. Use your debugging skills to figure out how to defuse the bomb. Keep in mind that to run a program in GDB with arguements you use `r arg1 arg2 arg3 etc.`, so to run the bomb with your netid the command would be `r <netid>`.
+This will launch GDB and load the safe debug symbols and source code. Use your debugging skills to figure out how to unlock the safe. Keep in mind that to run a program in GDB with arguements you use `r arg1 arg2 arg3 etc.`, so to run the safe with your netid the command would be `r <netid>`.
 
-You should begin by running the defuser and then starting the bomb with `r <netid>`. Read the debugging guide section of the docs for more information about how to use GDB.
+You should begin by running the lockpick and then starting the safe with `r <netid>`. Read the debugging guide section of the docs for more information about how to use GDB.
 
 ## Answer Submission
 
-There is a file in your repository called `submission.txt`. You should provide the answers to each phase of the bomb in this file. Provide one answer per line. For example if you think the bomb has three phases and the answers to the phases are `answer1`, `answer2`, `answer3` then your `submission.txt` should look like:
+There is a file in your repository called `submission.txt`. You should provide the answers to each phase of the safe in this file. Provide one answer per line. For example if you think the safe has three phases and the answers to the phases are `answer1`, `answer2`, `answer3` then your `submission.txt` should look like:
 ```console
 answer1
 answer2
@@ -97,13 +97,13 @@ Read [this](./debugging.html) to get started with debugging!
 
 ## Testing
 
-You can use your `submission.txt` file with the bomb's file mode to test your answers.
+You can use your `submission.txt` file with the safe's file mode to test your answers.
 
 ```console
-$ ./bomb <netid> submission.txt
+$ ./safe <netid> submission.txt
 ```
 
-If you have the correct answers then `Sucessfully defused the bomb!` will be printed.
+If you have the correct answers then `Sucessfully unlocked the safe!` will be printed.
 
 **Make sure you use your own netid for everything in this assignment. We will be grading your answers using your netid.**
 
@@ -111,13 +111,13 @@ If you have the correct answers then `Sucessfully defused the bomb!` will be pri
 
 * Log into your VM
 * Clone or Update your git repository on your VM
-* Use the defuser to figure out how to defuse the bomb
+* Use the lockpick to figure out how to unlock the safe
 * Add your answers to `submission.txt`
 * `git commit -a -m "My Submission"` (commit your work to git).
 
 ## CS 241 Makefile
 
-There is not Makefile for this assignment, but all future assignment in this class will use a Makefile similar to the one which follows. It's important to have a basic understanding of how it works.
+There is no Makefile for this assignment, but all future assignment in this class will use a Makefile similar to the one which follows. It's important to have a basic understanding of how it works.
 
 **Note: This is not a class about makefile programming, so you will not need to know the advanced parts of makefiles (pattern matching, expansion phases, etc). Still, it is important that you know a little bit about how they work for a future assignment.**
 
