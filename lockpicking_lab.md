@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: "Lockpicking Lab"
+title: "Luscious Locks"
 learning_objectives:
   - Getting familiar with GDB and system programming.
 wikibook:
