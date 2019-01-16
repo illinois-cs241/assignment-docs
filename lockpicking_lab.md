@@ -18,7 +18,7 @@ Read the [Development Guide](./development.html)!
 
 ## Git
 
-(Read the first section of the development site!) You will be using `git` to submit all your assignments in this course. First go to [the repository creator](https://edu.cs.illinois.edu/create-ghe-repo/{{site.subject_code}}{{site.course_number}}-{{site.semester}}/). **DO NOT DO THE README TUTORIAL**
+(Read the first section of the development site!) You will be using `git` to submit all your assignments in this course. First go to [the repository creator](https://edu.cs.illinois.edu/create-ghe-repo/{{site.subject_code}}{{site.course_number}}-{{site.semester}}/). **DO NOT DO THE README TUTORIAL!**
 
 **Once you are in your VM**, you'll need to set up some global defaults
 
@@ -27,7 +27,14 @@ git config --global user.name "FIRST_NAME LAST_NAME"
 git config --global user.email NETID@example.com
 ```
 
-Make sure to replace `FIRST_NAME` and `LAST_NAME` and `NETID` with your information. Your code will not be graded if you git config is not correctly set. Then checkout your repository as follows
+Make sure to replace `FIRST_NAME` and `LAST_NAME` and `NETID@example.com` with your information. For example:
+
+```console
+git config --global user.name "Lawrence Angrave"
+git config --global user.email "angrave@illinois.edu"
+```
+
+Your code will not be graded if you git config is not correctly set. **No exceptions!** Then checkout your repository as follows:
 
 ```console
 git clone https://github-dev.cs.illinois.edu/{{ site.subject_code }}{{site.course_number}}-{{site.semester }}/NETID.git
@@ -39,7 +46,7 @@ which will check out your entire git repo into a folder called 'NETID' into your
 cd NETID
 ```
 
-You've probably noticed the repository is empty! In order to grab the latest version of our assignment, complete the following steps.
+You've probably noticed the repository is empty! In order to grab the latest version of our assignment, complete the following steps. This adds the `_release` repository as an extra remote, and this step must be completed every time you want to initialize your repository on a new machine.
 
 ```console
 git remote add release https://github-dev.cs.illinois.edu/{{ site.subject_code }}{{site.course_number}}-{{site.semester }}/_release.git
@@ -49,7 +56,7 @@ git push origin master
 
 ## Graded Files
 
-One section we will have on the top of every assignment is a section called `graded_files` these are the files that we use to grade the assignment. `git` does not allow us to set the rest of the files to readonly to prevent changing them (header files, Makefile). You have to be careful to avoid changing these files. We are working on a system that prevents you from accidentally committing the changes, but there is no easy way to set permissions on your local copy.
+One section we will have on the top of every assignment is a section called `graded_files`. These are the files that we use to grade the assignment. `git` does not allow us to set the rest of the files to readonly to prevent changing them (header files, Makefile). You have to be careful to avoid changing these files. We are working on a system that prevents you from accidentally committing the changes, but there is no easy way to set permissions on your local copy. **No exceptions**: please make sure you're only submitting modifications to the graded files listed.
 
 ## Background and Assignment
 
