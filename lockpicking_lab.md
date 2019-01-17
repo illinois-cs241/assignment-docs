@@ -14,7 +14,7 @@ You have already been assigned a HW0 for the class. Remember to commit and push 
 
 ## Development
 
-Read the [Development Guide](./development.html)!
+Read the [Development Guide]({% link _tutorials/development.html %})!
 
 ## Git
 
@@ -100,7 +100,7 @@ answer3
 
 ## Debugging Guide
 
-Read [this](./debugging.html) to get started with debugging!
+Read [this]({% link _tutorials/debugging.html %}) to get started with debugging!
 
 ## Testing
 
