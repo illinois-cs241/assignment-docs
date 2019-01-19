@@ -85,7 +85,7 @@ The lockpick can be used as follows:
 $ ./lockpick
 ```
 
-This will launch GDB and load the safe debug symbols and source code. Use your debugging skills to figure out how to unlock the safe. Keep in mind that to run a program in GDB with arguements you use `r arg1 arg2 arg3 etc.`, so to run the safe with your netid the command would be `r <netid>`.
+This will launch GDB and load the safe debug symbols and source code. Use your debugging skills to figure out how to unlock the safe. Keep in mind that to run a program in GDB with arguments you use `r arg1 arg2 arg3 etc.`, so to run the safe with your netid the command would be `r <netid>`.
 
 You should begin by running the lockpick and then starting the safe with `r <netid>`. Read the debugging guide section of the docs for more information about how to use GDB.
 
