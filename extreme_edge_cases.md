@@ -133,9 +133,10 @@ Other helpful resources: [Test-Driven Development](http://wiki.c2.com/?TestDrive
 
 ## Reference Implementation
 
-Your senior coworkers at Facenovel have taken a liking to you for your work ethic, and they decided to help you by providing you a _reference implementation_. You are given two functions which you can access through the given file `camelCaser_ref_tests.c`.
+Your senior coworkers at Facenovel have taken a liking to you for your work ethic, and they decided to help you by providing you a _reference implementation_. You are given an interface `camelCaser_ref_tests.c` which allows you to access the black-box reference implementation. You are given a function `print_camelCaser(char *input)` that takes your string input and prints out the transformed camelCaser onto `stdout`. A few notes:
 
-The first one is `print_camelCaser(char *input)` that takes your string input and prints out the transformed camelCaser onto `stdout`. Note that this function is meant to be used to help you answer questions like, "What should be the result of inputting `<blah>` into `camel_caser()`?" Note that this function might behave weirdly with non-printable ASCII characters. The exceptions are `\a` and `\b`, which we have escaped in the output so that it displays on the terminal. Take **extra care** when using it with `\a`,`\b` and `\\a`, `\\b`, since they'll be displayed the same on the output. (For more details, here's an article on [escape sequences](https://en.wikipedia.org/wiki/Escape_sequences_in_C)).
+* This function is meant to be used to help you answer questions like, "What should be the result of inputting `<blah>` into `camel_caser()`?" You **may not use** this function in any graded part of your code
+* This function might behave weirdly with non-printable ASCII characters. The exceptions are `\a` and `\b`, which we have escaped in the output so that it displays on the terminal. Take **extra care** when using it with `\a`,`\b` and `\\a`, `\\b`, since they'll be displayed the same on the output. (For more details, here's an article on [escape sequences](https://en.wikipedia.org/wiki/Escape_sequences_in_C)).
 
 For example, if you type this in `camelCaser_ref_tests.c`
 
@@ -175,10 +176,7 @@ Output:
 
 We parse the `\a` and `\b` so that it gets displayed on the terminal. You **should not** be doing this in your camelCaser implementation.
 
-The second function provided is `check_output(char *input, char **output)`. This function is meant to be used to ensure that you understand what output is expected and serves as a sanity check. A few important details you need to know:
-
-* You **may not use** any of these two functions provided here in any part of your code. If you do so, your code will definitely not compile when graded.
-* The reference only serves as a starting guideline and a sanity check, and does not represent the only possible good implementation. **Your implementation is restricted by the specifications provided above, and only the specifications above.** An implementation is good if and only if it meets the requirements in the specifications.
+Please note that the reference only serves as a starting guideline and a sanity check, and does not represent the only possible good implementation. **Your implementation is restricted by the specifications provided above, and only the specifications above.** An implementation is good if and only if it meets the requirements in the specifications.
 
 To use the reference, modify the `camelCaser_ref_tests.c` file, run `make camelCaser_ref` and you should have a `camelCaser_ref` executable.
 
