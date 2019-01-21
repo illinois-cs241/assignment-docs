@@ -14,7 +14,6 @@ wikibook:
 
 ## Backstory
 
-
 What makes code good? Is it camelCased strings? Good comments? Descriptive variable names, perhaps?
 
 One thing we know is that good code is generally modular - it consists of discrete "units" of functionality that are only responsible for very specific and certain behavior. In our case, working with C, these "units" are functions.
@@ -89,9 +88,6 @@ _Hint:_ `ctype.h` has a lot of useful functions for this.
 
 Your implementation goes in camelCaser.c, and you may not leak any memory.
 
-We have also included a _reference implementation_. It is there to help you answer questions like, "What should be the result of inputting `<blah>` into `camel_caser()`?"  You can start the program with `./camelCaser-reference` and the program will take your input and return it camelCased when you press Enter. You should not add quotes around the strings you test (unless you want to try camelCasing actual quotation marks).
-
-
 #### Destroy
 
 You must also implement `destroy(char **result)`, a function that takes in the output of your `camel_caser` and frees up any memory used by it. We will be calling this in our test cases and checking for memory leaks in your implementation, so remember to test this!
@@ -119,30 +115,6 @@ char *ptr2 = as + 1;
 char s = *ptr2;
 ```
 
-### Escape Sequences
-
-If you want to see how the reference implementation handles ASCII characters that cannot be typed directly, you can use [escape sequences](https://en.wikipedia.org/wiki/Escape_sequences_in_C). You are likely already familiar with the `\n` escape sequence for representing newlines in `printf`, but there are [many others available](https://en.wikipedia.org/wiki/Escape_sequences_in_C#Table_of_escape_sequences).
-
-For example, you can see that newlines are treated as whitespace:
-
-```
-> hello\nworld.
-{
-  "helloWorld",
-  NULL
-}
-```
-
-Be warned: in the reference, if you type `\n`, the reference sees it as two bytes (`\` and `n`), and will replace it with the ASCII line feed character (ASCII value 0x0A) before checking what type of character it is (punctuation, whitespace, alphanumeric, etc).
-
-**You should _not_ do this in your implementation.**
-
-The reference does this so that you can test different escape sequences and how they should behave.
-
-If you want to test escape characters in _your_ camel caser, you can simply do `camel_case("foo\tbar")` in your test function(s). The C compiler will correctly compile the `\t` into the ASCII tab character rather than a `\` followed by a `t`. To _your_ camel caser, the `\t` will appear as **one** character, and will be correctly identified as whitespace by `isspace('\t')`.
-
-**In conclusion**: you should not parse escape sequences yourself by putting together `\` and `t`; they will appear as one character to your camel caser.
-
 ## Writing Unit Tests
 
 Your goal is to show that the other interns' implementations of camelCaser - which, of course, you can't see directly - fail on some extreme test cases, and, in the meantime, demonstrate to the head honcho at Facenovel exactly how robust your own function is.
@@ -151,13 +123,66 @@ Facenovel promises to pass in C-strings. Likewise, you promise to return a dynam
 
 What kinds of edge cases might come up?
 
-Run `make camelCaser` to test. You will have to fill in tests in camelCaser_tests.c.
+Run `make camelCaser` to test. You will have to fill in tests in `camelCaser_tests.c`.
 
 Because Facenovel values their testing server time, you may not try more than 16 different inputs, and each input must be less than 256 characters (only characters). This does NOT mean your implementation can assume input of 256 characters or less.
 
-Also, it is not in the spirit of unit testing to diff your implementation with the one you are testing. Therefore, you may **NOT** call your own camel_caser function when implementing your test cases.
+Also, it is not in the spirit of unit testing to diff the output of your implementation with the one you are testing. Therefore, you may **NOT** call your own `camel_caser` function when implementing your test cases.
 
 Other helpful resources: [Test-Driven Development](http://wiki.c2.com/?TestDrivenDevelopment)
+
+## Reference Implementation
+
+Your senior coworkers at Facenovel have taken a liking to you for your work ethic, and they decided to help you by providing you a _reference implementation_. You are given two functions which you can access through the given file `camelCaser_ref_tests.c`.
+
+The first one is `print_camelCaser(char *input)` that takes your string input and prints out the transformed camelCaser onto `stdout`. Note that this function is meant to be used to help you answer questions like, "What should be the result of inputting `<blah>` into `camel_caser()`?" Note that this function might behave weirdly with non-printable ASCII characters. The exceptions are `\a` and `\b`, which we have escaped in the output so that it displays on the terminal. Take **extra care** when using it with `\a`,`\b` and `\\a`, `\\b`, since they'll be displayed the same on the output. (For more details, here's an article on [escape sequences](https://en.wikipedia.org/wiki/Escape_sequences_in_C)).
+
+For example, if you type this in `camelCaser_ref_tests.c`
+
+```C
+char *input = "\aHello.";
+```
+
+this is displayed on the terminal
+
+```
+Test case
+Input: Hello.
+Output:
+{
+    "\aHello",
+    NULL
+}
+```
+
+and if you do this instead:
+
+```C
+char *input = "\\aHello.";
+```
+
+this is displayed on the terminal instead
+
+```
+Test case
+Input: \aHello.
+Output:
+{
+    "\aHello",
+    NULL
+}
+```
+
+We parse the `\a` and `\b` so that it gets displayed on the terminal. You **should not** be doing this in your camelCaser implementation.
+
+The second function provided is `check_output(char *input, char **output)`. This function is meant to be used to ensure that you understand what output is expected and serves as a sanity check. A few important details you need to know:
+
+* You **may not use** any of these two functions provided here in any part of your code. If you do so, your code will definitely not compile when graded.
+* The reference only serves as a starting guideline and a sanity check, and does not represent the only possible good implementation. **Your implementation is restricted by the specifications provided above, and only the specifications above.** An implementation is good if and only if it meets the requirements in the specifications.
+
+To use the reference, modify the `camelCaser_ref_tests.c` file, run `make camelCaser_ref` and you should have a `camelCaser_ref` executable.
+
+_Note_: The reference implementation is only available in release form. There is no debug version of the reference.
 
 ## Grading
 
