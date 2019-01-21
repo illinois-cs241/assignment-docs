@@ -176,7 +176,10 @@ Output:
 
 We parse the `\a` and `\b` so that it gets displayed on the terminal. You **should not** be doing this in your camelCaser implementation.
 
-Please note that the reference only serves as a starting guideline and a sanity check, and does not represent the only possible good implementation. **Your implementation is restricted by the specifications provided above, and only the specifications above.** An implementation is good if and only if it meets the requirements in the specifications.
+Please note that
+
+* the reference only serves as a starting guideline and a sanity check, and does not represent the only possible good implementation. **Your implementation is restricted by the specifications provided above, and only the specifications above.** An implementation is good if and only if it meets the requirements in the specifications.
+* the reference **does not replace actual testing** of your own implementation. You are responsible to rigorously test your own code to make sure it is robust and guards against all possible edge cases
 
 To use the reference, modify the `camelCaser_ref_tests.c` file, run `make camelCaser_ref` and you should have a `camelCaser_ref` executable.
 
