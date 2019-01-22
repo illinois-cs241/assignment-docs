@@ -73,7 +73,7 @@ Here is a formal description of how your camelCaser should behave:
     *   The punctuation from `input_s` is **not** added to `output_s`.
 *   Words are:
     *   nonempty substrings delimited by the MAXIMAL amount of whitespace.
-        *   This means that `     hello   world   ` is split into `hello` and `world` and NOT `hello `, ` `, ` world` or any other combination of whitespaces
+        *   This means that `"     hello   world   "` is split into `"hello"` and `"world"` and NOT `"hello "`, `" "`, `" world"` or any other combination of whitespaces
     *   considered uppercased if all of its letters are uppercased.
     *   considered lowercased if all of its letters are lowercased.
 *   a word `w` is camelCased if and only if:
