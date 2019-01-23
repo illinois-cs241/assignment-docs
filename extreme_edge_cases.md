@@ -135,9 +135,9 @@ Other helpful resources: [Test-Driven Development](http://wiki.c2.com/?TestDrive
 
 Your senior coworkers at Facenovel have taken a liking to you for your work ethic, and they decided to help you by providing you a _reference implementation_. You are given an interface `camelCaser_ref_tests.c` which allows you to access the black-box reference implementation. You are given two utility functions to help you understand what camelCase looks like.
 
-The first function provided is`print_camelCaser(char *input)`. It takes a string input and prints out the transformed camelCased output onto `stdout`. This function is meant to be used to help you answer questions like, "What should be the result of inputting `<blah>` into `camel_caser()`?" Note that this function might behave weirdly with non-printable ASCII characters. The exceptions are `\a` and `\b`, which we have escaped in the output so that it displays on the terminal. Take **extra care** when using it with `\a`,`\b` and `\\a`, `\\b`, since they'll be displayed the same on the output. (For more details, here's an article on [escape sequences](https://en.wikipedia.org/wiki/Escape_sequences_in_C)).
+The first function provided is`print_camelCaser(char *input)`. It takes a string input and prints out the transformed camelCased output onto `stdout`. This function is meant to be used to help you answer questions like, "What should be the result of inputting `<blah>` into `camel_caser()`?" Note that this function might behave weirdly with non-printable ASCII characters. The exceptions are `\a` and `\b`, which we have escaped in the output so that it displays on the terminal. Take **extra care** when using it with `\a`,`\b` and `\\a`, `\\b`. (For more details, here's an article on [escape sequences](https://en.wikipedia.org/wiki/Escape_sequences_in_C)).
 
-For example, if you type this in `camelCaser_ref_tests.c`
+As an example, if you type this in `camelCaser_ref_tests.c`
 
 ```C
 char *input = "\aHello.";
@@ -150,7 +150,7 @@ Test case
 Input: Hello.
 Output:
 {
-    "\aHello",
+    "\ahello",
     NULL
 }
 ```
@@ -168,7 +168,8 @@ Test case
 Input: \aHello.
 Output:
 {
-    "\aHello",
+    "",
+    "ahello",
     NULL
 }
 ```
