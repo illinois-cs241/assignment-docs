@@ -85,7 +85,7 @@ void first_step(int value) {
 }
 ```
 
-To complete Part 2, you must write `part2-main.c` so that it makes calls to all twelve functions in `part2-functions.c`, and such that each one prints out its "Illinois" line. When running `./part2`, your output should look exactly like this:
+To complete Part 2, you must write `part2-main.c` so that it makes calls to all eleven functions in `part2-functions.c`, and such that each one prints out its "Illinois" line. When running `./part2`, your output should look exactly like this:
 
 ```
 1: Illinois
@@ -143,10 +143,3 @@ or
 ```
 ./part2-debug
 ```
-
-## Autograder Schedule
-
-9/07 22:00
-9/09 22:00
-9/11 22:00
-9/13 00:00 - Deadline Autograder
