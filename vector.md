@@ -46,11 +46,7 @@ In case a fellow employee asks what you learned in CS 225, here's some review:
 
 Since this vector is generic, it will have to call custom constructor, destructor, and default constructor functions when objects are added or removed. (How is this better than a single function which handles all possible types?) Thus, your vector structure will contain pointers to your constructor or destructor routines, and you can initialize the vector by passing pointers to these functions as parameters.
 
-<!--Here's an illustration:
-
-![](./images/vector.jpg)-->
-
-What you'll end up with is a useful general-purpose vector, capable of dynamically expanding. (No more fixed-sized buffers!)
+What you'll end up with is a useful general-purpose vector, capable of dynamically expanding. (No more fixed-sized buffers!). If you get confused about the callback typedefs (i.e. what a copy constructor is) take a look at `callbacks.h`.
 
 Note: Remember that vector size (the number of actual objects held in the vector) and capacity (size of the storage space currently allocated for the vector) are two different things. Refer to documentation in vector.h and vector.c for more information.
 
