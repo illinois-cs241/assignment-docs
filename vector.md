@@ -57,7 +57,7 @@ Note: Remember that vector size (the number of actual objects held in the vector
 
 sstring is a wrapper around C-strings which makes dealing with strings easier
 with higher-level functions. We have not specified the definition of the sstring
-struct, and left that up to you! You can find specification for the sstring 
+struct, and left that up to you! You can find the specification for the sstring 
 functions in the `sstring.h` header file.
 
 ## Managing memory
