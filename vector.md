@@ -31,7 +31,6 @@ The _Shell_ is a terminal. Like all good terminals, your shell will need to reme
 
 However, after hearing tales of your talent, and with vectors being all the rage, other team leads have asked for vectors that they can use in their own projects. One option would be to write a vector for each team. However, being a good programmer, you know that code duplication is bad. Also, you're a lazy programmer, so you want to write as little code as possible to accomplish everything. You decide to implement a generic vector, something that every team can use with minimal changes.
 
-
 ## Vector
 
 A vector is an array that grows as a user adds and removes items from it. (Since CS 225 was a prerequisite, you probably knew all of that already.) However, your vector will need to be feature-rich enough for someone to easily create a document from it, or anything else the other sneaky teams want for their projects.
@@ -52,48 +51,10 @@ Note: Remember that vector size (the number of actual objects held in the vector
 
 ## sstring
 
-SString is a wrapper around c strings which makes dealing with strings easier
-with higher level functions. We have not specified the definition of the sstring
-struct, and left that up to you! Below are some brief descriptions of what each
-function should do.
-
-### `sstring *cstr_to_sstring(char *input)`
-
-This function should take in a c-string and return a pointer to a sstring on the
-heap.
-
-### `char *sstring_to_cstr(sstring *this)`
-
-This function should take in a sstring an return a pointer to a c-string on the
-heap.
-
-### `int sstring_append(sstring *this, sstring *addition)`
-
-This function should take in two sstrings, append the second to the first, and
-return the length of the first sstring after the append.
-
-### `vector *sstring_split(sstring *this, char delimiter)`
-
-This function should take an sstring and a character and split the sstring into
-a vector of c-strings on the delimiter.
-(e.g. `sstring_split(cstr_to_sstring("abcdeefg"), 'e') == [ "abcd", "", "fg" ]`)
-
-### `int sstring_substitute(sstring *this, size_t offset, char *target, char *substitution)`
-
-This function should substitute one occurrence of `target` in `this` after
-`offset` bytes with `substitution`. If there are no occurrences of `target` after
-`offset` bytes, return `-1`.  Otherwise return `0`.
-
-### `char *sstring_slice(sstring *this, int start, int end)`
-
-This function takes in a sstring, a start index and an end index. Return a
-c-string representing the bytes between start (inclusive) and end (exclusive).
-
-### `void sstring_destroy(sstring *this)`
-
-This function cleans up any allocated memory for a sstring.
-
-
+sstring is a wrapper around C-strings which makes dealing with strings easier
+with higher-level functions. We have not specified the definition of the sstring
+struct, and left that up to you! You can find the specification for the sstring 
+functions in the `sstring.h` header file.
 
 ## Managing memory
 
