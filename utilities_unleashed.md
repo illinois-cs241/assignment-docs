@@ -92,62 +92,43 @@ env – run a program in modified environments
 Usage:
 
 ```
-./env [-n #] [key=val1,val2,...] [key2=val1,val2,...] ... -- cmd [args] ..
+./env [-n #] [key=val1] [key2=val1] ... -- cmd [args] ..
 ```
 
 Please re-read this section *multiple* times before starting:
-* `-n N` is an _optional_ flag that indicates how many values there are for each variable. `N` must be a number more than zero, and is only required if more than 1. This means that if each `key` only has 1 value, `-n` is NOT needed.
-* Each variable is in the form of `NAME=v1,v2,v3...vN`, separated by spaces.
-* For each variable, there can either be *one* or `N` values. (There can only be `N` _if and only if_ the `-n` flag is used.)
+* Each variable is in the form of `NAME=v1`, separated by spaces.
 * Values may contain references to environment variables in the form `%NAME`, including variables that were set earlier. As a result, variables should be processed from left to right.
 * Each reference should be replaced with its value.
 * The names of variables (both in `key` and in `value`) only contain letters, numbers, or underscore characters.
-* For each environment variable `key`/`value` pair, `env` will assign `value` to `key` in the current environment. If `N` is more than 1, you must iterate through all pairs of values.
+* For each environment variable `key`/`value` pair, `env` will assign `value` to `key` in the child environment.
 * Each execution must be done with `fork`, `exec,` and `wait`.
-* The executions must be done sequentially, *not* in parallel.
 * The last variable/value(s) pairing is followed by a `--`.
 * *Everything* following the `--` is the command and any arguments that will be executed by env.
-* So, if `A=1,2,3` and `B=4,5,6` and we want to exec `cmd`, `cmd` will be executed *three* times. Once with `A = 1, B = 4`, then `A = 2, B = 5`, and finally `A = 3, B = 6`.
-* If any `key` has *one* value instead of `N`, you should set that `key` to that `value` `N` times.
-* If `A=1` and `B=4,5,6`, then you want to execute `cmd` three times again, but each time has `A=1`, and `B` switches between 4, 5, and then 6.
-* Since variables can contain references to environment variables, and execution has to be done sequentially - you can have something of the form `A=1,2,3` and `B=4,%A,6`, then you want to execute `cmd` three times again, once with `A = 1, B = 4`, then `A = 2, B = 2`, and finally `A = 3, B = 6`.
 * Invalid input should result in the usage being printed. It is your job to enforce correct usage! You shouldn't ignore bad usage.
 
 This is the canonical example and a practical use case:
 
 ```
-$ ./env -n 4 TZ=EST5EDT,CST6CDT,MST7MDT,PST8PDT -- date
+$ ./env -n 4 TZ=EST5EDT -- date
 Sat Sep  9 19:19:42 EDT 2017
-Sat Sep  9 18:19:42 CDT 2017
-Sat Sep  9 17:19:42 MDT 2017
-Sat Sep  9 16:19:42 PDT 2017
 $
 ```
-
-It runs `date` *four* times, once for each time zone, and shows us the result. 
-
-(Note: the output is in order of the variables, and is done sequentially.)
 
 Example of using references to other variables:
 
 ```
-$ ./env -n 4 TEMP=EST5EDT,CST6CDT,MST7MDT,PST8PDT TZ=%TEMP -- date
+$ ./env -n 4 TEMP=EST5EDT TZ=%TEMP -- date
 Sat Sep  9 19:19:42 EDT 2017
-Sat Sep  9 18:19:42 CDT 2017
-Sat Sep  9 17:19:42 MDT 2017
-Sat Sep  9 16:19:42 PDT 2017
 $
 ```
 
-This has the exact same behavior as before, because `TEMP` is first set to `EST5EDT`, and then when `TZ` is set to `%TEMP`, the value of `EST5EDT` is retrieved and then `TZ` is set to that.
+This has the exact same behavior as before, because `TEMP` is first set to `EST5EDT`, and then when `TZ` is set to `%TEMP`, the value of `EST5EDT` is retrieved and then `TZ` is set to that. Notice that the variables are set sequentially, or else it wouldn't work.
 
-Notice that the variables are set sequentially, or else it wouldn't work.
+Again like `time`, you can play with Linux's builtin `env` command by typing `env <var-list> <command-name>` (`env MYVAR=CS241 printenv`, for example) in your terminal. Again, remember to add `./` to the beginning (or the full path to your `env` executable file if you are in another directory), otherwise the builtin `env` will be called. **Do not use the built-in env, or you will immediately fail the assignment**
 
-Again like `time`, you can play with Linux's builtin `env` command by typing `env <var-list> <command-name>` (`env MYVAR=CS241 printenv`, for example) in your terminal. Again, remember to add `./` to the beginning (or the full path to your `env` executable file if you are in another directory), otherwise the builtin `env` will be called. Keep in mind that the builtin `env` *does not match* our specifications.
+In addition, keep in mind that the builtin `env` uses `$` instead of `%` to denote environment variables, and they are separated by spaces in the var list instead of commas. In practice, it can be very useful to change some environment variables when running certain command.
 
-In addition, keep in mind that the builtin `env` uses `$` instead of `%` to denote environment variables, and they are separated by spaces in the var list instead of commas.
-
-In practice, it can be very useful to change some environment variables when running certain command.
+### Extra: Why Env?
 
 For example, you may notice people write `#!/usr/bin/env python` on the first line of their Python script. This line ensures the Python interpreter used is the first one on user's environment `$PATH`. However, users may want to use another version of Python, and it may not be the first one on `$PATH`. Say, your desired location is `/usr/local/bin` for instance.
 
@@ -161,7 +142,7 @@ An alternative and better way is to use our `env`, and enter:
 
 then it runs the script with the desired Python interpreter.
 
-Nota bene:
+## Nota bene
 
 *   You __may not__ use the existing `env` program. (Our specification is different than the existing `env` program.)
 *   You __may not__ replace `%` with `$` or use `wordexp(3)`.
