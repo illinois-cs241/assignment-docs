@@ -142,7 +142,7 @@ An alternative and better way is to use our `env`, and enter:
 
 then it runs the script with the desired Python interpreter.
 
-## Nota bene
+### Nota bene
 
 *   You __may not__ use the existing `env` program. (Our specification is different than the existing `env` program.)
 *   You __may not__ replace `%` with `$` or use `wordexp(3)`.
