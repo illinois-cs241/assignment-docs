@@ -66,7 +66,7 @@ Note that we only care about [wall-clock time](https://en.wikipedia.org/wiki/Wal
 
 Pro tip: 1 second == 1,000,000,000 nanoseconds.
 
-Nota bene:
+### Nota bene:
 
 *   You __may not__ use the existing `time` program.
 *   You must use `fork`, `exec`, and `wait` (no other solutions will be accepted).
