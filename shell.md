@@ -15,7 +15,7 @@ wikibook:
 
 ## Backstory
 
-Well, we'll keep it short – you got fired. Your boss brought you in for a code review and was more than disappointed. Apparently, she wanted a text editor like this [one](https://www.sublimetext.com): we didn't get the memo. Now it's time to prove your worth. Your boss wants something fully functional and we've got a great idea. You're going to drop a :fire: :fire: shell on her to get rehired.
+Well, we'll keep it short – you got fired. Your boss brought you in for a code review and was more than disappointed. Apparently, she wanted a c++ style vector: we didn't get the memo. Now it's time to prove your worth. Your boss wants something fully functional, and we've got a great idea. You're going to drop a :fire: :fire: shell on her to get rehired.
 
 The basic function of a shell is to accept commands as inputs and execute the corresponding programs in response. You will be provided the `vector` and `format.c` libraries for your use. Hopefully, this will make things right and you can resume your work at *insert hot tech company here*. Feel free to refer to the Unix shell as a rough reference.
 
