@@ -94,7 +94,7 @@ env – run a program in modified environments
 Usage:
 
 ```
-./env [-n #] [key=val1] [key2=val1] ... -- cmd [args] ..
+./env [key=val1] [key2=val1] ... -- cmd [args] ..
 ```
 
 Please re-read this section *multiple* times before starting:
@@ -111,7 +111,7 @@ Please re-read this section *multiple* times before starting:
 This is the canonical example and a practical use case:
 
 ```
-$ ./env -n 4 TZ=EST5EDT -- date
+$ ./env TZ=EST5EDT -- date
 Sat Sep  9 19:19:42 EDT 2017
 $
 ```
@@ -119,7 +119,7 @@ $
 Example of using references to other variables:
 
 ```
-$ ./env -n 4 TEMP=EST5EDT TZ=%TEMP -- date
+$ ./env TEMP=EST5EDT TZ=%TEMP -- date
 Sat Sep  9 19:19:42 EDT 2017
 $
 ```
