@@ -55,7 +55,7 @@ So if a user enters:
 then time will run `sleep` with the argument `2` and print how long it took in seconds:
 
 ```
-2.002345 seconds
+sleep 2 took 2.002345 seconds
 ```
 
 For more examples, you can play with Linux's builtin `time` command by typing `time YOURCOMMAND` (`time ls -l`, for example) in your terminal. Be sure to add `./` to the beginning (or use the full path to your `time` executable file if you are in another directory), otherwise the builtin `time` will be called.
@@ -128,7 +128,7 @@ This has the exact same behavior as before, because `TEMP` is first set to `EST5
 
 Again like `time`, you can play with Linux's builtin `env` command by typing `env <var-list> <command-name>` (`env MYVAR=CS241 printenv`, for example) in your terminal. Again, remember to add `./` to the beginning (or the full path to your `env` executable file if you are in another directory), otherwise the builtin `env` will be called. **Do not use the built-in env, or you will immediately fail the assignment**
 
-In addition, keep in mind that the builtin `env` uses `$` instead of `%` to denote environment variables, and they are separated by spaces in the var list instead of commas. In practice, it can be very useful to change some environment variables when running certain command.
+In addition, keep in mind that the builtin `env` uses `$` instead of `%` to denote environment variables. In practice, it can be very useful to change some environment variables when running certain commands.
 
 ### Extra: Why Env?
 
