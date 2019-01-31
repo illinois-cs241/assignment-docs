@@ -60,6 +60,8 @@ then time will run `sleep` with the argument `2` and print how long it took in s
 
 For more examples, you can play with Linux's builtin `time` command by typing `time YOURCOMMAND` (`time ls -l`, for example) in your terminal. Be sure to add `./` to the beginning (or use the full path to your `time` executable file if you are in another directory), otherwise the builtin `time` will be called.
 
+We've also provided a test executable to run basic tests on your time implementation. Note that although these tests are similar to those that will be run on the autograder they are not identical, so passing locally does not guarantee you will receive full credit. It is still your responsibility to ensure you have functional code.
+
 Note that we only care about [wall-clock time](https://en.wikipedia.org/wiki/Wall-clock_time), and we recommend using [`clock_gettime`](http://linux.die.net/man/3/clock_gettime) with `CLOCK_MONOTONIC`.
 
 Pro tip: 1 second == 1,000,000,000 nanoseconds.
