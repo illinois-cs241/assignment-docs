@@ -15,17 +15,14 @@ wikibook:
   - "Memory, Part 1: Heap Memory Introduction"
 ---
 
-## Groundwork For Text Editor and Shell
+## Groundwork For Shell
 
-You are an intern at Macrohard, where you'll be writing a text editor and shell for everyone on your team.
+You are an intern at Macrohard, where you'll be writing a shell for everyone on your team.
 
 These projects will take you several weeks, and your mentor has decided on the following timetable:
 
 *   Week A: Vector and Sstream 
-*   Week B: Text Editor
-*   Week C: Shell
-
-The _Text Editor_ will use a [TUI](https://en.wikipedia.org/wiki/Text-based_user_interface) that another intern has written. Your mentor has decided to create a library to make dealing with strings in C easier.
+*   Week B+C: Shell
 
 The _Shell_ is a terminal. Like all good terminals, your shell will need to remember what processes are running. 
 
