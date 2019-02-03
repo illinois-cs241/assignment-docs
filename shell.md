@@ -25,7 +25,7 @@ The basic function of a shell is to accept commands as inputs and execute the co
 
 :fork_and_knife: :bomb: :bangbang:
 
-If your code fork-bombs on _any_ autograde, then you will automatically fail this MP. Please make sure that your `fork` code is correct before committing your code for the nightly autograder.
+If your code fork-bombs on _any_ autograde, then you will automatically fail this MP. Please make sure that your `fork` code is correct before committing your code for the autograder.
 
 To prevent you from fork bombing your own VM, we recommend looking into [`ulimit`](https://ss64.com/bash/ulimit.html). This will allow you to set a limit for how many times you can fork.
 
@@ -443,3 +443,10 @@ Use the appropriate prints from `format.h` for:
 - `cont` was ran without a `pid`
 
 **Any `<pid>` used in `kill`, `stop`, or, `cont` will either be a process that is a direct child of your shell or a non-existent process. You do not have to worry about killing other processes.**
+
+## Grading
+
+As you may notice, this MP is split up into two weeks:
+
+- Week 1 (50%): Week 1 tests cover everything up until the week 2 section.
+- Week 2 (50%): Week 2 tests cover everything covered in week 1 as well as the week 2 section.
