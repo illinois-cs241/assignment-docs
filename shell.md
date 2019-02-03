@@ -308,6 +308,7 @@ The `pfd` (print file descriptor) command that you have come up with will print 
 - The _real path_ of the file
 
 _Note:_ This includes stdin, stdout, and stderr.
+
 *Hint:* You may find the `/proc` filesystem to be useful here as well.
 
 Example output of this command:
