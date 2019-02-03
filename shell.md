@@ -268,14 +268,57 @@ Echo This!
 
 #### `ps`
 
-Like our good old `ps`, your shell should print out information about all currently executing processes. You should include the shell and its immediate children, but don't worry about grandchildren or other processes. Make sure you use `print_process_info()`!
+Like our good old `ps`, your shell should print out information about all currently executing processes. You should include the shell and its immediate children, but don't worry about grandchildren or other processes. Make sure you use `print_process_info_header()` and `print_process_info()` (and maybe some other helper functions)!
 
-_Note:_ while `ps` is normally a separate binary, it is a built-in command for your shell. (This is not "execing `ps`", this is you implementing it in the code. Thus you have to keep track of process statuses and such.)
+_Note:_ while `ps` is normally a separate binary, it is a built-in command for your shell. (This is not "execing `ps`", this is you implementing it in the code. Thus you may have to keep track of some information for each process.)
+
+Your version of the `ps` should print the following information for each process:
+- PID: The pid of the process
+- NLWP: The number of threads currently being used in the process
+- VSZ: The program size (virtual memory size) of the process, in kilobytes
+- STAT: The state of the process
+- START: The start time of the process
+- TIME: The amount of cpu time that the process has been executed for
+- COMMAND: The command that executed the process
+
+*Hint:* You may find the `/proc` filesystem to be useful, as well as the man pages for it.
 
 Some things to keep in mind:
 
 - The order in which you print the processes does not matter.
 - The 'command' for `print_process_info` should be the full command you executed. The `&` for background processes is optional. For the main shell process _only_, you do not need to include the command-line flags.
+- You may not exec the `ps` binary to complete this part of the assignment.
+
+Example output of this command:
+```
+(pid=25497)/home/user$ ps
+PID     NLWP    VSZ     STAT    START   TIME    COMMAND
+25498   1       7328    R       14:03   1:35    dd if=/dev/zero of=/dev/null &
+25501   1       7288    S       14:04   0:00    sleep 1000 &
+25497   1       7484    R       14:03   0:00    ./shell
+```
+
+#### `pfd <pid>`
+
+To impress your boss even futher, you've decided that you're going to implement a new command that doesn't exist in the regular shell.
+
+The `pfd` (print file descriptor) command that you have come up with will print the following information about each of the open file descriptors of a process:
+- The file descriptor number used in the process
+- The position of the file descriptor for the process
+- The _real path_ of the file
+
+_Note:_ This includes stdin, stdout, and stderr.
+*Hint:* You may find the `/proc` filesystem to be useful here as well.
+
+Example output of this command:
+```
+(pid=29709)/home/user$ pfd 29719
+FD_NO   POS     REALPATH
+0       0       /dev/pts/2
+1       0       /dev/pts/2
+2       0       /dev/pts/2
+3       4096    /home/user/doc.txt
+```
 
 #### `kill <pid>`
 
