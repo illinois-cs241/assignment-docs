@@ -109,7 +109,7 @@ If the command is run by a new process, the PID of the process should be printed
 Command executed by pid=<pid>
 ```
 
-This should be printed before any of the output of the command is printed (prints to be used are in `format.c/h`).
+This should be printed by the process that will run the command, before any of the output of the command is printed (prints to be used are in `format.c/h`).
 
 #### Keeping History
 
