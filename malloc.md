@@ -10,11 +10,15 @@ wikibook:
   - "Memory, Part 2: Implementing a Memory Allocator"
 ---
 
-## Introduction
+## Backstory
 
-Well, you impressed your boss with your shell and got your job back at Macrohard. Macrohard is now in tight competition with Ocean tent, the hot new tech startup trying to innovate the world's fastest C memory allocator. This simple competition wouldn't be an issue to Macrohard if it wasn't for the fact that Ocean tent also has intelligent cs241 students in it. 
+Well, color me impressed! Your shell was so fancy that you actually received that pay raise! However, you *may* have gone too far with your shell. Your boss is now so impressed at your skills that they sent you to the $$n$$th Inter-Company Turbo Malloc Contest - even though you're just a newhire! But hey, a business trip doesn't sound that bad, right?
 
-Your new task is to create this turbo malloc. Your boss gave you total freedom on your implementation so that you can out-think anyone else's implementation. The only limitation she gives you is two weeks to complete it. This time, you've decided not to procrastinate so that you can finish the first part of your memory allocator a week early, in hopes of getting a promotion. 
+Upon arriving at the competition venue, you realize that all your peers from CS 241 are in the contest! Apparently, all of them went too far with their shells as well, and ended up in the same scenario as you. Just as you were reminiscing about your time in CS 241, you received an email from your senpai in the company about the contest, and your face turns pale immediately.
+
+Turns out, the Inter-Company Turbo Malloc Contest is the official:tm: way tech companies compete with each other these days - winning the competition guarantees fame and glory for the company, and the losing companies will suffer shame and embarassment. What's more, any company that cannot beat the baseline will incur severe stock drops! Needless to say, losing the competition will ruin all your efforts in the past weeks to impress your boss, and if you fail to beat the baseline, you will probably lose your job, again (and this time, everyone will know your failures, since this contest is heavily publicized).
+
+The competition lasts for two weeks, and you get total freedom on your implementation. This time, you've decided not to procrastinate, since your entire livelihood hinges on how well you perform in this competition. Can you out-think every other contestant's implementations and secure that epic victory royale?
 
 ## Overview
 
