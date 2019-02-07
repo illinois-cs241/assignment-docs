@@ -15,9 +15,9 @@ wikibook:
 
 ## Backstory
 
-Well, we'll keep it short – you got fired. Your boss brought you in for a code review and was more than disappointed. Apparently, she wanted a c++ style vector: we didn't get the memo. Now it's time to prove your worth. Your boss wants something fully functional, and we've got a great idea. You're going to drop a :fire: :fire: shell on her to get rehired.
+Well, we'll keep it short – you got fired from Macrohard. Your boss brought you in for a code review and was more than disappointed. Apparently, she wanted a C++ style vector: we didn't get the memo. Now, you've decided to work for *insert hot tech company here*, and you got the job! However, there's a catch - all newhires in *insert hot tech company here* apparently have to go through a newcomers test if they want to keep their jobs. The task? Write a shell. So, you're going to drop a :fire: :fire: shell that is so fancy that your boss will not just keep you in the company, they'll immediately give you a pay raise as well.
 
-The basic function of a shell is to accept commands as inputs and execute the corresponding programs in response. You will be provided the `vector` and `format.c` libraries for your use. Hopefully, this will make things right and you can resume your work at *insert hot tech company here*. Feel free to refer to the Unix shell as a rough reference.
+The basic function of a shell is to accept commands as inputs and execute the corresponding programs in response. You will be provided the `vector`, `sstring` and `format.c` libraries for your use. Hopefully, this will make things right and you can secure your foothold at *insert hot tech company here*. Feel free to refer to the Unix shell as a rough reference.
 
 ## Notices
 
