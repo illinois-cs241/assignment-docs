@@ -113,7 +113,7 @@ This should be printed by the process that will run the command, before any of t
 
 #### Keeping History
 
-Your shell should store the command that was just executed, so the user can repeat it later if they wish. Every command should be stored unless otherwise noted. A vector may be useful here.
+Your shell should store the command that the user entered, so the user can repeat it later if they wish. Every command should be stored unless otherwise noted. A vector may be useful here.
 
 #### Backgrounding	
 An _external_ command suffixed with `&` should be run in the background. In other words, the shell should be ready to take the next command before the given command has finished running. There is no limit on the number of background processes you can have running at one time (aside from any limits set by the system).	
@@ -292,13 +292,7 @@ For commands that are not built-in, the shell should consider the command name t
 
 The `fork/exec/wait` paradigm is as follows: `fork` a child process. The child process must execute the command with `exec*`, while the parent must `wait` for the child to terminate before printing the next prompt.
 
-You are responsible of cleaning up all the child processes upon termination of your program. It is important to note that, upon a successful execution of the command, `exec` never returns to the child process. `exec` only returns to the child process when the command fails to execute successfully. If any of `fork`, `exec`, or `wait` fail, the appropriate error should be printed and your program should `exit` with exit status 1. For example, if `fork` fails:
-
-```
-(pid=1234)/home/user$ echo hello world
-Fork Failed!
-$
-```
+You are responsible of cleaning up all the child processes upon termination of your program. It is important to note that, upon a successful execution of the command, `exec` never returns to the child process. `exec` only returns to the child process when the command fails to execute successfully. If any of `fork`, `exec`, or `wait` fail, the appropriate error messages should be printed. The child should `exit` with exit status 1 if it fails to execute a command.
 
 Some external commands you may test to see whether your shell works are:
 
