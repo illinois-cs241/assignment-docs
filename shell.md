@@ -59,6 +59,8 @@ The shell must support the following two optional arguments:
 ./shell -h <filename>
 ```
 
+The format of the history file stored should be exactly the same as a script file. See below for details.
+
 If the the `-h` flag is not specified, the shell will still keep a history of commands run, but will not read/write from/to a history file. Just think of it like private browsing mode for your terminal.
 
 #### File
@@ -78,6 +80,8 @@ echo Hey!
 Command executed by pid=1235
 Hey!
 ```
+
+You have been given a sample script file `test_file.txt`. Your history files and script files should be formatted in the same manner.
 
 If the user supplies an incorrect number of arguments, or the script file cannot be found, your shell should print the appropriate error from `format.h` and exit.
 
