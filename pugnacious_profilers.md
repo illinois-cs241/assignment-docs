@@ -1,6 +1,12 @@
 ---
 layout: doc
-title: "Pugnacious Profilers"
+title: "Pugnacious Profiles"
+submissions:
+- title: Entire Assignment
+  due_date: 02/13/2018 11:59 pm
+  graded_files:
+  - orderbook.c
+  - orderbook.h
 learning_objectives:
   - Understanding profiling
   - Performance optimization (both time and memory)
@@ -69,7 +75,7 @@ Example output:
 344532111 S 100 117.840000
 ```
 
-## Part - 1 (Grade: 70%)
+## Part - 1
 High frequency trading requires optimal performance demanding high speed and for this part of the project we are going
 to meet those goals. While the program provided to you does everything correctly, it is too slow to scale up and process 
 real-time orders. On the other hand your competitors solution (TA reference implementation) is way faster than this.   
@@ -126,7 +132,7 @@ time command which should provide more accurate measures.*
 problem which can provide a near constant time complexity.
 - What contributes to the system time. 
 
-## Part - 2 (Grade: 30%)
+## Part - 2 (Optional)
 While time is an important factor while profiling, memory goes hand in hand with it. Once you have optimized for time, 
 you need to now bring your heap memory equal to or less than our reference implementation. To measure memory use the 
 following command:
@@ -146,17 +152,22 @@ realloc|          0              0              0  (nomove:0, dec:0, free:0)
    free|     548400       16948324
 ```
 
+*Note: orderbook_mem is compiled using -m32 flag which generates a 32 bit executable. This will thus generate consistent 
+memory usage on both 32 bit and 64 bit systems.*
+
 **Task**
 
-Our reference implementation uses **11304352** bytes of heap memory for ascii_data.txt dataset. For the **_-h_** flag which will 
+Our reference implementation uses **11320000** bytes of heap memory for ascii_data.txt dataset. For the **_-h_** flag which will 
 execute your time optimized implementation, bring your memory consumption equal to or less than this value. We will be looking 
-out for the stack segment as well and thus ensure that your stack peak is less than **500** bytes.
+out for the stack segment as well and thus ensure that your stack peak is less than **2500** bytes.
 
 **Hints**
 - Go over the data inside ascii_data.txt determining the highest values. We will not be crossing that threshold for our 
 testing data-sets. Typically, in the real world scenario's there is a predefined min / max however you will also come 
 across instances when you have to come up with a comprehensive min-max values and store it appropriately.
 - Think about the respective data-types that can effectively store the values without wasting memory.
+- Take into consideration padding. Memory is stored and retrieved in the form of words size of which is 4 bytes for 
+32-bit and 8 bytes for 64-bit. Thus, size of 29 byte struct will be padded to 32 bytes. [Struct Padding & Packing](https://stackoverflow.com/questions/4306186/structure-padding-and-packing)
 
 
 ## Challenge (Not Graded)
@@ -175,7 +186,6 @@ sys     0m0.095s
 ```
 
 It is very well possible to get below **~1.000s** for processing this dataset. Up for a challenge!
-
 
 
 
