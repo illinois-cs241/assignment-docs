@@ -79,7 +79,7 @@ After running `make`, you can run the executable as follows:
 ```
 ./par_reduce <reducer_name> <list_len> <num_threads>
 ```
-* `<reducer_name>` is one of the following: "add", "multiply", or "slow". 
+* `<reducer_name>` is one of the following: "add", "mult", or "slow". 
     * "add" adds every element with a base case of 0.
     * "mult" multiplies every element with a base case of 1.
     * "slow" doesn't perform any computation, but sleeps a small amount each time it is called. You may notice that add and multiply might get slower the more threads you use--this is because starting new threads takes time, and sometimes the extra time needed to spawn new threads exceeds the time saved in computation, especially for extremely quick ones like addition. So, we've given you a "slow" reducer that will let you test to make sure that running with `n` threads will take around `1/n` time. 
