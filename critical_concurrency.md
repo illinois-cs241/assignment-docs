@@ -69,7 +69,7 @@ The queue is completely independent of the data that the user feeds it. The queu
 
 Your goal is to implement the functions
 
-* `queue* queue_create (ssize_t max_size, copy_constructor_type copy_constructor, destructor_type destructor);`
+* `queue* queue_create (ssize_t max_size);`
 * `void queue_destroy (queue* this);`
 * `void queue_push (queue* this, void* element);`
 * `void* queue_pull (queue* this);`
