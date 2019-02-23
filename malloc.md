@@ -96,7 +96,7 @@ Here is what some of our error codes mean:
 
 ### Good Practices
 Since you can implement your malloc in whatever way you want, you may end up with a huge chunk of messy code that's hard to debug. Here are some suggestions for organizing and maintaining your code better:
-* Build simple functions before you add advanced features. In other words, make sure your program does what you want it to do before moving on to optimize it. 
+* Build simple functions before you add advanced features. In other words, make sure your program does what you want it to do before moving on to optimize it.
 * Separate the functionality of your program into smaller chunks of independent code. For example, if you find that you're frequently splitting a block of memory into two blocks, you probably want to write a split function instead of copy-pasting the splitting code every time you need to split.
 * Keep your code readable. This can be naming your variables appropriately or commenting your code well. This will really help you understand what your code is doing when you look back at them three days later!
 
@@ -129,10 +129,10 @@ Kill the program being debugged? (y or n) y
 [mcontest]: AVG: 0.000000
 [mcontest]: TIME: 0.012000
 (gdb) run
-Starting program: malloc/testers_exe/tester-2 
+Starting program: malloc/testers_exe/tester-2
 Memory was allocated, used, and freed!
 ```
-it will no longer use your own implementation, and therefore will not stop at the breakpoints you set, and will use the glibc implementations of malloc/calloc/etc. This is because of the way `gdb` handles dynamically loaded libraries. 
+it will no longer use your own implementation, and therefore will not stop at the breakpoints you set, and will use the glibc implementations of malloc/calloc/etc. This is because of the way `gdb` handles dynamically loaded libraries.
 
 ### Real Programs
 Both `mcontest` and `mreplace` can be used to launch "real" programs (not just the testers). For example:
@@ -204,7 +204,7 @@ So, let's work out some scenarios:
 
 ## Contest
 
-**View the malloc contest [here](http://cs241grader.web.engr.illinois.edu/malloc/)!**
+**View the malloc contest [here](https://sp19-cs241-grd-02.cs.illinois.edu/malloc/)!**
 
 The malloc contest pits your memory allocator implementation against your fellow students. There are a few things to know:
 
