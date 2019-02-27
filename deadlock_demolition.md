@@ -8,7 +8,18 @@ learning_objectives:
 
 ## Overview
 
-You will be building a library for deadlock-resitant mutex (drm) locks. A drm should behave like a pthread_mutex_t but not allow itself to be locked by a thread if the attempt to lock it would result in deadlock. To detect deadlock, you will need to maintain a Resource Allocation Graph and be able perform cycle detection on it. See [this page](http://cs241.cs.illinois.edu/coursebook/Deadlock#resource-allocation-graphs) for more information about Resource Allocation Graphs.
+This week, you will be building a library for deadlock-resistant mutex (drm) locks. A drm should behave like a pthread_mutex_t but not allow itself to be locked by a thread if the attempt to lock it would result in deadlock. We will use binary semaphore notation for your lock's functions:i.e. post is equivalent to unlocking and wait is equivalent to locking.
+
+You will be writing four functions:
+
+* `drm_t *drm_init();`
+* `int drm_post(drm_t *drm, pthread_t *thread_id);`
+* `int drm_wait(drm_t *drm, pthread_t *thread_id);`
+* `void drm_destroy(drm_t *drm);`
+
+To detect deadlock, you will need to maintain a Resource Allocation Graph and be able perform cycle detection on it. See [this page](http://cs241.cs.illinois.edu/coursebook/Deadlock#resource-allocation-graphs) for more information about Resource Allocation Graphs.
+
+**NOTE: the provided graph data structure is not thread-safe.**
 
 Good luck!
 
@@ -21,7 +32,9 @@ Please test this on your own in a variety of ways. Be careful of race conditions
 
 ## Testing Tips
 
+You may want to simulate situations where deadlock would occur using a standard mutex lock. 
 
+Consider logging important events inside of your functions.
 
 
 ### Thread Sanitizer
@@ -30,7 +43,7 @@ We have another target executed by typing `make tsan`. This compiles your code w
 
 ThreadSantizer is a race condition detection tool. See [this page](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-5%3A-Debugging#tsan) for more information.
 
-**We will be using ThreadSanitizer to grade your code! If the autograder detects a data race, you won't automatically get 0 points, but a few points will be deducted.**
+**We will be using ThreadSanitizer to grade your code, but we will only test for data race errors, NOT any other warning type.**
 
 
 ## Helpful Hints and Notes
@@ -38,7 +51,5 @@ ThreadSantizer is a race condition detection tool. See [this page](https://githu
 *   Make sure you thoroughly test your code! Race conditions can be hard to spot!
 *   Attempting to visualize your code or diagram it in certain cases can sometimes be a huge aid and is highly recommended!
 
-** In any of `semamore.c`, `barrier.c`, or `queue.c` you may not use semaphores or pthread_barriers **
-
 **ANYTHING not specified in these docs is considered undefined behavior and we will not test it**
-For example, calling queue_push(NULL, NULL) can do whatever you want it to. We will not test it.
+For example, calling drm_destroy on a locked drm. Doing the same thing on a pthread_mutex_t is is undefined behavior, and is for drm's as well. We will not test undefined behaviors.
