@@ -22,8 +22,8 @@ To detect deadlock, you will need to maintain a Resource Allocation Graph and be
 
 The general flow of the algorithm for lock and destroy are self-explanatory, they just need to clean up resources. The fun happens in wait and post (lock and unlock respectively). When a thread posts
 
-* Check to see if the vertex is in the graph. If not unlock the the mutex in the `drm_t` and return.
-* Otherwise if the edge from the drm to the thread exists, remove the edge and unlock the `drm_t`
+* Check to see if the vertex is in the graph. If it is not, return without unlocking the mutex in the `drm_t`.
+* Otherwise if an edge from the drm to the thread exists, remove the edge and unlock the `drm_t`
 
 For drm wait
 
