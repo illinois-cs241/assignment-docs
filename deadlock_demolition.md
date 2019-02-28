@@ -9,7 +9,7 @@ learning_objectives:
 
 ## Overview
 
-This week, you will be building a library for deadlock-resistant mutex (drm) locks. A drm should behave like a pthread_mutex_t but not allow itself to be locked by a thread if the attempt to lock it would result in deadlock. We will use binary semaphore notation for your lock's functions:i.e. post is equivalent to unlocking and wait is equivalent to locking.
+This week, you will be building a library for deadlock-resistant mutex (drm) locks. A drm should behave like a pthread_mutex_t but not allow itself to be locked by a thread if the attempt to lock it would result in deadlock. We will use binary semaphore notation for your lock's functions: i.e. post is equivalent to unlocking and wait is equivalent to locking.
 
 You will be writing four functions:
 
@@ -77,4 +77,4 @@ ThreadSantizer is a race condition detection tool. See [this page](https://githu
 *   Attempting to visualize your code or diagram it in certain cases can sometimes be a huge aid and is highly recommended!
 
 **ANYTHING not specified in these docs is considered undefined behavior and we will not test it**
-For example, calling drm_destroy on a locked drm. Doing the same thing on a pthread_mutex_t is is undefined behavior, and is for drm's as well. We will not test undefined behaviors.
+For example, calling drm_destroy on a locked drm. Doing the same thing on a pthread_mutex_t is is undefined behavior, and is for drm's as well. _We will not test undefined behavior_.
