@@ -20,10 +20,22 @@ You will be writing four functions:
 
 To detect deadlock, you will need to maintain a Resource Allocation Graph and be able perform cycle detection on it. See [this page](http://cs241.cs.illinois.edu/coursebook/Deadlock#resource-allocation-graphs) for more information about Resource Allocation Graphs.
 
-Since your Resource Allocation Graph will need to represent both drm locks and threads as vertices, use a shallow graph (see graph.h). You will need to lazy initialize a global graph. 
+The general flow of the algorithm for lock and destroy are self-explanatory, they just need to clean up resources. The fun happens in wait and post (lock and unlock respectively). When a thread posts
+
+* Check to see if the vertex is in the graph. If not unlock the the mutex in the `drm_t` and return.
+* Otherwise if the edge from the drm to the thread exists, remove the edge and unlock the `drm_t`
+
+For drm wait
+
+* Add the thread_id value (not the pointer!) to the graph if not already present
+* If locking the mutex would cause a deadlock, then fail otherwise lock and return success
+    * One case that would deadlock is a thread trying to lock a mutex it already owns. Think about how to factor this in
+    * Another case is adding that edge would cause a cycle in the resource allocation graph. You can do this by adding the edge to the resource allocation graph, checking for deadlock and if no deadlock occurs, then locking and returning.
+
+Since your Resource Allocation Graph will need to represent both drm locks and threads as vertices, use a shallow graph (see graph.h). You will need to lazy initialize a global graph in the `drm_init` function.
 Here is an example of lazy initialization with an integer variable:
 
-```
+```c
 int *g
   void init(){
     if(g == NULL)
