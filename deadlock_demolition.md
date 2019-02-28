@@ -20,7 +20,14 @@ You will be writing four functions:
 
 To detect deadlock, you will need to maintain a Resource Allocation Graph and be able perform cycle detection on it. See [this page](http://cs241.cs.illinois.edu/coursebook/Deadlock#resource-allocation-graphs) for more information about Resource Allocation Graphs.
 
-Since your Resource Allocation Graph will need to represent both drm locks and threads as vertices, use a shallow graph (see graph.h).
+Since your Resource Allocation Graph will need to represent both drm locks and threads as vertices, use a shallow graph (see graph.h). You will need to lazy initialize a global graph. 
+Here is an example of lazy initialization with an integer variable:
+
+```int *g
+  void init(){
+    if(g == NULL)
+      g = malloc(sizeof(int))
+  }```
 
 **NOTE: the provided graph data structure is not thread-safe.**
 
