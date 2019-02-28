@@ -27,7 +27,7 @@ The general flow of the algorithm for lock and destroy are self-explanatory, the
 
 For drm wait
 
-* Add the thread_id value (not the pointer!) to the graph if not already present
+* Add the thread_id value, or pointer you can assume the pointer is unique to the thread, to the graph if not already present
 * If locking the mutex would cause a deadlock, then fail otherwise lock and return success
     * One case that would deadlock is a thread trying to lock a mutex it already owns. Think about how to factor this in
     * Another case is adding that edge would cause a cycle in the resource allocation graph. You can do this by adding the edge to the resource allocation graph, checking for deadlock and if no deadlock occurs, then locking and returning.
