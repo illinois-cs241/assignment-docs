@@ -3,7 +3,8 @@ layout: doc
 title: "Deadlock Demolition"
 learning_objectives:
   - Synchronization Primitives
-  - Deadlock Detection using a Resource Allocation Graph
+  - Deadlock Detection 
+  - Resource Allocation Graph
 ---
 
 ## Overview
@@ -19,6 +20,8 @@ You will be writing four functions:
 
 To detect deadlock, you will need to maintain a Resource Allocation Graph and be able perform cycle detection on it. See [this page](http://cs241.cs.illinois.edu/coursebook/Deadlock#resource-allocation-graphs) for more information about Resource Allocation Graphs.
 
+Since your Resource Allocation Graph will need to represent both drm locks and threads as vertices, use a shallow graph (see graph.h).
+
 **NOTE: the provided graph data structure is not thread-safe.**
 
 Good luck!
@@ -32,10 +35,11 @@ Please test this on your own in a variety of ways. Be careful of race conditions
 
 ## Testing Tips
 
+See man pages for pthread_self(3) for passing a pthread_t pointer to drm_post and drm_wait. 
+
 You may want to simulate situations where deadlock would occur using a standard mutex lock. 
 
 Consider logging important events inside of your functions.
-
 
 ### Thread Sanitizer
 
@@ -43,7 +47,7 @@ We have another target executed by typing `make tsan`. This compiles your code w
 
 ThreadSantizer is a race condition detection tool. See [this page](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-5%3A-Debugging#tsan) for more information.
 
-**We will be using ThreadSanitizer to grade your code, but we will only test for data race errors, NOT any other warning type.**
+**We will be using ThreadSanitizer to grade your code, but we will ONLY test for data race warnings, NOT any other warning type.**
 
 
 ## Helpful Hints and Notes
