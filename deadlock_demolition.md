@@ -23,11 +23,13 @@ To detect deadlock, you will need to maintain a Resource Allocation Graph and be
 Since your Resource Allocation Graph will need to represent both drm locks and threads as vertices, use a shallow graph (see graph.h). You will need to lazy initialize a global graph. 
 Here is an example of lazy initialization with an integer variable:
 
-```int *g
+```
+int *g
   void init(){
     if(g == NULL)
       g = malloc(sizeof(int))
-  }```
+  }
+```
 
 **NOTE: the provided graph data structure is not thread-safe.**
 
