@@ -34,7 +34,7 @@ The actual layout is taken directly from a real 32 bit processor and operating s
 
 For illustrative purposes a Page Table Entry looks like the following:
 
-![Page Table Entry](images/page_table_entry.png)
+![Page Table Entry](/images/page_table_entry.png)
 
 Each entry is represented as a struct with bit fields whose syntax you can learn about in a [tutorial](http://www.tutorialspoint.com/cprogramming/c_bit_fields.htm).
 The bit fields basically allows us to squeeze multiple flags into a single 32 bit integer.
@@ -158,7 +158,7 @@ For this lab we have 2 levels of indirection (see `page_table.h`).
 
 The following illustration demonstrates how to translate from a virtual address to a physical address:
 
-![Virtual Address Translation](images/virtual_address_translation.png)
+![Virtual Address Translation](/images/virtual_address_translation.png)
 
 That this image is saying is that you are to take the top 10 bits of the provided virtual address to index an entry in the page directory of the process.
 That entry should contain the base address of a page table.
