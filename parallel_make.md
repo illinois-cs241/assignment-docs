@@ -38,11 +38,10 @@ You might also want to look [here](https://web.archive.org/web/20170202011246/ht
 
 ## Resource Allocation Graphs
 
-A good way to think about this MP at a high level is by using a graph.  You can think of `make` rules as nodes in the graph and dependency relations as directed edges that point from rules to dependencies.
+A good way to think about this MP at a high level is by using a model [covered in lecture](https://github.com/angrave/SystemProgramming/wiki/Deadlock%2C-Part-1%3A-Resource-Allocation-Graph), Resource Allocation Graphs. You can think of `make` rules as nodes in the graph and dependency relations as directed edges that point from rules to dependencies. This visualization comes in handy when we are dealing with programs that may encounter deadlock. Given that a `Makefile` may contain a circular dependency (what are the required conditions for a program to deadlock?), keep this model at the back of your mind when building your solution.
 
 Here is an example Makefile:
 
-```
     d: a c
     	echo D
     a: b
@@ -51,7 +50,6 @@ Here is an example Makefile:
     	echo B
     c:
     	echo C
-```
 
 The following graph represents the above Makefile. Note that 'a' and 'b' form a cycle (-> 'b' -> 'a' ->). 
 
@@ -150,16 +148,38 @@ See `rule.h` for a description of the `rule_t` API. And read `parser.h` for more
 
 **USAGE WARNINGS**:
 * Any vectors returned from graph functions must be destroyed manually to prevent memory leaks. Destroying these vectors will not destroy anything in the actual graph. 
+
 * Destroying the graph or removing vertices from the graph will completely destroy all associated targets (i.e. rule labels), rules, and edges. So copy anything you need for later use before removal or destruction.
 * You should not add new vertices to the graph. If you choose to do this using `graph_set_vertex()`, keep in mind that both the key and value must be *strings*, since the graph's value copy constructor transforms strings to new `rule_t` structs. Read `parser.c` in order to understand the dependency graph's memory management scheme.
 
 * **The graph and vector classes are *not* thread-safe!** You must enforce mutual exclusion if multiple threads are to concurrently modify and access these structures.
 
+## Graph Searching and Cycle Detection
+
+GNU `make` handles cyclical dependencies by attempting to delete edges that cause cycles. If you tried to call `make d` on the example Makefile shown earlier, GNU `make` would essentially attempt to convert that Makefile to this one:
+
+    d: a c
+    	echo D
+    a: b
+    	echo A
+    b:  #a (comment out 'a': no more cycles if you remove this edge!)
+    	echo B
+    c:
+    	echo C
+
+To highlight the importance of cycle detection in resource allocation schemes, we also require that you explicitly handle cycles. However, *your implementation of parmake will ignore all goal rules whose descendants belong to cycles*. That is, calling `./parmake d` on this makefile would execute nothing, since 'd' cannot be satisfied due to the cyclical dependency (-> 'a' -> 'b' ->). However, calling `./parmake c` will still execute `echo C`, since the (nonexistent) descendants of 'c' don't belong to cycles.
+
+Moreover, you must announce any goal rules that are dropped due to existence of cyclical dependencies using the function `print_cycle_failure()` found in `format.h`. Read the header file for usage information.
+
+Since this MP requires you to implement some graph algorithms, you may want to consult [this resource](http://www.cs.cornell.edu/courses/cs2112/2012sp/lectures/lec24/lec24-12sp.html) to jog your CS 225 memory.
+
+Note: You do NOT have to parallelize cycle detection and essential rule extraction. You only need to parallelize the execution of commands.
+
+
 ## Satisfy the rules
 
 Each rule depends on a (possibly empty) set of other rules. It is important to note that every dependency will be a rule, even if the dependency isn't explicitly defined in the Makefile. For example, these two Makefiles are equivalent:
 
-```
     # Makefile 1
     a: b
     	echo A
@@ -167,14 +187,17 @@ Each rule depends on a (possibly empty) set of other rules. It is important to n
     a: b
         echo A
     b:
-```
 
-Some rules might also be files on the disk. A rule can be satisfied if and only if all of rules that it depends on have been satisfied and none of the commands have failed. See what determines a failed rule in the Running Commands section.
+Some rules might also be files on the disk. A rule can be satisfied if and only if all of rules that it depends on have been satisfied and none of them have failed (See what determines a failed rule in Running Commands).
 
 Note that you shouldn't try to satisfy rules that aren't "good" goal rules and don't have any "good" goal rules as ancestors. Specifically, you should not try to satisfy a rule if any of the following is true:
 
-1. the rule is not a goal rule, and it has no ancestors that are goal rules
-2. the rule is not a goal rule, and all of its goal rule ancestors fall under *(1)* or *(2)*
+1. the rule is a goal rule, but is involved in a cycle, i.e. there exists a path from the rule to itself in the dependency graph
+2. the rule is a goal rule, but at least one of its descendants, i.e. any rule in the dependency graph reachable from the goal rule, is involved in a cycle
+3. the rule is not a goal rule, and it has no ancestors that are goal rules
+4. the rule is not a goal rule, and all of its goal rule ancestors fall under *(1)* or *(2)*
+
+Basically, there is no need to satisfy a rule if it isn't necessary to satisfy the goal rules or if we already know that all the goal rules it might satisfy are doomed to fail due to cycles. Trying to satisfying any of them would be impossible at worst or a waste of time at best.
 
 When a rule is ready to be satisfied, we must determine if we actually need to run the rule's commands. We run its commands if and only if at least one of the following is true:
 
@@ -203,7 +226,7 @@ take_backup :
     cp -r * ../backup
 ```
 
-*   The rule is the name of a file on disk, and it depends on another file with a _newer_ change time than the change time of the file which corresponds to the name of the rule. To determine whether a file is _newer_, you should use stat and difftime to determine if it is newer. The differences in time will have a granularity of 1 second.
+*   The rule is the name of a file on disk, and it depends on another file with a NEWER change time than the change time of the file which corresponds to the name of the rule. To determine whether a file is NEWER, you should use stat and difftime to determine if it is newer. The differences in time will have a granularity of 1 second.
 
 If neither of these is true, then the rule is already satisfied and does not need its commands executed. Otherwise, the rule is unsatisfied and available to be run.
 
@@ -284,13 +307,14 @@ For a tsan example, see [the tsan docs](https://clang.llvm.org/docs/ThreadSaniti
 ### (Almost) a reference implementation
 You can use the real GNU `make` to check your implementation. However, it differs from `parmake` in certain substantive aspects that may or may not be resolved. Here is a partial list of differences:
 * `make` usually prints every command it runs. Run `make` with the flag `-s` (for silent) to suppress these.
+* `make` deals with cycles differently than `parmake`, so do not use `make` as a reference for cycle handling.
 * `make` kills the program immediately after a rule fails. Run `make` with the flag `-k` (for keep going) to continue satisfying rules that aren't doomed to fail.
 * `make` requires every dependency to either be explicitly declared in the Makefile or present as a file on the disk. To get `parmake` and `make` to work the same way, define every rule explicitly.
 * `make` spits out error messages when commands fail, even when the flag `-k` is used. `parmake` will not do this.
     
 
 Example "good" Makefile:
-```
+
     #testfile
     
     a: maybefile b c 
@@ -301,7 +325,7 @@ Example "good" Makefile:
     c:
     	echo "c"
     maybefile:
-```
+
 Example commands:
 
 ```
@@ -321,6 +345,7 @@ except maybe for some printouts that `make` emits when 'b' fails. Remember that 
 Here is the grading breakdown:
 
 * Part 1 (50%): Create a single-threaded version of `parmake` (so just `make`). This version should:
+	- identify cycles in the dependency graph returned by the parser and remove goal rules that depend on them
 	- attempt to run all other goal rules by running all their descendants (i.e. implicit dependencies) and *only* their descendants
 	- identify whether or not to run a rule as per the flowchart recipe and run it once possible (or reject it if not possible)
 * Part 2 (50%): Create the full multi-threaded version of `parmake` (so `par`). This version should:
