@@ -212,3 +212,6 @@ As well as the simple mapper/reducer pairs, we also have also included some real
 For instructions on how to use the pi code, see the file `pi/README.txt`.
 Note that we do not currently compile this with an NVIDIA compiler, so you will
 not be able to use the CUDA version of this code (which we have not tested) unless you fiddle with the `Makefile`.
+
+### Restricted Functions
+Since a learning objective of this assignment is to use the fork-exec-wait pattern and to learn interprocess communication, if you use `popen`, `system`, or related functions you will automatically fail this MP.
