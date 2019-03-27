@@ -3,8 +3,6 @@ layout: doc
 title: "Netfilter Kernel Module"
 ---
 
-# Netfilter
-
 Requirements:
   + Understand how netfilter could be used to block packets
   + Understand how the concepts you leared in CS 241 apply to the kernel
@@ -12,7 +10,7 @@ Requirements:
   + Have a proc endpoint to display how many times each of google's IP ranges sent a packet 
   + Optional: Implement something extra (more statistics or some actual filtering)
 
-# Part 1 - Making a kernel module (optional)
+## Part 1 - Making a kernel module (optional)
 
 There's two main components to making a kernel module, an initializer and an
 exit handler. The initializer will run when the module is loaded and the exit
@@ -43,7 +41,7 @@ of output with human readable timestamps.
 To complete part 1, write a kernel module in `filter.c` and using `printk` write
 "hello world" to the log.
 
-# Part 2 - Making a netfilter module
+## Part 2 - Making a netfilter module
 
 In this part we will experiment with `netfilter` - a way of filtering packets at
 the kernel level. To accomplish this, we'll need to setup a few things.
@@ -112,7 +110,7 @@ ping [ something that isn't owned by google ]
 
 and check your `dmesg` log for updates.
 
-# Part 3 - Using proc for output
+## Part 3 - Using proc for output
 
 Now, we're going to create an endpoint in `/proc` that will allow you to view
 statistics about the packets you've intercepted. To accomplish this, create a
@@ -131,7 +129,7 @@ and how that is different from a spinlock.
 
 To create your proc endpoint, you can use the following code:
 
-# Implementing proc_fs endpoint
+## Implementing proc_fs endpoint
 
 Here is some sample code for implementing read. In this code, `range_count` is
 an array of `size_t`s such that the `i`th element of the array contains the
