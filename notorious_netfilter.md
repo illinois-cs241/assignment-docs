@@ -98,9 +98,12 @@ a pointer to the ip address.
 Finally you'll want to return `NF_ACCEPT` to allow the packet to continue on
 it's journey through the network stack. If you wanted to block the packet
 instead, use `NF_DROP`. Try playing around with those options to block specific
-google ranges.
+google ranges. Warning: dropping all packets will result in the kernel module
+also dropping your ssh connection to your vm! If this happens, let one of us
+know so that we can reset your vm.
 
-To test this, run `dmesg -wH` in one terminal and in other try commands like:
+To test this, run `dmesg -wH` in one terminal and in other terminals, try
+commands like:
 ```
 ping www.google.com
 wget google.com && rm index.html
