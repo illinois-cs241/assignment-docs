@@ -1,6 +1,16 @@
 ---
 layout: doc
 title: "Netfilter Kernel Module"
+submissions:
+- title: Entire Assignment
+  due_date: 04/03/2019 11:59 pm
+  graded_files:
+  - filter.c
+  - filter.h
+learning_objectives:
+  - Learn about kernel modules
+  - Understand how packets are filtered
+  - Understand how networking concepts are applied at a low level
 ---
 
 Requirements:
