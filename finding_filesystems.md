@@ -117,7 +117,7 @@ The inodes and data blocks are laid sequentially out so you can treat them like 
 
 You do not to modify or read any of the code in `fakefs_src/`.
 
-To make this MP possible, we've developed our own userspace filesystem interface which we're calling fakefs. Normally, filesystem are a piece of code which you load into your kernel and must provide a few things. It needs a constructor, destructor, callbacks for all system calls involving files and file descriptors within your filesystem. However, writing kernel code is a bit more cumbersome than writing normal code since you need additional security checks among other things, and can even lead to instability in your operating system. To avoid this, there are various ways to implment a filesystem in userspace. The most common (and preferred) method is to use a library called FUSE (Filesystems in USErspace). However, FUSE allows you to implement your file operations in userspace, but still interacts with th ekernel to provide it's functionality. While this allows you to mount  the filesystem and use it like any other filesystem, there a few reasons why we chose not to use it for this MP. A major reason is that if a FUSE callback crashes while it is mounted, it renders the mounted partition unusable and in some cases, you won't be able to even unmount the partition without rebooting the machine. To prevent this, and make this MP not annoying and tedious, we've made our own way of implementing filesystems in userspace by `hooking` filesystem operations. 
+To make this MP possible, we've developed our own userspace filesystem interface which we're calling fakefs. Normally, filesystems are a piece of code which you load into your kernel and must provide a few things. It needs a constructor, destructor, callbacks for all system calls involving files and file descriptors within your filesystem. However, writing kernel code is a bit more cumbersome than writing normal code since you need additional security checks among other things, and can even lead to instability in your operating system. To avoid this, there are various ways to implment a filesystem in userspace. The most common (and preferred) method is to use a library called FUSE (Filesystems in USErspace). FUSE allows you to implement your file operations in userspace, but still interacts with the kernel to provide it's functionality. While this allows you to mount the filesystem and use it like any other filesystem, there are a few reasons why we chose not to use it for this MP. A major reason is that if a FUSE callback crashes while it is mounted, it renders the mounted partition unusable and in some cases, you won't be able to even unmount the partition without rebooting the machine. To prevent making this MP annoying and tedious, we've made our own way of implementing filesystems in userspace by `hooking` filesystem operations. 
 
 If you take a look at `fakefs_src/fakefs.c` you'll see that we've overridden most of `glibc`'s filesystem operations. Note that this only hooks functions from code or programs that were either written in `C` or in something that compiles to `C`. Running a program written in assembly will not be affected by these hooks.
 
@@ -129,7 +129,7 @@ There are some functions that you are going to need to know in order to finish t
 
 ### `get_inode`
 
-This function takes a string name like `/path/to/file` and returns the inode corresponding to the file at end of that path. `get_inode` returns NULL when the intended file does not exist or the file is invalid.
+This function takes a string name like `/path/to/file` and returns the inode corresponding to the file at the end of that path. `get_inode` returns NULL when the intended file does not exist or the file is invalid.
 
 ### `is_file` / `is_directory`
 
@@ -173,9 +173,9 @@ You will need to implement the following 4 functions
 * `ssize_t minixfs_read(file_system *fs, const char *path, void *buf, size_t req, off_t *off)`
 * `ssize_t minixfs_write(file_system *fs, const char *path, const void *buf, size_t count, off_t *off)`
 
-And you will need to implement a virtual file `/virtual/info` for more information about that scroll down to the virtual filesystem section.
+And you will need to implement a virtual file `/virtual/info`. For more information about that scroll down to the virtual filesystem section.
 
-You can find more information about the required functions in `minixfs.h`. Remember to set `errno` on errors in your code! We will be checking errno while grading.
+You can find more information about the required functions in `minixfs.h`. Remember to set `errno` on errors in your code!! We will be checking errno while grading.
 
 Note that for all functions where you need to update times, you should use `clock_gettime(CLOCK_REALTIME, variable_to_update);`.
 
