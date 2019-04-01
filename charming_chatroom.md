@@ -40,15 +40,15 @@ The client executable will accept up to four arguments:
 
 The client performs two main functions: (1) writes user input to the server and (2) writes bytes from server to user.  We have handled the overall logic of reading from user, writing to server, reading from server, and writing to user.  Your job is to set up the client and connect it to the server.
 
-Implement `run_client()` to use a TCP IPv4 connection and connect to the host at the given port.  A signal interrupt will be sent to the client as a flag to tell your client to exit. To be precise, when your client program receives a `SIGINT` it should free memory, close sockets, and gracefully exit the program.
+Implement the provided function to use a TCP IPv4 connection and connect to the host at the given port.  A signal interrupt will be sent to the client as a flag to tell your client to exit. To be precise, when your client program receives a `SIGINT` it should free memory, close sockets, and gracefully exit the program.
 
-**Notice** the `write_to_server()` and `read_from_server()` functions use `write_all_to_socket()` and `read_all_from_socket()`.  You will have to implement these functions to handle the failures of read/write calls, but more on that later.
+**Notice** the writing and reading to the server use `write_all_to_socket()` and `read_all_from_socket()`.  You will have to implement these functions to handle the failures of read/write calls, but more on that later.
 
 The figure below gives you an idea about how the client side architecture looks like: ![Alt](/images/ClientArch.png "Title")
 
 So to sum up, your job in the client program is:
 
-* Implement `run_client()` and the rest of `close_client()`
+* Implement the running client and closing client functions
 * Set up the network connection (TCP + IPv4).
 * Launch threads to read from the server.
 * Launch threads to write to server.
@@ -155,9 +155,6 @@ alec: sending bytes
 Notice the **XYZ**, that is the machine number you will use to connect to the server (the person hosting's machine)
 In the above "terminals", there are things like "Waiting for connection..." and "Ending Server": do not worry about having to do this. It is simply flavor text printed to the window. Feel free to do that; we will only test the bytes that are sent and received.
 **Because it's particularly important for this lab, we want to reiterate that you should not have any memory leaks :)**
-
-
-
 
 ## Grading
 

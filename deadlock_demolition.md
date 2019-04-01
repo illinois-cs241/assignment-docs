@@ -66,7 +66,7 @@ Consider logging important events inside of your functions.
 
 We have another target executed by typing `make tsan`. This compiles your code with Thread Sanitizer.
 
-ThreadSantizer is a race condition detection tool. See [this page](https://github.com/angrave/SystemProgramming/wiki/C-Programming%2C-Part-5%3A-Debugging#tsan) for more information.
+ThreadSantizer is a race condition detection tool. See [this page](http://cs241.cs.illinois.edu/coursebook/Background#tsan) for more information.
 
 **We will be using ThreadSanitizer to grade your code, but we will ONLY test for data race warnings, NOT any other warning type.**
 

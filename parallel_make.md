@@ -38,7 +38,7 @@ You might also want to look [here](https://web.archive.org/web/20170202011246/ht
 
 ## Resource Allocation Graphs
 
-A good way to think about this MP at a high level is by using a model [covered in lecture](https://github.com/angrave/SystemProgramming/wiki/Deadlock%2C-Part-1%3A-Resource-Allocation-Graph), Resource Allocation Graphs. You can think of `make` rules as nodes in the graph and dependency relations as directed edges that point from rules to dependencies. This visualization comes in handy when we are dealing with programs that may encounter deadlock. Given that a `Makefile` may contain a circular dependency (what are the required conditions for a program to deadlock?), keep this model at the back of your mind when building your solution.
+A good way to think about this MP at a high level is by using a model [covered in lecture](http://cs241.cs.illinois.edu/coursebook/Deadlock#resource-allocation-graphs), Resource Allocation Graphs. You can think of `make` rules as nodes in the graph and dependency relations as directed edges that point from rules to dependencies. This visualization comes in handy when we are dealing with programs that may encounter deadlock. Given that a `Makefile` may contain a circular dependency (what are the required conditions for a program to deadlock?), keep this model at the back of your mind when building your solution.
 
 Here is an example Makefile:
 
@@ -55,7 +55,7 @@ The following graph represents the above Makefile. Note that 'a' and 'b' form a 
 
 ![Makefile Graph](../images/ColorfulDeadlock.svg)
 
-Some more resources on RAGs & Deadlock: [Wikipedia](https://en.wikipedia.org/wiki/Deadlock), [Wikibook](https://github.com/angrave/SystemProgramming/wiki/Deadlock%2C-Part-2%3A-Deadlock-Conditions).
+Some more resources on RAGs & Deadlock: [Wikipedia](https://en.wikipedia.org/wiki/Deadlock), [Coursebook](http://cs241.cs.illinois.edu/coursebook/Deadlock#resource-allocation-graphs).
 
 ## Program Inputs
 

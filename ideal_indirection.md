@@ -17,7 +17,7 @@ wikibook:
 In this assignment, you will be working on managing a mapping of 32-bit virtual address space  to a 32-bit physical address space with 4 KB (kilobyte) pages.
 Each component of virtual memory has been split up into several files to help you build a mental model of virtual memory.
 Reading through these files can start to help you understand the roles of the different hardware and software involved in managing virtual memory.
-You will only have to write two functions in `mmu.c`, but it requires a good understanding of the wikibook and decent knowledge of the rest of the provided code.
+You will only have to write two functions in `mmu.c`, but it requires a good understanding of the coursebook and decent knowledge of the rest of the provided code.
 
 The rest of this documentation will serve to help you understand the purpose of each file and give you a high level understanding of virtual memory.
 The implementation details of each function are documented in the header and source files.
@@ -150,9 +150,7 @@ void mmu_write_to_virtual_address(mmu *this, uintptr_t virtual_address, size_t p
 ```
 This means you have to translate from a virtual to a physical address:
 
-From the wikibook: "For most memory accesses of most programs, there is a significant chance that the TLB has cached the results... the TLB [may] not have the result cached and the MMU must use the much slower page table to determine the physical frame."
-
-Thus for any virtual address, you should check whether the result has been already cached in the TLB (see `tlb.h`). Otherwise you must search the page tables.
+Also for any virtual address, you should check whether the result has been already cached in the TLB (see `tlb.h`). Otherwise you must search the page tables.
 
 For this lab we have 2 levels of indirection (see `page_table.h`).
 

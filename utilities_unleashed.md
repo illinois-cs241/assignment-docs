@@ -80,7 +80,7 @@ Pro tip: 1 second == 1,000,000,000 nanoseconds.
 ### Useful Resources
 
 *   [Program arguments: argc & argv](http://cs-education.github.io/sys/#chapter/2/section/0/activity/0)
-*   [fork, exec, wait](https://github.com/angrave/SystemProgramming/wiki/Forking%2C-Part-2%3A-Fork%2C-Exec%2C-Wait)
+*   [fork, exec, wait](http://cs241.cs.illinois.edu/coursebook/Processes#the-fork-exec-wait-pattern)
 *   [fork and waitpid](http://cs-education.github.io/sys/#chapter/5/section/1/activity/0)
 
 ## env

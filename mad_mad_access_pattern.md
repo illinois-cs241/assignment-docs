@@ -115,7 +115,7 @@ reading any part of the file directly. When reading a node from the memory mappe
 pointer arithmetic to jump to the correct position and read the node
 using regular pointer dereferencing.
 
-[mmap Introduction](https://github.com/angrave/SystemProgramming/wiki/File-System%2C-Part-6%3A-Memory-mapped-files-and-Shared-memory)
+[mmap Introduction](http://cs241.cs.illinois.edu/coursebook/Ipc#mmap)
 
 Put the code for this in lookup2.c.
 
