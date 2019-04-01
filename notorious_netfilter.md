@@ -1,9 +1,17 @@
 ---
 layout: doc
 title: "Netfilter Kernel Module"
+submissions:
+- title: Entire Assignment
+  due_date: 04/03/2019 11:59 pm
+  graded_files:
+  - filter.c
+  - filter.h
+learning_objectives:
+  - Learn about kernel modules
+  - Understand how packets are filtered
+  - Understand how networking concepts are applied at a low level
 ---
-
-# Netfilter
 
 Requirements:
   + Understand how netfilter could be used to block packets
@@ -12,7 +20,7 @@ Requirements:
   + Have a proc endpoint to display how many times each of google's IP ranges sent a packet 
   + Optional: Implement something extra (more statistics or some actual filtering)
 
-# Part 1 - Making a kernel module (optional)
+## Part 1 - Making a kernel module (optional)
 
 There's two main components to making a kernel module, an initializer and an
 exit handler. The initializer will run when the module is loaded and the exit
@@ -43,7 +51,7 @@ of output with human readable timestamps.
 To complete part 1, write a kernel module in `filter.c` and using `printk` write
 "hello world" to the log.
 
-# Part 2 - Making a netfilter module
+## Part 2 - Making a netfilter module
 
 In this part we will experiment with `netfilter` - a way of filtering packets at
 the kernel level. To accomplish this, we'll need to setup a few things.
@@ -98,9 +106,12 @@ a pointer to the ip address.
 Finally you'll want to return `NF_ACCEPT` to allow the packet to continue on
 it's journey through the network stack. If you wanted to block the packet
 instead, use `NF_DROP`. Try playing around with those options to block specific
-google ranges.
+google ranges. Warning: dropping all packets will result in the kernel module
+also dropping your ssh connection to your vm! If this happens, let one of us
+know so that we can reset your vm.
 
-To test this, run `dmesg -wH` in one terminal and in other try commands like:
+To test this, run `dmesg -wH` in one terminal and in other terminals, try
+commands like:
 ```
 ping www.google.com
 wget google.com && rm index.html
@@ -109,7 +120,7 @@ ping [ something that isn't owned by google ]
 
 and check your `dmesg` log for updates.
 
-# Part 3 - Using proc for output
+## Part 3 - Using proc for output
 
 Now, we're going to create an endpoint in `/proc` that will allow you to view
 statistics about the packets you've intercepted. To accomplish this, create a
@@ -128,7 +139,7 @@ and how that is different from a spinlock.
 
 To create your proc endpoint, you can use the following code:
 
-# Implementing proc_fs endpoint
+## Implementing proc_fs endpoint
 
 Here is some sample code for implementing read. In this code, `range_count` is
 an array of `size_t`s such that the `i`th element of the array contains the

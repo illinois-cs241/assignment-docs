@@ -54,7 +54,7 @@ So to sum up, your job in the client program is:
 * Launch threads to write to server.
 * Free memory you allocate.
 
-**Note:** You do not need to modify any of the code in `client.c` except for the function `run_client()` and `close_program()` in order to get the client successfully working.  However, you *may* modify any of the other code if you want, but **be careful**.
+**Note:** You do not need to modify any of the code in `client.c` except for the function `connect_to_server()` and `close_server_connection()` in order to get the client successfully working.  However, you *may* modify any of the other code if you want, but **be careful**.
 
 
 ## Server
