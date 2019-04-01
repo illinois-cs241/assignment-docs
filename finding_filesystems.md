@@ -270,7 +270,7 @@ You can also test by generating your own filesystems. Simply run ./fakefs mkfs _
 
 ## Helpful Hints and Notes
 
-*   We've gone ahead and compiled some info on tools you may find useful in this MP, * [Finding Filesystems Tools]({% link _tutorials/filesystems_tools.md %})
+*   We've gone ahead and compiled some info on tools you may find useful in this MP: [Finding Filesystem Tools]({% link _tutorials/filesystems_tools.md %})
 *   Handle the edge conditions. You can assume that size will be valid. What is the code supposed to do when you get to a singly indirect block?
 *   Draw pictures! Understand what each of the things in the structs mean.
 *   Review your pointer arithmetic.
