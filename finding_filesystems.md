@@ -274,5 +274,3 @@ You can also test by generating your own filesystems. Simply run ./fakefs mkfs _
 *   Draw pictures! Understand what each of the things in the structs mean.
 *   Review your pointer arithmetic.
 *   **Only** change`minixfs.c`.
-
-## Graded Files
