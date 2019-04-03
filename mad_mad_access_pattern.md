@@ -82,7 +82,7 @@ if (node->right_child) {
 }
 ```
 
-![BTRE](images/241_memory_mapped_madness_diagram.png)
+![BTRE](/images/241_memory_mapped_madness_diagram.png)
 
 Note that none of the binary search trees we give you will have duplicate keys.
 
