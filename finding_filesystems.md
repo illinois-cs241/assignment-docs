@@ -153,14 +153,7 @@ You may not need to use this macro, but if you choose to, then any `data_block` 
 
 ### Other useful functions
 
-* `void make_string_from_dirent`
-* `add_single_indirect_block`
-* `add_data_block_to_indirect_block`
-* `add_data_block_to_inode`
-* `parent_directory`
-* `init_inode`
-
-You can find information about these in `minixfs.h` and `minixfs_utils.h`. It's also a good idea to read through the provided functions briefly (at least the headers) to get an idea of what tools we provide you with.
+It's also a good idea to read through `minixfs.h` and `minixfs_utils.h to get an idea of what tools we provide you with.
 
 
 ## So what do I need to do?
