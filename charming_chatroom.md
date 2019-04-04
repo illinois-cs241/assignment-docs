@@ -84,18 +84,19 @@ Read and Write calls (general `read`/`write` - this extends to `recv`, `send`, e
 ```
 while number of bytes is not the number needed:
     return_code = read bytes from socket
-    if return_code = 0:
+    if return_code = 0: //what does it mean for read to return 0?
         return something
     else if return_code > 0:
         add return_code bytes to counter
     else if return_code == -1 and error was interrupted:
         try again
-    else:
+    else:  //return_code == -1, and error is something else
+           //you may want to handle some other errors here
         return something
 return bytes read
 ```
 
-The `something` you would return here will depend on the needs of your code. For example, if you care about the partial message received before failure occurs, you would return the number of bytes read. If, however, you only care about full messages, and choose to disregard any incomplete messages, you would have a different choice of return values.
+The `something` you would return here will depend on the needs of your code. For example, if you care about the partial message received before failure occurs, you would return the number of bytes read. If, however, you only care about full messages, and choose to disregard any incomplete messages, you would have a different choice of return values. Also, there are a wide variety of possible failures for `read()` and `write()` (and other system calls in general). Perhaps, you may want to handle a different error code as well
 
 In `utils.c/h` we have declared the functions `read_all_from_socket` and `write_all_to_socket`.  You need to implement these functions to read/write from/to a socket and handle the failures of read/write (defined above).  **You should look at `utils.h` for detailed info on what your functions should do and what they should return.**
 
