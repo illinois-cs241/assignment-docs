@@ -66,10 +66,6 @@ This is the famous inode struct that you have been learning about! Here are a br
 
 - `uid` is the user ID of the inode owner.
 - `gid` is the ID of the inode group (does not have to include the owner).
-This is the famous inode struct that you have been learning about! Here are a breakdown of the variables:
-
-- `uid` is the user ID of the inode owner.
-- `gid` is the ID of the inode group (does not have to include the owner).
 - `mode` is a bitmask. The bottom 9 bits are read-write-execute for owner-group-others. Bits 11-10 are the type of the file. `(mode >> 9)` corresponds to a particular type. We have given you two functions, `is_file` and `is_directory`, that tell you whether or not the inode represents a directory or file. There are no other types in our filesystem.
 - `nlink` is the hard link count which is the number of directories that the file is linked to from (directories can't be hard linked).
 - `atim` is access time, which is the time of last access or the last time a file was `read(2)`. 
