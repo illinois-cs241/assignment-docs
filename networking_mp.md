@@ -308,7 +308,7 @@ Part 1 requires **full** client functionality.
 - Part 2: The Server Part 1
 
 Part 2 requires you to begin implementing your server. We will run the full server-client autograder for this week (except for the stress test).
-Obtaining 50% of the points is a 100% on week 2, 45% yields a 90%, 40% an 80%, and so on. You may choose which parts of the server you wish to implement first.
+Obtaining 50% of the points is a 100% on week 2, 45% yields a 90%, 40% an 80%, and so on. You may choose which parts of the server you wish to implement first. **Obtaining greater that 50% of the points does not give you extra credit.**
 
 - Part 3: The Server Part 2
 
