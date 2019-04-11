@@ -169,6 +169,8 @@ diff test.txt examples/expected_fcfs.txt
 
 For your convenience, we've wrapped this with the bash script __testall.sh__. Running `./testall.sh` will run all the schemes and diff them with the expected output to check if your implementation is correct. If you'd like to test specific schemes, you can pass those in as arguments, for example `./testall.sh rr fcfs pri` will only test round robin, first-come-first-serve and priority. 
 
+You can test the output of gthread.log for certain scheduling schemes using the script `check_scheduler.py`. To do this, you'll first have to run `./main fcfs`, and then `python3 check_scheduler.py fcfs` - it will check if your __gthread.log__ file is correct for the given scheduling scheme. This is more reliable than the __testall.sh__ script. Currently, only FCFS, SJF, and PRI scheduling schemes are supported.
+
 However, since this method of testing relies on outputs generated every second, it may not accurately reflect the schedulers behavior, and may falsely report your solution as correctly working. To get around this, you can also take a look at the generated log in __gthread.log__. This contains information about each thread's context switches and you can manually inspect it to see if it does what you expect. 
 
 Using the log file, we have built a visualizer for this data that will display which thread ran in approximately 500ms intervals. Note that the visualizer doesn't perfectly display all the context switches, and performs especially badly with round robin output. However, it works well for schemes such as sjf and will display the following if __gthread.log__ contains the log of running `./main sjf`:
