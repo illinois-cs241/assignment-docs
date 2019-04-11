@@ -13,6 +13,7 @@ learning_objectives:
   - Understand how networking concepts are applied at a low level
 ---
 
+Lecture video link [https://docs.google.com/presentation/d/1EX5mKLrgvwiv8O2CoVmj8IuZr3jN28XO8xjCWgnD2qU/edit?usp=sharing](https://docs.google.com/presentation/d/1EX5mKLrgvwiv8O2CoVmj8IuZr3jN28XO8xjCWgnD2qU/edit?usp=sharing)
 Requirements:
   + Understand how netfilter could be used to block packets
   + Understand how the concepts you leared in CS 241 apply to the kernel
