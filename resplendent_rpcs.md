@@ -35,7 +35,7 @@ Note: This _isn't_ actually how the true DNS protocol works. The true protocol h
 
 ### Failure
 In this lab, if a server ever fails to retrieve a result, it will return "-1.-1.-1.-1". Make sure to check for this and set the success field in the server response accordingly!
-Like in chatroom's `read_all_from_socket`/`write_all_to_socket`, remember to check errno when sendto() and recvfrom() return -1; and errno = EAGAIN, meaning you have to restart your call.
+Like in chatroom's `read_all_from_socket`/`write_all_to_socket`, remember to check errno when sendto() and recvfrom() return -1; and errno = EINTR, meaning you have to restart your call.
 
 ## Why UDP?
 In chatroom, a TCP connection made sense because you wanted to stay in contact with the chatting server for a long time, never lose messages, and receive messages in a particular order. 
