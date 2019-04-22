@@ -100,6 +100,11 @@ Since you can implement your malloc in whatever way you want, you may end up wit
 * Separate the functionality of your program into smaller chunks of independent code. For example, if you find that you're frequently splitting a block of memory into two blocks, you probably want to write a split function instead of copy-pasting the splitting code every time you need to split.
 * Keep your code readable. This can be naming your variables appropriately or commenting your code well. This will really help you understand what your code is doing when you look back at them three days later!
 
+As you come up with ideas it's a good idea to try to understand what edges your
+algorithm might run into and try to make sure you handle them before even
+implementing your code. You may find this visualizer useful for this task:
+[http://aneeshdurg.me/visual-malloc/](http://aneeshdurg.me/visual-malloc/)
+
 ### Debugging
 `./mcontest` runs an optimized version of your code, so you won't be able to debug with `gdb`. To solve this, we have provided another version called `./mreplace` which uses a version of your malloc compiled without optimization, so you can debug with `gdb`. Here's an example, running tester 2 with gdb:
 
