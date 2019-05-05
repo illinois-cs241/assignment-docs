@@ -98,7 +98,7 @@ typedef struct {
 
 ```
 
-![Finding Map](http://cs241.cs.illinois.edu/images/map.png)
+![Finding Map](http://cs241.cs.illinois.edu/images/assignment-docs/mp/finding_filesystems/map.png)
 
 The `file_system` struct keeps track of the metadata, the root inode (where `fs->inode_root[0]` is the root `"/"` inode), and the root of the `data_block`s.
 

@@ -98,7 +98,7 @@ camelCaser takes in a C string, which represents an arbitrary number of sentence
 
 For those who like pictures, here is what the return value of camelCaser looks like in memory:
 
-![Memory Map](/images/char_double_pointer.jpg)
+![Memory Map](/images/assignment-docs/mp/finding_filesystems/char_double_pointer.jpg)
 
 In the above picture, you can see that we have a `char` double pointer called 'array'. In this scenario, the `char` double pointer points to the beginning of a NULL-terminated array of character pointers. Each of the character pointers in the array points to the beginning of a NULL-terminated `char` array that can be anywhere in memory.
 
