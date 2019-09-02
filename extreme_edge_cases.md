@@ -135,54 +135,45 @@ Other helpful resources: [Test-Driven Development](http://wiki.c2.com/?TestDrive
 
 Your senior coworkers at Facenovel have taken a liking to you for your work ethic, and they decided to help you by providing you a _reference implementation_. You are given an interface `camelCaser_ref_tests.c` which allows you to access the black-box reference implementation. You are given two utility functions to help you understand what camelCase looks like.
 
-The first function provided is`print_camelCaser(char *input)`. It takes a string input and prints out the transformed camelCased output onto `stdout`. This function is meant to be used to help you answer questions like, "What should be the result of inputting `<blah>` into `camel_caser()`?" Note that this function might behave weirdly with non-printable ASCII characters. The exceptions are `\a` and `\b`, which we have escaped in the output so that it displays on the terminal. Take **extra care** when using it with `\a`,`\b` and `\\a`, `\\b`. (For more details, here's an article on [escape sequences](https://en.wikipedia.org/wiki/Escape_sequences_in_C)).
-
-As an example, if you type this in `camelCaser_ref_tests.c`
+The first function provided is`print_camelCaser(char *input)`. It takes a string input and prints out the transformed camelCased output onto `stdout`. This function is meant to be used to help you answer questions like, "What should be the result of inputting `<blah>` into `camel_caser()`?". As an example, if you type this in `camelCaser_ref_tests.c`
 
 ```C
-char *input = "\aHello.";
+char *input = "Hello. Welcome to CS 241. I love System Programming!";
 ```
 
 this is displayed on the terminal
 
 ```
-Test case
-Input: Hello.
-Output:
-{
-    "\ahello",
-    NULL
+Input:
+        Hello. Welcome to CS 241. I love System Programming!
+
+Output:{
+        "hello",
+        "welcomeToCs241",
+        "iLoveSystemProgramming",
+        NULL
 }
 ```
 
-and if you do this instead:
+Note that this function does not work very well with non-printable ASCII characters. Therefore, a second function is provided for you to use: `check_output(char *input, char **output)`. This function takes the input string you provided and the (hardcoded) expected output camelCased array of strings, and compares the expected output with the reference output. The function returns `1` if the expected output is exactly the same as the reference output, and `0` otherwise. This function is to be used as a sanity check, to confirm your understanding of what the camelCased output is like. For example, supposed you had:
 
 ```C
-char *input = "\\aHello.";
+char *output[] = {"hello", "welcomeToCS241", "iLoveSystemProgramming", NULL};
 ```
 
-this is displayed on the terminal instead
+you should get an output as below:
 
 ```
-Test case
-Input: \aHello.
-Output:
-{
-    "",
-    "ahello",
-    NULL
-}
+diffing [hello] with [hello]
+diffing [welcomeToCS241] with [welcomeToCs241]
+check_output test: 0
 ```
-
-We parse the `\a` and `\b` so that it gets displayed on the terminal. You **should not** be doing this in your camelCaser implementation.
-
-The second function that you can use is `check_output(char *input, char **output)`. This function takes the input string you provided and the expected output camelCased array of strings, and compares the expected output with the reference output. The function returns `1` if the expected output is exactly the same as the reference output, and `0` otherwise. This function is to be used as a sanity check, to confirm your understanding of what the camelCased output is like.
 
 A few important things to be aware of when you use the reference implementation:
 
 * **DO NOT use any functions** provided in `camelCaser_ref_tests.c` and `camelCaser_ref_utils.h` in any part of your `camel_caser()` implementation as well as your unit tests (that is, don't use it anywhere outside of `camelCaser_ref_tests.c`). Your code will definitely not compile during grading if you use any of those functions in any graded files.
 * The reference only serves as a starting guideline and a sanity check, to ensure that you understand how camelCase works. The reference implementation does not represent the only possible good implementation. **Your implementation is restricted by the specifications provided above, and only the specifications above.** An implementation is good if and only if it meets the requirements in the specifications.
-* The reference **does not replace actual testing** of your own implementation. You are responsible to rigorously test your own code to make sure it is robust and guards against all possible edge cases.
+* The reference **does not replace actual testing** of your own implementation. You are responsible to rigorously test your own code to make sure it is robust and guards against all possible edge cases. You should not be using the reference implementation to test your own code.
 
 To use the reference, modify the `camelCaser_ref_tests.c` file, run `make camelCaser_ref` and you should have a `camelCaser_ref` executable.
 
@@ -209,5 +200,12 @@ You cannot assume _anything_ about the input, other than the input string being 
 #### Example
 
 Let's say there are five good implementations and five bad implementations. If you correctly say all five good are good, then you'd get +5 points. If you correctly identify three of the bad ones as bad, then you would get +3 for those and -2 for incorrectly labeling the others. In this case, you'd get a 6/10.
+
+## Notes
+- Always make sure that your code works on the `release` build, since we test your code on `release` builds.
+- Always use the `debug` build to debug your code. The `release` build comes with compiler optimizations and can be harder to debug. The debug build also allows you to view source code in GDB.
+- **Memory errors are bad, very bad.** They often are the sources of undefined behavior in your code. Any code with memory errors in it should always be assumed to fail until they are fixed.
+- Always make sure that your assignments are free from memory errors and memory leaks.
+- C-string manipulation is a decent part of some future assignments. Take a moment to familiarize yourself with ASCII characters, C-strings and the `string.h` library.
 
 Good luck!
