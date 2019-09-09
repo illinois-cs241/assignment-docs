@@ -78,7 +78,7 @@ Here is a formal description of how your camelCaser should behave:
     *   considered lowercased if all of its letters are lowercased.
 *   a word `w` is camelCased if and only if:
     *   it is the first word and it is lowercased
-    *   it is any word after the first word and its first letter is uppercased
+    *   it is any word after the first word and only its first letter is uppercased
 *   Punctuation marks, whitespace, and letters are defined by `ispunct()`, `isspace()`, and `isalpha()` respectively.
     *   These are parts of the C standard, so you can `man ispunct` for more information.
     *   If `input_s` has ANY non-{punctuation, letter, whitespace} characters, they go straight into `output_s` without any modifications. **ALL** ASCII characters are valid input. Your camelCaser does not need to handle all of Unicode.
