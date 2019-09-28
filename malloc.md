@@ -209,7 +209,7 @@ So, let's work out some scenarios:
 
 ## Contest
 
-**View the malloc contest [here](https://sp19-cs241-grd-02.cs.illinois.edu/malloc/)!**
+**View the malloc contest [here](https://fa19-cs241-grd-01.cs.illinois.edu/malloc/)!**
 
 The malloc contest pits your memory allocator implementation against your fellow students. There are a few things to know:
 
