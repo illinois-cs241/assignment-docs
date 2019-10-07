@@ -86,7 +86,7 @@ Hey!
 
 You have been given a sample script file `test_file.txt`. Your history files and script files should be formatted in the same manner.
 
-If the user supplies an incorrect number of arguments, or the script file cannot be found, your shell should print the appropriate error from `format.h` and exit.
+If the user supplies an incorrect number of arguments, or the script file cannot be found, your shell should print the appropriate error from `format.h` and exit. **Note:** users may supply both optional arguments and in any order.
 
 The [getopt](http://linux.die.net/man/3/getopt) function may come in handy. :smile:
 
