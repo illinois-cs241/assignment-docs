@@ -35,7 +35,10 @@ Since a learning objective of this assignment is to use the fork-exec-wait patte
 
 Since this MP **requires** your programs to print a variety of things like error messages, we have provided you with our own highly customized formatting library. You should not be printing out to stdout and stderr at all; instead, all output and errors should be printed using the functions provided in `format.c` and `format.h`. In `format.h` you can find documentation about what each function does, and you should use them whenever appropriate.
 
+Irregular command spacing need not be supported and will **NOT** be tested. For example, "cd              .." or another odd combination won't be graded.
+
 **Note**: don't worry if you don't use all of the functions in `format.c`, but you should use them whenever their documented purpose matches the situation.
+
 
 ## Overview
 
