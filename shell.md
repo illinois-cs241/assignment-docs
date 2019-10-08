@@ -122,7 +122,7 @@ This should be printed by the process that will run the command, before any of t
 
 Your shell should store the command that the user entered, so the user can repeat it later if they wish. Every command should be stored unless otherwise noted. A vector may be useful here.
 
-#### Backgrounding	
+## Backgrounding	
 An _external_ command suffixed with `&` should be run in the background. In other words, the shell should be ready to take the next command before the given command has finished running. There is no limit on the number of background processes you can have running at one time (aside from any limits set by the system).	
 
 There may or may not be a single space between the rest of the command and `&`. For example, `pwd&` and `pwd &` are both valid.	
