@@ -146,25 +146,6 @@ Usually when we do `Ctrl+C`, the current running program will exit. However, we 
 
 Note that we want this signal sent to the foreground process, not to any backgrounded processes. As such, you will want to use [`setpgid`](http://man7.org/linux/man-pages/man2/setpgid.2.html) to assign each background process to its own process group when forking:
 
-```
-pid_t pid = fork();
-if (pid > 0) {
-  // ...
-
-  // assign the child's process group id to be its pid
-  if (setpgid(pid, pid) == -1) {
-    print_setpgid_failed();
-    exit(1);
-  }
-
-  // ...
-} else if ( ... ) {
-  // ...
-}
-```
-
-Yes, we are giving you code that you will want to put somewhere in your program. Use it appropriately for free points!
-
 ## Commands
 
 Shell supports two types of commands: built-in and external (i.e. non-built-in). While built-in commands are executed without creating a new process, an external command *must* create a new process to execute the program for that particular command.
