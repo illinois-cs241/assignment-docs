@@ -86,7 +86,7 @@ Hey!
 
 You have been given a sample script file `test_file.txt`. Your history files and script files should be formatted in the same manner.
 
-If the user supplies an incorrect number of arguments, or the script file cannot be found, your shell should print the appropriate error from `format.h` and exit. **Note:** users may supply both optional arguments and in any order.
+If the user supplies an incorrect number of arguments, or the script file cannot be found, your shell should print the appropriate error from `format.h` and exit. **Note:** Users may supply both optional arguments and in any order.
 
 The [getopt](http://linux.die.net/man/3/getopt) function may come in handy. :smile:
 
@@ -310,6 +310,17 @@ Input: `x && y`
 * If `x` exited successfully (status = 0), run `y`.
 * If `x` did not exit successfully (status ≠ 0), do *not* run `y`. This is also known as [short-circuiting](https://en.wikipedia.org/wiki/Short-circuit_evaluation).
 
+```
+(pid=1234)/home/user$ echo hi && echo bye
+(pid=1234)/home/user$ hi
+(pid=1234)/home/user$ bye
+```
+
+```
+(pid=1234)/home/user$ cd /asdf && echo short-circuit
+/asdf: No such file or directory
+```
+
 This mimics short-circuiting AND in boolean algebra: if `x` is false, we know the result will be false *without* having to run `y`.
 
 :question: This is often used to run multiple commands in a sequence and stop early if one fails. For example, `make && ./shell` will run your shell only if `make` succeeds.
@@ -323,6 +334,17 @@ Input: `x || y`
 * If `x` exited successfully, the shell does *not* run `y`. This is short-circuiting.
 * If `x` did not exit successfully, run `y`.
 
+```
+(pid=1234)/home/user$ echo hi || echo bye
+(pid=1234)/home/user$ hi
+```
+
+```
+(pid=1234)/home/user$ cd /asdf || echo runMe
+/asdf: No such file or directory
+(pid=1234)/home/user$ runMe
+```
+
 Boolean algebra: if `x` is true, we can return true right away *without* having to run `y`.
 
 :question: This is often used to recover after errors. For example, `make || echo 'Make failed!'` will run `echo` only if `make` does not succeed.
@@ -334,6 +356,18 @@ Boolean algebra: if `x` is true, we can return true right away *without* having 
 Input: `x; y`
 * The shell first runs `x`.
 * The shell then runs `y`.
+
+```
+(pid=1234)/home/user$ echo hi; echo bye
+(pid=1234)/home/user$ hi
+(pid=1234)/home/user$ bye
+```
+
+```
+(pid=1234)/home/user$ cd /asdf; echo runMe
+/asdf: No such file or directory
+(pid=1234)/home/user$ runMe
+```
 
 :question: The two commands are run regardless of whether the first one succeeds.
 
