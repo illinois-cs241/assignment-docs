@@ -18,7 +18,7 @@ wikibook:
 ## Backstory
 After finally being taken off of PIP due to your outstanding malloc performance you can finally relax a little. So take a Pomelo ElCroix out of the minifridge and relax!
 
-Don't lower your standing desk just yet though because as it turns out, while you were competing an intern deleted the plaintext file containing everyone's passwords and now
+Don't lower your standing desk just yet, because as it turns out, while you were competing, an intern deleted the plaintext file containing everyone's passwords.
 nobody can log in. All that's left are the hashes in the auth database. Before you can update your LoopedIn status, your manager sprints over to your desk and tells you
 that the company has freed up some resources and they want you to brute force everyone's passwords before they can take their PTO. Your manager suggests you use a thread
 pool but before you can read the NerdsForNerds article on what a thread pool is your manager's manager sends you a calendar invite telling you to parallelize each password.
