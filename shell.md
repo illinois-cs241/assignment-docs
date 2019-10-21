@@ -25,17 +25,17 @@ The basic function of a shell is to accept commands as inputs and execute the co
 
 :fork_and_knife: :bomb: :bangbang:
 
-If your code fork-bombs on _any_ autograde, then you will automatically fail this MP. Please make sure that your `fork` code is correct before committing your code for the autograder.
-
-To prevent you from fork bombing your own VM, we recommend looking into [`ulimit`](https://ss64.com/bash/ulimit.html). This will allow you to set a limit for how many times you can fork.
+To prevent you from fork bombing your own VM, we recommend looking into [`ulimit`](https://ss64.com/bash/ulimit.html). This will allow you to set a limit for how many times you can fork. It is a good idea to add this to your `~/.bashrc` file (feel free to look up online how to do so), so that it is run every time you log in to your VM.
 
 Since a learning objective of this assignment is to use the fork-exec-wait pattern, if you use `system`, you will automatically fail this MP.
 
 #### Formatting
 
-Since this MP **requires** your programs to print a variety of things like error messages, we have provided you with our own highly customized formatting library. You should not be printing out to stdout and stderr at all; instead, all output and errors should be printed using the functions provided in `format.c` and `format.h`. In `format.h` you can find documentation about what each function does, and you should use them whenever appropriate.
+- Since this MP **requires** your programs to print a variety of things like error messages, we have provided you with our own highly customized formatting library. You should not be printing out to stdout and stderr at all; instead, all output and errors should be printed using the functions provided in `format.c` and `format.h`. In `format.h` you can find documentation about what each function does, and you should use them whenever appropriate.
 
 **Note**: don't worry if you don't use all of the functions in `format.c`, but you should use them whenever their documented purpose matches the situation.
+
+- Do not worry about irregular spacing in command inputs (i.e. extra whitespace before and after each token). This is considered undefined behavior and will not be tested.
 
 ## Overview
 
@@ -49,7 +49,7 @@ The shell should run in a loop like this executing multiple commands:
 * Read the command from standard input
 * Print the PID of the process executing the command (with the exception of built-in commands), and run the command
 
-The shell must support the following two optional arguments:
+The shell must support the following two optional arguments, however, *the order of the arguments does not matter, and should not affect the functionality of your shell*.
 
 #### History
 
@@ -119,7 +119,7 @@ This should be printed by the process that will run the command, before any of t
 
 Your shell should store the command that the user entered, so the user can repeat it later if they wish. Every command should be stored unless otherwise noted. A vector may be useful here.
 
-#### Backgrounding	
+## Background Processes
 An _external_ command suffixed with `&` should be run in the background. In other words, the shell should be ready to take the next command before the given command has finished running. There is no limit on the number of background processes you can have running at one time (aside from any limits set by the system).	
 
 There may or may not be a single space between the rest of the command and `&`. For example, `pwd&` and `pwd &` are both valid.	
@@ -141,26 +141,9 @@ Backgrounding will **not** be chained with the logical operators.
 
 Usually when we do `Ctrl+C`, the current running program will exit. However, we want the shell itself to ignore the `Ctrl+C` signal (`SIGINT`). Instead, it should check if there is a currently running foreground process, and if so, it should kill that foreground process using SIGINT (the `kill()` function might come in handy, here and elsewhere).
 
-Note that we want this signal sent to the foreground process, not to any backgrounded processes. As such, you will want to use [`setpgid`](http://man7.org/linux/man-pages/man2/setpgid.2.html) to assign each background process to its own process group when forking:
+When a signal is sent to process, it is sent to all processes in its process group. In this assignment, the shell process is the leader of a process group consisting of all processes that are `fork`'d from it.
 
-```
-pid_t pid = fork();
-if (pid > 0) {
-  // ...
-
-  // assign the child's process group id to be its pid
-  if (setpgid(pid, pid) == -1) {
-    print_setpgid_failed();
-    exit(1);
-  }
-
-  // ...
-} else if ( ... ) {
-  // ...
-}
-```
-
-Yes, we are giving you code that you will want to put somewhere in your program. Use it appropriately for free points!
+Since we want this signal sent to the foreground process, but not to any backgrounded processes, you will want to use [`setpgid`](http://man7.org/linux/man-pages/man2/setpgid.2.html) to assign each background process to its own process group after forking:
 
 ## Commands
 
@@ -272,7 +255,7 @@ Echo This!
 
 #### `exit`
 
-The shell will exit once it receives the `exit` command or once it receives an `EOF`. An `EOF` is sent by typing `Ctrl-D` from your terminal. It is also sent automatically from a script file (as used with the `-f` flag) once the end of the file is reached. This should cause your shell to exit with exit status 0.
+The shell will exit once it receives the `exit` command or once it receives an `EOF` **at the beginning of the line**. An `EOF` is sent by typing `Ctrl-D` from your terminal. It is also sent automatically from a script file (as used with the `-f` flag) once the end of the file is reached. This should cause your shell to exit with exit status 0.
 
 If there are currently stopped or running background processes when your shell receives `exit` or `Control-D` (EOF), you should kill and cleanup each of those children before your shell exits. You do not need to worry about SIGTERM.
 
@@ -359,6 +342,9 @@ As usual, you may not have any memory leaks or errors.
 
 ## Week 2 Only - Additional Built-In Commands
 
+
+*Hint:* You may find the `/proc` filesystem to be useful, as well as the man pages for it, for `ps` and `pfd`.
+
 #### `ps`
 
 Like our good old `ps`, your shell should print out information about all currently executing processes. You should include the shell and its immediate children, but don't worry about grandchildren or other processes. Make sure you use `print_process_info_header()` and `print_process_info()` (and maybe some other helper functions)!
@@ -370,11 +356,9 @@ Your version of the `ps` should print the following information for each process
 - NLWP: The number of threads currently being used in the process
 - VSZ: The program size (virtual memory size) of the process, in kilobytes
 - STAT: The state of the process
-- START: The start time of the process
-- TIME: The amount of cpu time that the process has been executed for
+- START: The start time of the process. You will want to add the boot time of the computer, and start time of the process to calculate this. Make sure you are careful while converting from various formats - the man pages for procfs have helpful tips.
+- TIME: The amount of cpu time that the process has been executed for. This includes time the process has been scheduled in user mode (utime) and kernel mode (stime).
 - COMMAND: The command that executed the process
-
-*Hint:* You may find the `/proc` filesystem to be useful, as well as the man pages for it.
 
 Some things to keep in mind:
 
