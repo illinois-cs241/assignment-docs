@@ -199,6 +199,9 @@ Note that you shouldn't try to satisfy rules that aren't "good" goal rules and d
 
 Basically, there is no need to satisfy a rule if it isn't necessary to satisfy the goal rules or if we already know that all the goal rules it might satisfy are doomed to fail due to cycles. Trying to satisfying any of them would be impossible at worst or a waste of time at best.
 
+As an extension of this idea on efficiency, if a rule fails once, it should not be run again even if it is asked for by another goal rule.
+Similarly, if a rule succeeds, it should only be run once, even if it is added as a goal rule multiple times. (To think why this should be the case, imagine the behavior of Make if you ask it to compile your code multiple times in one line.)
+
 When a rule is ready to be satisfied, we must determine if we actually need to run the rule's commands. We run its commands if and only if at least one of the following is true:
 
 *   The name of the rule is not the name of a file on disk.
