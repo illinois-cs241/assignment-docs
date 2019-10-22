@@ -241,7 +241,7 @@ You can use `system()` to run the commands associated with each rule. There are 
 * If any of a rule's commands fail while evaluating that rule, then the rule should "fail" and no more of its commands should be run
 * If a rule fails, its parent rules (rules which have this rule as a dependency) should fail as well. Note that this is not necessarily true for the converse (i.e. if a parent fails, its children may still be satisfied)
 
-For your convenience these rules are captured in the following flow chart:
+For your convenience these rules are captured in the following flow chart (open this image in a new tab if you cannot see the flowchart clearly):
 
 ![Flow Chart](../images/assignment-docs/mp/parallel_make/parmake_flowchart.svg)
 
