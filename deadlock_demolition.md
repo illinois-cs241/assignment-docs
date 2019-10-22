@@ -20,7 +20,7 @@ You will be writing four functions:
 
 To detect deadlock, you will need to maintain a Resource Allocation Graph and be able perform cycle detection on it. See [this page](http://cs241.cs.illinois.edu/coursebook/Deadlock#resource-allocation-graphs) for more information about Resource Allocation Graphs.
 
-The general flow of the algorithm for lock and destroy are self-explanatory, they just need to clean up resources. The fun happens in wait and post (lock and unlock respectively). When a thread posts
+The general flow of the algorithm for init and destroy are self-explanatory, they just need to clean up resources. The fun happens in wait and post (lock and unlock respectively). When a thread posts
 
 * Check to see if the vertex is in the graph. If it is not, return without unlocking the mutex in the `drm_t`.
 * Otherwise if an edge from the drm to the thread exists, remove the edge and unlock the `drm_t`
