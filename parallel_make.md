@@ -243,7 +243,7 @@ You can use `system()` to run the commands associated with each rule. There are 
 
 For your convenience these rules are captured in the following flow chart:
 
-![Flow Chart](../images/assignment-docs/parallel_make/parmake_flowchart.svg)
+![Flow Chart](../images/assignment-docs/mp/parallel_make/parmake_flowchart.svg)
 
 ## Parallelize! (Part 2 Only)
 
