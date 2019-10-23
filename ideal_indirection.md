@@ -98,17 +98,17 @@ Photo Cred: http://duartes.org/gustavo/blog/post/anatomy-of-a-program-in-memory/
 Notice how some of the memory segments like the stack and mmap have an arrow pointing down.
 This indicates that these regions "grow down" by decreasing their end boundary's virtual address as you add elements to them.
 This is so that the stack and heap can share the same address space, but grow in different directions.
-It is now easy to see that if you put too many elements onto the stack it will eventually run into heap memory leading to the classic Stack Overflow<sup>TM</sup>.
+It is now easy to see that if you put too many elements onto the stack, it will eventually run into heap memory leading to the classic Stack Overflow<sup>TM</sup>.
 
 The reasons why this external structure is needed for this lab is to answer the question: "How do you know when an address is invalid?".
 You cannot rely on the present bit of a page table entry, since that page may be valid, but just happens to be paged to disk.
 The solution is to check if an address is in any memory segment with `address_in_segmentations(vm_segmentations *segmentations, uint32_t address)`.
-If the address is not in any of the process's segments, then you get one of the possible instances of the dreaded segmentation fault (segfault).
+If the address is not in any of the process' segments, then you get one of the possible instances of the dreaded segmentation fault (segfault).
 Note that you will need to perform this check before attempting to translate virtual addresses to physical addresses.
 
 ## Kernel (`kernel.c` and `kernel.h`)
 
-For this assignment all the physical memory allocations will be abstracted by `kernel.c`.
+For this assignment, all the physical memory allocations will be abstracted by `kernel.c`.
 
 This file will maintain a global array of pages that you will use to model all of physical memory.
 That is to say that all virtual addresses get translated to an address in:
@@ -130,9 +130,9 @@ Simulated virtual address $$\rightarrow$$ Simulated physical address $$\rightarr
 Note that the final transation to actual physical address will be done by the system.
 
 We use a global `char` array for our simulated physical memory as it so happens that global variables such as these are stored in some of the lowest addresses in virtual memory.
-Because of this, the array, despite existing in a 64 bit environment, only needs the 32 lower bits of a 64 bit address to address it.
+Because of this, the array, despite existing in a 64-bit environment, only needs the 32 lower bits of a 64-bit address to address it.
 This is great because it allows us to use the 32 lower bits to refer to a simulated physical memory location, despite being on a 64 bit system.
-The downside is that we will need to convert the 32-bit simulated physical memory addresses into a 64 bit pointer in your actual user space before we actually try to access the simulated physical memory at that address.
+The downside is that we will need to convert the 32-bit simulated physical memory addresses into a 64-bit pointer in your actual user space before we actually try to access the simulated physical memory at that address.
 To assist you with this, we have provided a few helper functions to perform this translation: 
 
 ```
