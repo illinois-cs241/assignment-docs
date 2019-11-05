@@ -57,7 +57,7 @@ typedef struct {
   struct timespec mtim;
   struct timespec ctim;
   uint64_t size; 
-  data_block_number direct[NUM_DIRECT_INODES];
+  data_block_number direct[NUM_DIRECT_BLOCKS];
   data_block_number indirect;
 } inode;
 ```
@@ -73,7 +73,7 @@ This is the famous inode struct that you have been learning about! Here are a br
 - `ctim` is the last change time, or in other words, the last time the file's metadata was changed.
 - `size` is the size of the file in bytes
 - `direct` is an array where the `direct[i]` is the `i`th data block's offset from the `data_root`.
-- `indirect` is the offset number (`data_block_number`) of a data block, which contains `NUM_INDIRECT_INODES` number of `data_block_number`'s.
+- `indirect` is the offset number (`data_block_number`) of a data block, which contains `NUM_INDIRECT_BLOCKS` number of `data_block_number`'s.
 
 ### Data blocks
 
@@ -139,9 +139,9 @@ Call `is_virtual_path` on a path to see if it's a path in the virtual component.
 
 Call `minixfs_min_blockcount` to ensure that an inode has a certain minimum number of data blocks directly, or indirectly associated with it.
 
-### `NUM_DIRECT_INODES`
+### `NUM_DIRECT_BLOCKS`
 
-`NUM_DIRECT_INODES` is the number of direct `data_block` nodes in a single inode. The `indirect` array has only this many entries (for the sake of simplicity).
+`NUM_DIRECT_BLOCKS` is the number of direct `data_block` nodes in a single inode. The `indirect` array has only this many entries (for the sake of simplicity).
 
 ### `UNASSIGNED_NODE`
 
