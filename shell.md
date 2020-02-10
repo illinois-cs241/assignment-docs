@@ -50,7 +50,7 @@ Since a learning objective of this assignment is to use the fork-exec-wait patte
 
 ### Input Formatting
 
-Do not worry about irregular spacing in command inputs (i.e. extra whitespace before and after each token). This is considered undefined behavior and will not be tested. You are free to make your code as robust as you want, but we will only test the basic cases without irregular spacing (unless specified).
+**Do not worry about irregular spacing** in command inputs (i.e. extra whitespace before and after each token). This is considered undefined behavior and will not be tested. You are free to make your code as robust as you want, but we will only test the basic cases without irregular spacing (unless specified).
 
 ### Output Formatting
 
@@ -71,14 +71,15 @@ The shell is responsible for providing a command line for users to execute progr
 - Built-in commands
 - Foreground external commands
 - Logical operators
+- `SIGINT` handling
 - Exiting
 
 ### Part 2
 Everything from part 1, and:
 - Background external commands
 - `ps`
-- `stop`, `cont` and `kill`
-- Input/Output redirection
+- Redirection commands
+- Signal commands
 
 ## Starting Your Shell
 
@@ -205,7 +206,7 @@ If there are currently stopped or running background processes when your shell r
 
 ### Catching Ctrl+C
 
-Usually when we do `Ctrl+C`, the current running program will exit. However, we want the shell itself to ignore the `Ctrl+C` signal (`SIGINT`). Instead, it should check if there is a currently running foreground process, and if so, it should kill that foreground process using `SIGINT` (the `kill()` function might come in handy, here and elsewhere).
+Usually when we do `Ctrl+C`, the current running program will exit. However, we want the shell itself to ignore the `Ctrl+C` signal (`SIGINT`). Instead, it should check if there is a currently running foreground process, and if so, it should kill that foreground process using `SIGINT` (the `kill` function might come in handy, here and elsewhere).
 
 When a signal is sent to a process, it is sent to all processes in its process group. In this assignment, the shell process is the leader of a process group consisting of all processes that are `fork`'d from it.
 
@@ -338,7 +339,7 @@ Some external commands you may test to see whether your shell works are:
 echo hello
 ```
 
-It is good practice to flush the standard output stream before the fork to be able to correctly display the output.
+Tip: It is good practice to flush the standard output stream before the fork to be able to correctly display the output. This will also prevent duplicate printing from the child process.
 
 :bangbang: Please read the disclaimer at the top of the page! We don't want to have to give any failing grades. :bangbang:
 
@@ -350,11 +351,12 @@ Like `bash`, your shell should support `&&`, `||`, and `;` in between two comman
 
 **Important**: you should *not* try to handle the combination of the `!history`, `#<n>`, `!<prefix>`, or `exit` commands with any logical operators. Rather, you can assume these commands will always be run on a line by themselves.
 
-#### AND
+### AND
 
-`&&` is the AND operator.
-
-Input: `x && y`
+`&&` is the AND operator. Usage:
+ ```
+x && y
+```
 * The shell first runs `x`, then checks the exit status.
 * If `x` exited successfully (status = 0), run `y`.
 * If `x` did not exit successfully (status ≠ 0), do *not* run `y`. This is also known as [short-circuiting](https://en.wikipedia.org/wiki/Short-circuit_evaluation).
@@ -376,11 +378,14 @@ This mimics short-circuiting AND in boolean algebra: if `x` is false, we know th
 
 :question: This is often used to run multiple commands in a sequence and stop early if one fails. For example, `make && ./shell` will run your shell only if `make` succeeds.
 
-#### OR
+Tip: You may want to look into the provided macros to read the status of an exited child.
 
-`||` is the OR operator.
+### OR
 
-Input: `x || y`
+`||` is the OR operator. Usage:
+```
+x || y
+```
 * The shell first runs `x`, then checks the exit status.
 * If `x` exited successfully, the shell does *not* run `y`. This is short-circuiting.
 * If `x` did not exit successfully, run `y`.
@@ -401,11 +406,12 @@ Boolean algebra: if `x` is true, we can return true right away *without* having 
 
 :question: This is often used to recover after errors. For example, `make || echo 'Make failed!'` will run `echo` only if `make` does not succeed.
 
-#### Separator
+### Separator
 
-`;` is the command separator.
-
-Input: `x; y`
+`;` is the command separator. Usage:
+```
+x; y
+```
 * The shell first runs `x`.
 * The shell then runs `y`.
 
@@ -428,11 +434,9 @@ bye
 
 ## Memory
 
-As usual, you may not have any memory leaks or errors.
+As usual, you may not have any memory leaks or errors. Note that still reachable memory blocks do not count as memory leaks.
 
-## Week 2 Only - Additional Built-In Commands
-
-#### Background Processes
+## Background Processes
 
 An _external_ command suffixed with `&` should be run in the background. In other words, the shell should be ready to take the next command before the given command has finished running. There is no limit on the number of background processes you can have running at one time (aside from any limits set by the system).  
 
@@ -449,14 +453,11 @@ When I type, it shows up on this line
 ``` 
 Note this is not the only way your shell may misalign.
 
-While the shell should be usable after calling the command, after the process finishes, the parent is still responsible for waiting on the child. Avoid creating zombies! Do not catch SIGCHLD, instead regularly check to see if your children need reaping. Think about what happens when multiple children finish around the same time.  
+While the shell should be usable after calling the command, after the process finishes, the parent is still responsible for waiting on the child. Avoid creating zombies! Do not catch `SIGCHLD`, as catching `SIGCHLD` comes with all sorts of caveats and subtleties that are hard to work around. Instead regularly check to see if your children need reaping (think about placement of this piece of code: where should you put this, and why). Think about what happens when multiple children finish around the same time, and what happens if a foreground/background process finish around the same time.  
 
 Backgrounding will **not** be chained with the logical operators nor with redirection operators.
 
-
-*Hint:* You may find the `/proc` filesystem to be useful, as well as the man pages for it, for `ps` and `pfd`.
-
-#### `ps`
+## `ps`
 
 Like our good old `ps`, your shell should print out information about all currently executing processes. You should include the shell and its immediate children, but don't worry about grandchildren or other processes. Make sure you use `print_process_info_header()` and `print_process_info()` (and maybe some other helper functions)!
 
@@ -467,14 +468,14 @@ Your version of the `ps` should print the following information for each process
 - NLWP: The number of threads currently being used in the process
 - VSZ: The program size (virtual memory size) of the process, in kilobytes
 - STAT: The state of the process
-- START: The start time of the process. You will want to add the boot time of the computer, and start time of the process to calculate this. Make sure you are careful while converting from various formats - the man pages for procfs have helpful tips.
-- TIME: The amount of cpu time that the process has been executed for. This includes time the process has been scheduled in user mode (utime) and kernel mode (stime).
+- START: The start time of the process. You will want to add the boot time of the computer, and start time of the process to calculate this. Make sure you are careful while converting from various formats - the man pages for `procfs` have helpful tips.
+- TIME: The amount of cpu time that the process has been executed for. This includes time the process has been scheduled in user mode (`utime`) and kernel mode (`stime`).
 - COMMAND: The command that executed the process
 
 Some things to keep in mind:
 
 - The order in which you print the processes does not matter.
-- The 'command' for `print_process_info` should be the full command you executed. The `&` for background processes is optional. For the main shell process _only_, you do not need to include the command-line flags.
+- The 'command' for `print_process_info` should be the full command you executed. The `&` for background processes is optional. For the main shell process _only_, you do not need to include the command-line flags. Ensure that the 'command' does not have trailing whitespace at the end of it.
 - You may not exec the `ps` binary to complete this part of the assignment.
 
 Example output of this command:
@@ -486,51 +487,112 @@ PID     NLWP    VSZ     STAT    START   TIME    COMMAND
 25497   1       7484    R       14:03   0:00    ./shell
 ```
 
+*Hint:* You may find the `/proc` filesystem to be useful, as well as the man pages for it.
+
 ## Redirection Operators
 
 Your boss wants some way for your shell commands to be able to link together. You decide to implement `>>`, `>`, and `<`. This will require only a minimal amount of string parsing that you have to do yourself.
 
 **Important**: each input can have at most *one* of `>>`, `>` or `<`. You do *not* have to support chaining (e.g. `x >> y < z > w`).
 
-**Important**: you should *not* try to handle the combination of the `!history`, `#<n>`, `!<prefix>`, or `exit` commands with any redirection operators. Rather, you can assume these commands will always be run on a line by themselves.
+**Important**: you should *not* try to handle the combination of the `cd`, `!history`, `#<n>`, `!<prefix>`, or `exit` commands with any redirection operators. Rather, you can assume these commands will always be run on a line by themselves.
 
-| Name | Symbol | Rules|
-| ---- | ----- | -------|
-| APPEND   | >> | The shell runs process `x` and appends the output onto file `y`. Create `y` if it does not exist.|
-| TRUNCATE   | > | The shell runs process `x` and appends the output onto file `y` after truncating the contents of `y`.|
-| PIPE | < | Pass the contents of file `y` into process `x`. Run `x` using the content of `y` as standard input. |
+**Note**: Assume that the redirection operator commands will be formatted correctly. Any incorrectly formatted redirection commands is considered undefined behavior.
 
-#### `kill <pid>`
+### OUTPUT
 
-The ever-useful panic button. Send `SIGTERM` to the specified process.
+`>` places the output of a command into a file. Usage:
+```
+<cmd> [args ...] > <filename>
+```
+If the file exists, overwrite the contents of the file with the output of the current command. Example usage:
+```
+(pid=2777)/home/usr$ echo hello > hey.txt
+Command executed by pid=3750
+(pid=2777)/home/usr$ cat hey.txt
+Command executed by pid=3751
+hello
+(pid=2777)/home/usr$ echo welcome to cs241 > hey.txt
+Command executed by pid=3752
+(pid=2777)/home/usr$ cat hey.txt
+Command executed by pid=3754
+welcome to cs241
+```
+
+### APPEND
+
+`>>` appends the output of a command into a file. Usage:
+```
+<cmd> [args ...] >> <filename>
+```
+If the file does not exist, assume that it is an empty file. Example usage (`hi.txt` does not exist in the directory before these commands are executed):
+```
+(pid=2777)/home/usr$ echo a >> hi.txt
+Command executed by pid=2780
+(pid=2777)/home/usr$ cat hi.txt
+Command executed by pid=2781
+a
+(pid=2777)/home/usr$ echo wheeee >> hi.txt
+Command executed by pid=2782
+(pid=2777)/home/usr$ cat hi.txt
+Command executed by pid=2783
+a
+wheeee
+```
+
+### INPUT
+
+`<` pipes the contents of a file into a command as its input. Usage:
+```
+<cmd> [args ...] < <filename>
+```
+If the file does not exist, it is undefined behavior. Example usage:
+`hello.txt` contains:
+```
+welcome to cs241
+```
+
+```
+(pid=3771)/home/usr$ wc < hello.txt
+Command executed by pid=3772
+ 1  3 17
+```
+
+Hint: `dup` will be useful here
+
+## Signal Commands
+
+Like bash, your shell will support sending signals to its child processes. We require you to implement the 3 signals listed below.
+
+### `kill <pid>`
+
+The ever-useful panic button. Sends `SIGTERM` to the specified process.
 
 Use the appropriate prints from `format.h` for:
 - Successfully sending `SIGTERM` to process
 - No process with `pid` exists
 - `kill` was ran without a `pid`
 
-#### `stop <pid>`
+### `stop <pid>`
 
 This command will allow your shell to stop a currently executing process by sending it the `SIGTSTP` signal. It may be resumed by using the command `cont`.
 
 Use the appropriate prints from `format.h` for:
 - Process was successfully sent `SIGTSTP`
-- No such process exists
+- No process with `pid` exists
 - `stop` was ran without a `pid`
 
-#### `cont <pid>`
+### `cont <pid>`
 
 This command resumes the specified process by sending it `SIGCONT`.
 
 Use the appropriate prints from `format.h` for:
+- Process was successfully sent `SIGCONT`
 - No such process exists
 - `cont` was ran without a `pid`
 
-**Any `<pid>` used in `kill`, `stop`, or, `cont` will either be a process that is a direct child of your shell or a non-existent process. You do not have to worry about killing other processes.**
+Note: Any `<pid>` used in `kill`, `stop`, or, `cont` will either be a process that is a direct child of your shell or a non-existent process. You do not have to worry about killing other processes.
 
 ## Grading
 
-As you may notice, this MP is split up into two weeks:
-
-- Week 1 (50%): Week 1 tests cover everything up until the week 2 section.
-- Week 2 (50%): Week 2 tests cover everything covered in week 1 as well as the week 2 section.
+Note that Week 1 and Week 2 count as one week of MP grades respectively. See the overview for a list of features required for each week.
