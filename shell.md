@@ -558,7 +558,7 @@ Command executed by pid=3772
  1  3 17
 ```
 
-Hint: `dup` will be useful here
+Hint: `dup` will be useful for all the redirection commands
 
 ## Signal Commands
 
